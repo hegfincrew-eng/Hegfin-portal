@@ -1465,7 +1465,7 @@
 ════════════════════════════════════════ -->
 <!-- Firebase Cloud Realtime Sync SDK (Free Tier) -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
 <script>
   /* ════════════════════════════════════
@@ -2913,66 +2913,77 @@
   /* ════════════════════════════════════
      10. CLOUD REALTIME SYNC ENGINE (FIREBASE)
   ═════════════════════════════════════ */
+  const DEFAULT_FIREBASE_CONFIG = {
+    apiKey: "AIzaSyATQQ7cI92uNRj63W_T7qvetpluJqjq2l0",
+    authDomain: "hegfin-acadmey.firebaseapp.com",
+    databaseURL: "https://hegfin-acadmey-default-rtdb.firebaseio.com",
+    projectId: "hegfin-acadmey",
+    storageBucket: "hegfin-acadmey.firebasestorage.app",
+    messagingSenderId: "246007208478",
+    appId: "1:246007208478:web:241861eed42bdf411bac0f",
+    measurementId: "G-F1NYJPMB09"
+  };
+
   const CLOUD_CONFIG_KEY = 'hegfin_firebase_config';
   let isCloudConnected = false;
-  let firestoreDb = null;
+  let rtdbInstance = null;
   let isReceivingRemoteUpdate = false;
 
   function initCloudSync() {
-    const savedConfig = localStorage.getItem(CLOUD_CONFIG_KEY);
-    if (!savedConfig) {
-      updateCloudUI(false);
-      return;
+    let configObj = DEFAULT_FIREBASE_CONFIG;
+    const customConfig = localStorage.getItem(CLOUD_CONFIG_KEY);
+    if (customConfig) {
+      try {
+        if (customConfig.trim().startsWith('{')) {
+          configObj = JSON.parse(customConfig);
+        }
+      } catch(e) {
+        console.warn('Custom config parse error, using default:', e);
+      }
     }
 
     try {
-      let configObj = null;
-      // Allow clean JSON or relaxed JS object
-      if (savedConfig.trim().startsWith('{')) {
-        try {
-          configObj = JSON.parse(savedConfig);
-        } catch(e) {
-          // Attempt lenient parse for JS object
-          configObj = (new Function('return ' + savedConfig))();
-        }
-      }
-
-      if (!configObj || !configObj.projectId) {
-        updateCloudUI(false);
+      if (!window.firebase) {
+        console.warn('Firebase SDK not available yet');
         return;
       }
 
-      // Initialize Firebase App
       if (!firebase.apps.length) {
         firebase.initializeApp(configObj);
       }
-      firestoreDb = firebase.firestore();
-      isCloudConnected = true;
-      updateCloudUI(true);
 
-      // Listen to Realtime Remote Updates from Firestore
-      const docRef = firestoreDb.collection('hegfin_academy').doc('shared_state');
-      docRef.onSnapshot((docSnapshot) => {
-        if (docSnapshot.exists) {
-          const remoteData = docSnapshot.data();
+      rtdbInstance = firebase.database();
+
+      // Monitor online/offline status
+      rtdbInstance.ref('.info/connected').on('value', (snap) => {
+        const connected = !!snap.val();
+        isCloudConnected = connected;
+        updateCloudUI(connected);
+      });
+
+      // Listen for Live Realtime Updates across all staff phones & computers
+      const stateRef = rtdbInstance.ref('hegfin_academy/shared_state');
+      stateRef.on('value', (snapshot) => {
+        const remoteData = snapshot.val();
+        if (remoteData) {
           isReceivingRemoteUpdate = true;
 
-          // Merge tasks
+          // Sync tasks
           if (remoteData.tasks && Array.isArray(remoteData.tasks)) {
             tasks = remoteData.tasks;
             saveState(TASKS_KEY, tasks);
           }
-          // Merge expenses
+          // Sync expenses
           if (remoteData.expenses && Array.isArray(remoteData.expenses)) {
             expenses = remoteData.expenses;
             saveState(EXPENSES_KEY, expenses);
           }
-          // Merge payments
+          // Sync payments
           if (remoteData.payments && Array.isArray(remoteData.payments)) {
             payments = remoteData.payments;
             saveState(PAYMENTS_KEY, payments);
           }
-          // Merge roster (passwords)
+          // Sync staff passwords / roster
           if (remoteData.staffRoster && typeof remoteData.staffRoster === 'object') {
             staffRoster = remoteData.staffRoster;
             saveState(ROSTER_KEY, staffRoster);
@@ -2981,12 +2992,12 @@
           refreshAll();
           setTimeout(() => { isReceivingRemoteUpdate = false; }, 300);
         } else {
-          // Document does not exist yet on cloud, push our initial local state
+          // Cloud empty on first boot, initialize it
           pushLocalStateToCloud();
         }
-      }, (error) => {
-        console.warn('Firestore sync listener error:', error);
-        updateCloudUI(false, error.message);
+      }, (err) => {
+        console.warn('Firebase RTDB error:', err);
+        updateCloudUI(false, err.message);
       });
 
     } catch(err) {
@@ -2996,33 +3007,30 @@
   }
 
   function pushLocalStateToCloud() {
-    if (!isCloudConnected || !firestoreDb || isReceivingRemoteUpdate) return;
+    if (!rtdbInstance || isReceivingRemoteUpdate) return;
     try {
-      firestoreDb.collection('hegfin_academy').doc('shared_state').set({
-        tasks,
-        expenses,
-        payments,
-        staffRoster,
+      rtdbInstance.ref('hegfin_academy/shared_state').set({
+        tasks: tasks || [],
+        expenses: expenses || [],
+        payments: payments || [],
+        staffRoster: staffRoster || {},
         lastUpdated: new Date().toISOString(),
         updatedBy: currentUser ? currentUser.name : 'System'
-      }, { merge: true }).catch(err => {
-        console.warn('Cloud sync push error:', err);
       });
     } catch(e) {
-      console.warn('Push error:', e);
+      console.warn('Cloud sync push error:', e);
     }
   }
 
-  // Intercept saveState calls to also push to cloud
+  // Intercept saveState calls to automatically broadcast to cloud
   const originalSaveState = saveState;
   saveState = function(key, val) {
     originalSaveState(key, val);
-    if (isCloudConnected && !isReceivingRemoteUpdate) {
-      // Debounce push
+    if (rtdbInstance && !isReceivingRemoteUpdate) {
       clearTimeout(window._cloudPushTimer);
       window._cloudPushTimer = setTimeout(() => {
         pushLocalStateToCloud();
-      }, 300);
+      }, 250);
     }
   };
 
@@ -3038,21 +3046,21 @@
       if (iconEl)  { iconEl.textContent = 'cloud_done'; iconEl.style.color = '#34d399'; }
       if (textEl)  { textEl.textContent = 'Cloud: Live Synced'; textEl.style.color = '#34d399'; }
       if (subEl)   { subEl.textContent = 'Multi-device realtime active'; }
-      if (pillEl)  { pillEl.textContent = 'Live Cloud Active ✓'; pillEl.className = 'pill green'; }
+      if (pillEl)  { pillEl.textContent = 'Live Cloud Active ●'; pillEl.className = 'pill green'; }
       if (titleEl) { titleEl.textContent = 'Connected & Synced'; }
-      if (descEl)  { descEl.textContent = 'Realtime sync is operational. Changes made on any phone or desktop reflect instantly on all devices.'; }
+      if (descEl)  { descEl.textContent = 'Realtime cloud sync is operational. Changes made on any phone or desktop reflect instantly on all devices.'; }
     } else {
-      if (iconEl)  { iconEl.textContent = 'cloud_off'; iconEl.style.color = '#94a3b8'; }
-      if (textEl)  { textEl.textContent = 'Cloud: Local Mode'; textEl.style.color = '#e2e8f0'; }
-      if (subEl)   { subEl.textContent = errorMsg ? 'Sync issue: Tap to fix' : 'Tap to connect Firebase sync'; }
-      if (pillEl)  { pillEl.textContent = 'Device Storage Only'; pillEl.className = 'pill'; pillEl.style.background = '#e2e8f0'; pillEl.style.color = '#475569'; }
-      if (titleEl) { titleEl.textContent = 'Offline / Local Mode'; }
-      if (descEl)  { descEl.textContent = errorMsg ? `Error: ${errorMsg}` : 'Currently saving to this device browser memory. To sync automatically across everyone\'s phone in real-time, connect your free Google Firebase project below.'; }
+      if (iconEl)  { iconEl.textContent = 'cloud_sync'; iconEl.style.color = '#f59e0b'; }
+      if (textEl)  { textEl.textContent = 'Cloud: Connecting...'; textEl.style.color = '#f59e0b'; }
+      if (subEl)   { subEl.textContent = errorMsg ? 'Sync issue: Retrying' : 'Connecting to live database...'; }
+      if (pillEl)  { pillEl.textContent = 'Connecting...'; pillEl.className = 'pill amber'; }
+      if (titleEl) { titleEl.textContent = 'Connecting to Cloud'; }
+      if (descEl)  { descEl.textContent = errorMsg ? `Error: ${errorMsg}` : 'Connecting to your Hegfin cloud database...'; }
     }
   }
 
   function openCloudModal() {
-    const saved = localStorage.getItem(CLOUD_CONFIG_KEY) || '';
+    const saved = localStorage.getItem(CLOUD_CONFIG_KEY) || JSON.stringify(DEFAULT_FIREBASE_CONFIG, null, 2);
     const input = document.getElementById('firebase-config-input');
     if (input) input.value = saved;
     document.getElementById('cloud-modal').classList.add('open');
@@ -3072,7 +3080,7 @@
     try {
       localStorage.setItem(CLOUD_CONFIG_KEY, raw);
       initCloudSync();
-      toast('Cloud configuration saved! Attempting live connection...');
+      toast('Cloud configuration updated! Reconnecting...');
       setTimeout(() => {
         closeCloudModal();
       }, 600);
@@ -3082,11 +3090,10 @@
   }
 
   function clearCloudConfig() {
-    if (confirm('Disconnect from cloud and revert to device-only storage?')) {
+    if (confirm('Reset to default Hegfin cloud database?')) {
       localStorage.removeItem(CLOUD_CONFIG_KEY);
-      isCloudConnected = false;
-      updateCloudUI(false);
-      toast('Disconnected from cloud sync.');
+      initCloudSync();
+      toast('Reset to default cloud database.');
       closeCloudModal();
     }
   }
@@ -3096,6 +3103,7 @@
       if (!el.value) el.valueAsDate = new Date();
     });
 
+    initCloudSync();
     initLoginScreen();
   });
 </script>
