@@ -613,16 +613,216 @@
     .mb-nav-item.active { color: var(--primary); }
     .mb-nav-item .material-symbols-outlined { font-size: 22px; }
 
-    @media (max-width: 820px) {
-      #sidebar { position: fixed; left: -250px; top: 0; bottom: 0; }
-      #sidebar.open { left: 0; }
-      .mobile-menu-btn { display: inline-flex; }
-      .view-pane { padding: 16px 14px 70px; }
-      #topbar { padding: 0 14px; }
-      #mobile-bottom-nav { display: flex; }
-      .cards-row { grid-template-columns: 1fr; }
-      .form-row { flex-direction: column; gap: 10px; }
+        /* Sidebar Backdrop for Mobile */
+    #sidebar-backdrop {
+      display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px); z-index: 48; -webkit-tap-highlight-color: transparent;
     }
+
+    .sidebar-close-btn {
+      display: none; background: rgba(255,255,255,0.12); border: none; border-radius: 8px;
+      color: #fff; padding: 5px; cursor: pointer; line-height: 1;
+    }
+    .sidebar-close-btn:hover { background: rgba(255,255,255,0.25); }
+
+    /* Sidebar Sub-Navigation Links */
+    .sidebar-sub-nav {
+      padding-left: 14px; margin-top: 4px; display: flex; flex-direction: column; gap: 2px;
+    }
+    .sidebar-sub-link {
+      display: flex; align-items: center; gap: 10px; padding: 7px 12px; border-radius: 8px;
+      color: rgba(255,255,255,0.65); font-size: 12.5px; font-weight: 500; cursor: pointer;
+      border: none; background: none; text-align: left; width: 100%; font-family: inherit;
+      transition: all 0.15s ease;
+    }
+    .sidebar-sub-link:hover, .sidebar-sub-link.active {
+      background: rgba(255,255,255,0.14); color: #ffffff; font-weight: 700;
+    }
+    .sidebar-sub-link .material-symbols-outlined { font-size: 17px; }
+
+    /* Mobile Subnav Bar (Sticky Pills under Top Bar) */
+    #mobile-subnav-bar {
+      display: none; background: #ffffff; border-bottom: 1px solid var(--border);
+      padding: 8px 12px; position: sticky; top: 56px; z-index: 38;
+      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    #mobile-subnav-bar::-webkit-scrollbar { display: none; }
+    .mb-subnav-row {
+      display: flex; align-items: center; gap: 6px; flex-shrink: 0; min-width: 100%;
+    }
+    .mb-subnav-pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px;
+      border: 1px solid var(--border); background: #f8fafc; color: var(--sub);
+      font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer;
+      transition: all 0.15s ease; font-family: inherit; -webkit-tap-highlight-color: transparent;
+    }
+    .mb-subnav-pill.active {
+      background: var(--primary); color: #ffffff; border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(79,70,229,0.25);
+    }
+    .mb-subnav-pill .material-symbols-outlined { font-size: 16px; }
+
+    /* Swipe hint for tables on mobile */
+    .table-mobile-hint {
+      display: none; align-items: center; gap: 6px; font-size: 11px;
+      color: #64748b; background: #f1f5f9; padding: 5px 10px; border-radius: 6px;
+      margin-bottom: 8px; font-weight: 500;
+    }
+
+    @media (max-width: 820px) {
+      #sidebar {
+        position: fixed; left: -280px; top: 0; bottom: 0; width: 260px;
+        z-index: 50; transition: left 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 5px 0 25px rgba(0,0,0,0.3);
+      }
+      #sidebar.open { left: 0; }
+      .sidebar-close-btn { display: inline-flex; }
+      .mobile-menu-btn { display: none !important; }
+      
+      #topbar {
+        padding: 0 10px; min-height: 54px; justify-content: space-between;
+        max-width: 100vw; box-sizing: border-box; overflow: hidden;
+      }
+      #module-label {
+        border-right: none; padding-right: 0; margin-right: 0;
+        font-size: 13.5px;
+      }
+      #module-label img {
+        height: 20px !important;
+      }
+      .action-group {
+        flex-shrink: 0; margin-left: auto;
+      }
+      #quick-action-btn {
+        padding: 6px 11px; font-size: 12px; border-radius: 8px;
+        white-space: nowrap; flex-shrink: 0;
+      }
+      #quick-action-btn .material-symbols-outlined {
+        font-size: 17px;
+      }
+      #topbar #finance-tabs, #topbar #task-tabs {
+        display: none !important;
+      }
+      .topbar-spacer { display: none; }
+      
+      #mobile-subnav-bar { display: flex; }
+      #mobile-bottom-nav {
+        display: flex;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+        height: calc(56px + env(safe-area-inset-bottom, 0));
+      }
+      .view-pane {
+        padding: 14px 12px calc(72px + env(safe-area-inset-bottom, 0));
+      }
+      .table-mobile-hint { display: flex; }
+
+      .cards-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .metric-card {
+        padding: 12px 14px !important;
+      }
+      .metric-card .value {
+        font-size: 20px !important;
+      }
+      .metric-card .label {
+        font-size: 11px !important;
+      }
+
+      .form-row { flex-direction: column; gap: 10px; }
+      .form-group input, .form-group select, .form-group textarea {
+        font-size: 16px !important; /* Prevents iOS auto-zoom on focus */
+      }
+
+      .modal-box {
+        width: 95% !important;
+        max-width: 95% !important;
+        max-height: 92vh !important;
+        margin: 10px auto !important;
+        padding: 16px !important;
+      }
+
+      .task-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        padding: 14px;
+      }
+      .task-card .task-avatar {
+        width: 34px; height: 34px; font-size: 12px;
+      }
+      .task-card .task-actions {
+        width: 100%;
+        justify-content: flex-end;
+        padding-top: 8px;
+        border-top: 1px solid #f1f5f9;
+      }
+      .task-card .task-remark-btn, .task-card .task-toggle-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+    }
+
+    /* Direct Line Task Card Architecture */
+    .task-card {
+      background: var(--card); border-radius: 14px; padding: 14px 16px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;
+      transition: all 0.15s ease; width: 100%; box-sizing: border-box;
+    }
+    .task-card:hover { border-color: #cbd5e1; box-shadow: var(--shadow); }
+    .task-card.completed { background: #fafbfc; opacity: 0.8; }
+    
+    .task-direct-header {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+    }
+    .task-direct-title {
+      font-size: 15px; font-weight: 700; color: var(--text);
+      flex: 1; word-break: break-word; line-height: 1.35;
+    }
+    .task-direct-title.done { text-decoration: line-through; color: var(--sub); }
+    
+    .task-direct-badges {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .task-direct-meta {
+      display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--sub);
+    }
+    @media (min-width: 600px) {
+      .task-direct-meta { flex-direction: row; align-items: center; gap: 14px; }
+    }
+    .task-direct-actions {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      padding-top: 8px; border-top: 1px solid #f1f5f9; margin-top: 2px;
+    }
+    .task-direct-actions .task-remark-btn {
+      flex: 1; justify-content: center; padding: 8px 12px; font-size: 12.5px;
+    }
+    .task-direct-actions .task-toggle-btn {
+      flex: 1; justify-content: center; padding: 8px 12px; font-size: 12.5px;
+    }
+
+    /* Responsive Staff Ledger Cards (Zero Overlapping) */
+    .person-card-responsive {
+      background: var(--card); border-radius: 14px; padding: 14px 16px;
+      border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;
+    }
+    .person-card-header {
+      display: flex; align-items: center; gap: 12px; width: 100%;
+    }
+    .person-card-stats-box {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      background: #f8fafc; border-radius: 10px; padding: 9px 8px;
+      gap: 6px; text-align: center; border: 1px solid #f1f5f9;
+    }
+    .stat-col .stat-lbl { font-size: 11px; color: var(--sub); font-weight: 500; }
+    .stat-col .stat-val { font-size: 14px; font-weight: 700; margin-top: 2px; }
+
   </style>
 </head>
 <body>
@@ -675,26 +875,71 @@
 <!-- ═══════════════════════════════════════
      1. SIDEBAR
 ════════════════════════════════════════ -->
+<div id="sidebar-backdrop" onclick="closeSidebar()"></div>
 <aside id="sidebar">
   <div class="sidebar-logo">
-    <div style="margin-bottom: 6px;">
-      <img src="hegfin_logo_white.png" alt="Hegfin Academy" style="height: 38px; max-width: 100%; object-fit: contain; display: block;"/>
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 6px;">
+      <img src="hegfin_logo_white.png" alt="Hegfin Academy" style="height: 36px; max-width: 80%; object-fit: contain; display: block;"/>
+      <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="Close Menu">
+        <span class="material-symbols-outlined">close</span>
+      </button>
     </div>
     <div class="sub">Mangalore • Operations & Finance</div>
   </div>
 
-  <div class="sidebar-section-label">Operations</div>
+  <div class="sidebar-section-label">Operations & Views</div>
   <nav class="sidebar-nav">
     <button class="mod-btn active" id="mod-finance-btn" onclick="switchModule('finance', this)">
       <span class="material-symbols-outlined">account_balance</span>
       <span>Finance Room</span>
       <span class="badge-pill" id="badge-finance-pending">0</span>
     </button>
-    <button class="mod-btn" id="mod-tasks-btn" onclick="switchModule('tasks', this)">
+    <div class="sidebar-sub-nav" id="sidebar-finance-sub">
+      <button class="sidebar-sub-link active" data-fview="dashboard" onclick="showFinanceView('dashboard')">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </button>
+      <button class="sidebar-sub-link" data-fview="expenses" onclick="showFinanceView('expenses')">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span id="sb-expenses-label">All Expenses</span>
+      </button>
+      <button class="sidebar-sub-link" id="sb-people-btn" data-fview="people" onclick="showFinanceView('people')">
+        <span class="material-symbols-outlined">group</span>
+        <span id="sb-people-label">Staff Ledgers</span>
+      </button>
+      <button class="sidebar-sub-link" id="sb-repay-btn" data-fview="repay" onclick="showFinanceView('repay')">
+        <span class="material-symbols-outlined">payments</span>
+        <span>Record Payment</span>
+      </button>
+      <button class="sidebar-sub-link" data-fview="add" onclick="showFinanceView('add')">
+        <span class="material-symbols-outlined">add_circle</span>
+        <span>Add Expense</span>
+      </button>
+    </div>
+
+    <button class="mod-btn" id="mod-tasks-btn" onclick="switchModule('tasks', this)" style="margin-top:6px;">
       <span class="material-symbols-outlined">task_alt</span>
       <span>Tasks</span>
       <span class="badge-pill" id="badge-tasks-ongoing">0</span>
     </button>
+    <div class="sidebar-sub-nav" id="sidebar-tasks-sub" style="display:none;">
+      <button class="sidebar-sub-link active" data-tview="all" onclick="showTaskView('all')">
+        <span class="material-symbols-outlined">list</span>
+        <span>All Tasks</span>
+      </button>
+      <button class="sidebar-sub-link" data-tview="ongoing" onclick="showTaskView('ongoing')">
+        <span class="material-symbols-outlined">pending</span>
+        <span>Ongoing</span>
+      </button>
+      <button class="sidebar-sub-link" data-tview="completed" onclick="showTaskView('completed')">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Completed</span>
+      </button>
+      <button class="sidebar-sub-link" data-tview="addtask" onclick="showTaskView('addtask')">
+        <span class="material-symbols-outlined">add_circle</span>
+        <span>Add Task</span>
+      </button>
+    </div>
   </nav>
 
   <div class="sidebar-divider"></div>
@@ -807,6 +1052,53 @@
       </button>
     </div>
   </header>
+
+  <!-- Sticky Mobile Pill Sub-Navigation Bar -->
+  <nav id="mobile-subnav-bar">
+    <!-- Finance View Pills -->
+    <div class="mb-subnav-row" id="mb-finance-tabs">
+      <button class="mb-subnav-pill active" data-fview="dashboard" onclick="showFinanceView('dashboard')">
+        <span class="material-symbols-outlined">dashboard</span>
+        <span>Dashboard</span>
+      </button>
+      <button class="mb-subnav-pill" data-fview="expenses" onclick="showFinanceView('expenses')">
+        <span class="material-symbols-outlined">receipt_long</span>
+        <span id="mb-tab-expenses-label">All Expenses</span>
+      </button>
+      <button class="mb-subnav-pill" id="mb-tab-people-btn" data-fview="people" onclick="showFinanceView('people')">
+        <span class="material-symbols-outlined">group</span>
+        <span id="mb-tab-people-label">Staff Ledgers</span>
+      </button>
+      <button class="mb-subnav-pill" id="mb-tab-repay-btn" data-fview="repay" onclick="showFinanceView('repay')">
+        <span class="material-symbols-outlined">payments</span>
+        <span>Record Payment</span>
+      </button>
+      <button class="mb-subnav-pill" data-fview="add" onclick="showFinanceView('add')">
+        <span class="material-symbols-outlined">add_circle</span>
+        <span>+ Expense</span>
+      </button>
+    </div>
+
+    <!-- Tasks View Pills -->
+    <div class="mb-subnav-row" id="mb-task-tabs" style="display:none;">
+      <button class="mb-subnav-pill active" data-tview="all" onclick="showTaskView('all')">
+        <span class="material-symbols-outlined">list</span>
+        <span>All Tasks</span>
+      </button>
+      <button class="mb-subnav-pill" data-tview="ongoing" onclick="showTaskView('ongoing')">
+        <span class="material-symbols-outlined">pending</span>
+        <span>Ongoing</span>
+      </button>
+      <button class="mb-subnav-pill" data-tview="completed" onclick="showTaskView('completed')">
+        <span class="material-symbols-outlined">task_alt</span>
+        <span>Completed</span>
+      </button>
+      <button class="mb-subnav-pill" data-tview="addtask" onclick="showTaskView('addtask')">
+        <span class="material-symbols-outlined">add_circle</span>
+        <span>+ Task</span>
+      </button>
+    </div>
+  </nav>
 
   <!-- ═════════════════════════════════════
        MODULE 1: FINANCE ROOM
@@ -1225,12 +1517,8 @@
     <span class="material-symbols-outlined">task_alt</span>
     <span>Tasks</span>
   </button>
-  <button class="mb-nav-item" onclick="handleQuickAction()">
-    <span class="material-symbols-outlined" style="color:var(--primary);font-size:26px">add_circle</span>
-    <span>Create</span>
-  </button>
   <button class="mb-nav-item" onclick="openProfileModal()">
-    <span class="material-symbols-outlined">account_circle</span>
+    <span class="material-symbols-outlined">person</span>
     <span>Profile</span>
   </button>
 </nav>
@@ -1643,16 +1931,23 @@
     const banner = document.getElementById('confidential-banner');
     if (banner) banner.style.display = admin ? 'none' : 'flex';
 
-    // Confidentiality adjustments on tabs & headings
+    // Confidentiality adjustments on tabs & headings across all navigation bars
     const repayTab = document.getElementById('tab-repay-btn');
     if (repayTab) repayTab.style.display = admin ? 'flex' : 'none';
+    const mbRepayTab = document.getElementById('mb-tab-repay-btn');
+    if (mbRepayTab) mbRepayTab.style.display = admin ? 'inline-flex' : 'none';
+    const sbRepayTab = document.getElementById('sb-repay-btn');
+    if (sbRepayTab) sbRepayTab.style.display = admin ? 'flex' : 'none';
 
-    const peopleTab = document.getElementById('tab-people-btn');
-    const peopleTabLabel = document.getElementById('tab-people-label');
-    if (peopleTabLabel) peopleTabLabel.textContent = admin ? 'Staff Ledgers' : 'My Ledger';
+    const peopleText = admin ? 'Staff Ledgers' : 'My Ledger';
+    if (document.getElementById('tab-people-label')) document.getElementById('tab-people-label').textContent = peopleText;
+    if (document.getElementById('mb-tab-people-label')) document.getElementById('mb-tab-people-label').textContent = peopleText;
+    if (document.getElementById('sb-people-label')) document.getElementById('sb-people-label').textContent = peopleText;
 
-    const expTabLabel = document.getElementById('tab-expenses-label');
-    if (expTabLabel) expTabLabel.textContent = admin ? 'All Expenses' : 'My Expenses';
+    const expText = admin ? 'All Expenses' : 'My Expenses';
+    if (document.getElementById('tab-expenses-label')) document.getElementById('tab-expenses-label').textContent = expText;
+    if (document.getElementById('mb-tab-expenses-label')) document.getElementById('mb-tab-expenses-label').textContent = expText;
+    if (document.getElementById('sb-expenses-label')) document.getElementById('sb-expenses-label').textContent = expText;
 
     const dashPeopleHeading = document.getElementById('dash-people-heading');
     if (dashPeopleHeading) dashPeopleHeading.textContent = admin ? '👤 Staff Reimbursement Ledgers' : '👤 My Reimbursement Ledger';
@@ -2617,7 +2912,7 @@
         <div style="text-align:center; padding: 40px 20px; color: var(--sub);">
           <span class="material-symbols-outlined" style="font-size:42px; opacity:0.3; display:block; margin-bottom:8px;">chat_bubble_outline</span>
           <div style="font-size:14px; font-weight:700; color:var(--text);">No Remarks Yet</div>
-          <div style="font-size:12.5px; margin-top:2px;">Post updates (e.g. 'Document submitted, waiting for CA response...').</div>
+          <div style="font-size:12px; margin-top:2px; color:var(--sub);">Type an update below to start the thread.</div>
         </div>
       `;
       return;
@@ -2629,26 +2924,29 @@
       const s = staffRoster[authorName] || { colorClass: 'av-indigo', initials: authorName.slice(0,2).toUpperCase() };
 
       return `
-        <div style="display:flex; gap:10px; align-items:flex-start; ${isMe ? 'flex-direction:row-reverse;' : ''}">
-          <div class="avatar ${s.colorClass}" style="width:34px; height:34px; font-size:12px; flex-shrink:0;">
+        <div style="display:flex; gap:8px; align-items:flex-start; margin-bottom:10px; ${isMe ? 'flex-direction:row-reverse;' : ''}">
+          <div class="avatar ${s.colorClass}" style="width:30px; height:30px; font-size:11px; flex-shrink:0;">
             ${s.initials}
           </div>
           <div style="max-width:82%; display:flex; flex-direction:column; ${isMe ? 'align-items:flex-end;' : 'align-items:flex-start;'}">
-            <div style="display:flex; align-items:center; gap:8px; margin-bottom:3px;">
-              <strong style="font-size:12px; color:var(--text);">${r.sender}</strong>
-              <span style="font-size:10.5px; color:var(--sub);">${r.timestamp || ''}</span>
+            <div style="display:flex; align-items:center; gap:6px; margin-bottom:2px; font-size:11px;">
+              <strong style="color:var(--text);">${r.sender}</strong>
+              <span style="color:var(--sub); font-size:10px;">${r.timestamp || ''}</span>
             </div>
             <div style="
-              background: ${isMe ? '#eef0ff' : '#ffffff'};
-              color: var(--text);
-              border: 1px solid ${isMe ? '#c7c4ff' : 'var(--border)'};
+              background: ${isMe ? '#4f46e5' : '#ffffff'};
+              color: ${isMe ? '#ffffff' : 'var(--text)'};
+              border: ${isMe ? 'none' : '1px solid var(--border)'};
               border-radius: ${isMe ? '14px 4px 14px 14px' : '4px 14px 14px 14px'};
-              padding: 9px 13px;
-              font-size: 13.5px;
-              line-height: 1.5;
-              box-shadow: var(--shadow-sm);
+              padding: 7px 12px;
+              font-size: 13px;
+              line-height: 1.4;
+              box-shadow: 0 1px 2px rgba(0,0,0,0.05);
               white-space: pre-wrap;
               word-break: break-word;
+              width: fit-content;
+              max-width: 100%;
+              display: inline-block;
             ">
               ${r.text}
             </div>
