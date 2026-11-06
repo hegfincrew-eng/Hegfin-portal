@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- HEGFIN Academy Portal v4 — Role-Based Confidentiality & Multi-Staff Security -->
 <html lang="en">
 <head>
   <meta charset="utf-8"/>
@@ -16,697 +15,691 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0..1,0" rel="stylesheet"/>
 
   <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  :root {
-    --bg: #f3f5f9;
-    --card: #ffffff;
-    --primary: #4f46e5;
-    --primary-hover: #4338ca;
-    --primary-light: #eef0ff;
-    --primary-border: #c7c4ff;
-    --text: #0c1b35;
-    --sub: #565e74;
-    --border: #e2e8f0;
-    --border-subtle: #edf2f7;
-    --green: #16a34a;
-    --green-bg: #dcfce7;
-    --amber: #d97706;
-    --amber-bg: #fef3c7;
-    --red: #dc2626;
-    --red-bg: #fee2e2;
-    --sidebar: #1e1b4b;
-    --sidebar-sub: rgba(255,255,255,0.7);
-    --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
-    --shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
-    --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
-  }
+    :root {
+      --bg: #f4f6fa;
+      --card: #ffffff;
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef0ff;
+      --primary-border: #c7c4ff;
+      --text: #0f172a;
+      --sub: #64748b;
+      --border: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      --green: #16a34a;
+      --green-bg: #dcfce7;
+      --amber: #d97706;
+      --amber-bg: #fef3c7;
+      --red: #dc2626;
+      --red-bg: #fee2e2;
+      --sidebar: #1e1b4b;
+      --sidebar-sub: rgba(255,255,255,0.7);
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+      --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
+    }
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-  }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
 
-  /* 0. LOGIN SCREEN GATE */
-  #login-screen {
-    position: fixed; inset: 0;
-    background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-    z-index: 9999;
-    display: flex; align-items: center; justify-content: center;
-    padding: 20px;
-  }
-  .login-box {
-    background: #fff; border-radius: 20px; padding: 36px 32px;
-    max-width: 440px; width: 100%; box-shadow: var(--shadow-lg);
-    text-align: center;
-  }
-  .login-sub { font-size: 13px; color: var(--sub); margin-bottom: 24px; }
-  .login-btn {
-    width: 100%; padding: 13px; background: var(--primary); color: #fff;
-    border: none; border-radius: 10px; font-size: 14.5px; font-weight: 700;
-    cursor: pointer; transition: all 0.15s ease; font-family: inherit;
-  }
-  .login-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    /* -------------------------------------------------------------
+       0. LOGIN GATEWAY (Clean Username & Password)
+       ------------------------------------------------------------- */
+    #login-screen {
+      position: fixed; inset: 0;
+      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+      z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
+      padding: 20px;
+    }
+    .login-box {
+      background: #ffffff; border-radius: 20px; padding: 36px 32px;
+      max-width: 420px; width: 100%; box-shadow: var(--shadow-lg);
+      text-align: center;
+    }
+    .login-sub { font-size: 13px; color: var(--sub); margin-bottom: 24px; margin-top: 6px; }
+    .form-group { display: flex; flex-direction: column; gap: 6px; text-align: left; }
+    .form-group label {
+      font-size: 11px; font-weight: 700; color: var(--sub);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .input-field {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 11px 14px; font-size: 14px; color: var(--text);
+      background: #fbfcfe; outline: none; transition: all 0.15s ease;
+      font-family: inherit;
+    }
+    .input-field:focus { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px rgba(79,70,229,0.12); }
+    .login-btn {
+      width: 100%; padding: 13px; background: var(--primary); color: #fff;
+      border: none; border-radius: 10px; font-size: 14.5px; font-weight: 700;
+      cursor: pointer; transition: all 0.15s ease; font-family: inherit; margin-top: 10px;
+    }
+    .login-btn:hover { background: var(--primary-hover); transform: translateY(-1px); }
 
-  /* 1. SIDEBAR (DESKTOP) */
-  #sidebar {
-    width: 240px; min-height: 100vh;
-    background: var(--sidebar);
-    display: flex; flex-direction: column;
-    flex-shrink: 0; position: sticky; top: 0; height: 100vh;
-    z-index: 50; transition: transform 0.25s ease;
-  }
-  .sidebar-logo {
-    padding: 22px 20px 18px;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
-  }
-  .sidebar-logo .school { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
-  .sidebar-logo .sub { font-size: 11.5px; color: var(--sidebar-sub); }
+    /* -------------------------------------------------------------
+       1. SIDEBAR (Strictly Finance Room & Tasks only)
+       ------------------------------------------------------------- */
+    #sidebar {
+      width: 240px; min-height: 100vh;
+      background: var(--sidebar);
+      display: flex; flex-direction: column;
+      flex-shrink: 0; position: sticky; top: 0; height: 100vh;
+      z-index: 50; transition: transform 0.25s ease;
+    }
+    .sidebar-logo {
+      padding: 22px 20px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .sidebar-logo .school-title { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -0.3px; }
+    .sidebar-logo .school-sub { font-size: 11.5px; color: var(--sidebar-sub); margin-top: 2px; }
 
-  .sidebar-section-label {
-    font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.4);
-    text-transform: uppercase; letter-spacing: 0.1em;
-    padding: 16px 18px 6px;
-  }
-  .sidebar-nav { padding: 0 12px; display: flex; flex-direction: column; gap: 4px; }
-  .mod-btn {
-    display: flex; align-items: center; gap: 12px;
-    padding: 11px 14px; border-radius: 10px;
-    color: var(--sidebar-sub); font-size: 13.5px; font-weight: 600;
-    cursor: pointer; transition: all 0.15s ease;
-    border: none; background: none; text-align: left; width: 100%; font-family: inherit;
-  }
-  .mod-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
-  .mod-btn.active {
-    background: rgba(79,70,229,0.36); color: #ffffff;
-    box-shadow: inset 0 0 0 1px rgba(199,196,255,0.3);
-  }
-  .mod-btn .material-symbols-outlined { font-size: 20px; flex-shrink: 0; }
-  .mod-btn .badge-pill {
-    margin-left: auto; font-size: 11px; font-weight: 700;
-    padding: 2px 7px; border-radius: 10px;
-    background: rgba(255,255,255,0.18); color: #fff;
-  }
-  .sidebar-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 12px 14px; }
+    .sidebar-section-label {
+      font-size: 10.5px; font-weight: 700; color: rgba(255,255,255,0.45);
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 16px 20px 6px;
+    }
+    .sidebar-nav { padding: 0 12px; display: flex; flex-direction: column; gap: 4px; }
+    .mod-btn {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 14px; border-radius: 10px;
+      color: var(--sidebar-sub); font-size: 13.5px; font-weight: 600;
+      cursor: pointer; transition: all 0.15s ease;
+      border: none; background: none; text-align: left; width: 100%; font-family: inherit;
+    }
+    .mod-btn:hover { background: rgba(255,255,255,0.08); color: #fff; }
+    .mod-btn.active {
+      background: rgba(79,70,229,0.36); color: #ffffff;
+      box-shadow: inset 0 0 0 1px rgba(199,196,255,0.3);
+    }
+    .mod-btn .material-symbols-outlined { font-size: 20px; flex-shrink: 0; }
+    .mod-btn .badge-pill {
+      margin-left: auto; font-size: 11px; font-weight: 700;
+      padding: 2px 7px; border-radius: 10px;
+      background: rgba(255,255,255,0.18); color: #fff;
+    }
 
-  /* Current User Profile Card in Sidebar */
-  .sidebar-user {
-    margin-top: auto; padding: 14px 16px;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    background: rgba(0,0,0,0.22);
-    display: flex; align-items: center; gap: 10px;
-  }
-  .sidebar-avatar {
-    width: 38px; height: 38px; border-radius: 50%;
-    background: var(--primary); color: #fff;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 700; font-size: 13px; flex-shrink: 0; cursor: pointer;
-  }
-  .user-info { min-width: 0; flex: 1; cursor: pointer; }
-  .user-info strong { color: #fff; display: block; font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .user-info span { color: var(--sidebar-sub); font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .user-profile-btn {
-    background: none; border: none; color: #a5b4fc;
-    cursor: pointer; padding: 5px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .user-profile-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
-  .logout-btn {
-    background: none; border: none; color: #fca5a5;
-    cursor: pointer; padding: 5px; border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-  }
-  .logout-btn:hover { background: rgba(239,68,68,0.2); }
+    .sidebar-divider { height: 1px; background: rgba(255,255,255,0.08); margin: 14px 16px; }
 
-  /* 2. MAIN CONTENT AREA & TOPBAR */
-  #main {
-    flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative;
-  }
+    /* Cloud Status Pill in Sidebar */
+    .sidebar-cloud-badge {
+      margin: 0 14px 10px;
+      background: rgba(255,255,255,0.05); border: 1px dashed rgba(255,255,255,0.16);
+      border-radius: 10px; padding: 9px 12px; font-size: 11px; cursor: pointer;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .sidebar-cloud-badge:hover { background: rgba(255,255,255,0.09); }
 
-  #topbar {
-    background: var(--card); border-bottom: 1px solid var(--border);
-    padding: 0 20px; display: flex; align-items: center; gap: 12px;
-    min-height: 60px; position: sticky; top: 0; z-index: 40;
-  }
-  .mobile-menu-btn { display: none !important; }
+    /* User Profile Card in Sidebar */
+    .sidebar-user {
+      margin-top: auto; padding: 14px 16px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      background: rgba(0,0,0,0.22);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .sidebar-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--primary); color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 13px; flex-shrink: 0; cursor: pointer;
+    }
+    .user-info { min-width: 0; flex: 1; cursor: pointer; }
+    .user-info strong { color: #fff; display: block; font-size: 13px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-info span { color: var(--sidebar-sub); font-size: 11px; display: block; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .user-action-btn {
+      background: none; border: none; color: #a5b4fc;
+      cursor: pointer; padding: 5px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .user-action-btn:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .logout-btn { color: #fca5a5; }
+    .logout-btn:hover { background: rgba(239,68,68,0.2); }
 
-  #module-label {
-    font-size: 14px; font-weight: 800; color: var(--text);
-    padding-right: 14px; border-right: 1px solid var(--border);
-    margin-right: 4px; white-space: nowrap;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .tab-nav-group {
-    display: flex; align-items: center; gap: 4px; overflow-x: auto;
-    scrollbar-width: none;
-  }
-  .tab-nav-group::-webkit-scrollbar { display: none; }
-
-  .tab-btn {
-    display: flex; align-items: center; gap: 6px;
-    padding: 7px 13px; border-radius: 8px; border: none;
-    background: transparent; color: var(--sub); font-size: 13px;
-    font-weight: 500; cursor: pointer; transition: all 0.15s ease;
-    font-family: inherit; white-space: nowrap;
-  }
-  .tab-btn:hover { background: var(--bg); color: var(--text); }
-  .tab-btn.active {
-    background: var(--primary-light); color: var(--primary); font-weight: 700;
-  }
-  .tab-btn .material-symbols-outlined { font-size: 18px; }
-
-  .topbar-spacer { flex: 1; }
-  .action-group { display: flex; align-items: center; gap: 10px; }
-  .primary-btn {
-    display: inline-flex; align-items: center; gap: 6px;
-    background: var(--primary); color: #fff; border: none;
-    padding: 8px 16px; border-radius: 9px; font-size: 13px; font-weight: 700;
-    cursor: pointer; transition: all 0.15s ease; font-family: inherit; white-space: nowrap;
-  }
-  .primary-btn:hover { background: var(--primary-hover); }
-
-  /* 3. STICKY MOBILE SUBNAV BAR (PILLS) */
-  #mobile-subnav-bar {
-    display: none; background: #ffffff; border-bottom: 1px solid var(--border);
-    padding: 8px 12px; position: sticky; top: 54px; z-index: 38;
-    overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.03);
-  }
-  #mobile-subnav-bar::-webkit-scrollbar { display: none; }
-  .mb-subnav-row {
-    display: flex; align-items: center; gap: 6px; flex-shrink: 0; min-width: 100%;
-  }
-  .mb-subnav-pill {
-    display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px;
-    border: 1px solid var(--border); background: #f8fafc; color: var(--sub);
-    font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer;
-    transition: all 0.15s ease; font-family: inherit; -webkit-tap-highlight-color: transparent;
-  }
-  .mb-subnav-pill.active {
-    background: var(--primary); color: #ffffff; border-color: var(--primary);
-    box-shadow: 0 2px 6px rgba(79,70,229,0.25);
-  }
-  .mb-subnav-pill .material-symbols-outlined { font-size: 16px; }
-
-  /* 4. VIEW PANES & MODULES */
-  .module-container { display: none; flex-direction: column; flex: 1; }
-  .module-container.active { display: flex; }
-  .view-pane { display: none; padding: 24px 28px 40px; flex-direction: column; flex: 1; }
-  .view-pane.active { display: flex; }
-
-  /* 5. STAT CARDS & DASHBOARD */
-  .cards-row {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
-  }
-  .stat-card {
-    background: var(--card); border-radius: 16px; padding: 18px 20px;
-    box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-    display: flex; flex-direction: column; gap: 6px;
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-  .stat-card .label {
-    display: flex; align-items: center; justify-content: space-between;
-    font-size: 12px; font-weight: 700; color: var(--sub);
-  }
-  .stat-card .amount {
-    font-size: 24px; font-weight: 800; letter-spacing: -0.5px;
-    font-variant-numeric: tabular-nums;
-  }
-  .stat-card .amount.urgent { color: var(--red); }
-  .stat-card .amount.warn   { color: var(--amber); }
-  .stat-card .amount.ok     { color: var(--green); }
-  .stat-card .hint { font-size: 11.5px; color: var(--sub); line-height: 1.35; }
-  .stat-card .pill { margin-top: 4px; align-self: flex-start; }
-
-  /* Section Headers */
-  .section-head {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 12px; margin-top: 6px;
-  }
-  .section-head h2 { font-size: 15px; font-weight: 800; color: var(--text); }
-  .link-action {
-    font-size: 12px; font-weight: 700; color: var(--primary);
-    cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 4px;
-  }
-  .link-action:hover { text-decoration: underline; }
-
-  /* 6. TASK CARDS (CLEAN DIRECT LINE ARCHITECTURE) */
-  .task-list { display: flex; flex-direction: column; gap: 12px; }
-  .task-card {
-    background: var(--card); border-radius: 14px; padding: 14px 18px;
-    box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-    display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;
-    transition: all 0.15s ease; width: 100%; box-sizing: border-box;
-  }
-  .task-card:hover { border-color: #cbd5e1; box-shadow: var(--shadow); }
-  .task-card.completed { background: #fafbfc; opacity: 0.8; }
-
-  .task-direct-header {
-    display: flex; align-items: center; gap: 10px; width: 100%;
-  }
-  .task-direct-title {
-    font-size: 15px; font-weight: 700; color: var(--text);
-    flex: 1; word-break: break-word; line-height: 1.35;
-  }
-  .task-direct-title.done { text-decoration: line-through; color: var(--sub); }
-
-  .task-direct-badges {
-    display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
-  }
-  .priority-badge {
-    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
-  }
-  .p-high   { background: #fee2e2; color: #dc2626; }
-  .p-medium { background: #fef3c7; color: #d97706; }
-  .p-low    { background: #dcfce7; color: #16a34a; }
-
-  .status-badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 20px;
-  }
-  .status-ongoing   { background: var(--amber-bg); color: var(--amber); }
-  .status-completed { background: var(--green-bg); color: var(--green); }
-  .status-overdue   { background: var(--red-bg);   color: var(--red); }
-
-  .task-direct-meta {
-    display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
-    font-size: 12px; color: var(--sub);
-  }
-  .task-meta-item { display: flex; align-items: center; gap: 4px; }
-  .task-meta-item.overdue { color: var(--red); font-weight: 700; }
-  .task-meta-divider { color: #cbd5e1; }
-
-  .task-direct-actions {
-    display: flex; align-items: center; gap: 8px; width: 100%;
-    padding-top: 8px; border-top: 1px solid var(--border-subtle); margin-top: 2px;
-  }
-  .task-remark-btn {
-    background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;
-    border-radius: 8px; padding: 7px 14px; font-size: 12.5px; font-weight: 700;
-    cursor: pointer; font-family: inherit; transition: all 0.15s ease;
-    display: inline-flex; align-items: center; gap: 6px;
-  }
-  .task-remark-btn:hover { background: #e2e8f0; color: var(--primary); }
-  .remark-count-badge {
-    background: var(--primary); color: #fff; border-radius: 12px;
-    font-size: 11px; padding: 1px 6px; font-weight: 800;
-  }
-  .task-toggle-btn {
-    background: var(--primary-light); color: var(--primary); border: none;
-    border-radius: 8px; padding: 7px 14px; font-size: 12.5px; font-weight: 700;
-    cursor: pointer; font-family: inherit; transition: all 0.15s ease;
-    display: inline-flex; align-items: center; gap: 4px;
-  }
-  .task-toggle-btn:hover { background: var(--primary); color: #fff; }
-  .task-delete-btn {
-    background: none; border: none; cursor: pointer; color: #94a3b8;
-    padding: 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
-    margin-left: auto;
-  }
-  .task-delete-btn:hover { color: var(--red); }
-
-  /* 7. STAFF LEDGERS CARDS (ZERO OVERLAPPING) */
-  .person-card-responsive {
-    background: var(--card); border-radius: 14px; padding: 14px 18px;
-    border: 1px solid var(--border); box-shadow: var(--shadow-sm);
-    display: flex; flex-direction: column; gap: 10px; margin-bottom: 12px;
-  }
-  .person-card-header {
-    display: flex; align-items: center; gap: 12px; width: 100%;
-  }
-  .person-card-stats-box {
-    display: grid; grid-template-columns: repeat(3, 1fr);
-    background: #f8fafc; border-radius: 10px; padding: 10px 8px;
-    gap: 6px; text-align: center; border: 1px solid #f1f5f9;
-  }
-  .stat-col .stat-lbl { font-size: 11px; color: var(--sub); font-weight: 500; }
-  .stat-col .stat-val { font-size: 14.5px; font-weight: 700; margin-top: 2px; }
-
-  /* Avatars */
-  .avatar {
-    width: 40px; height: 40px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 13px; font-weight: 700; flex-shrink: 0;
-  }
-  .av-indigo { background: #eef0ff; color: #4f46e5; }
-  .av-teal   { background: #ccfbf1; color: #0f766e; }
-  .av-orange { background: #fff7ed; color: #ea580c; }
-  .av-purple { background: #f3e8ff; color: #7c3aed; }
-  .av-pink   { background: #fce7f3; color: #be185d; }
-
-  /* Buttons */
-  .btn-sm {
-    padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
-    cursor: pointer; border: none; font-family: inherit; transition: all 0.15s ease;
-    display: inline-flex; align-items: center; gap: 4px;
-  }
-  .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
-  .btn-outline:hover { background: var(--bg); border-color: var(--primary); color: var(--primary); }
-  .btn-pay { background: var(--green-bg); color: var(--green); font-weight: 800; }
-  .btn-pay:hover { background: var(--green); color: #fff; }
-
-  /* Pills & Badges */
-  .pill {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
-  }
-  .pill.green { background: var(--green-bg); color: var(--green); }
-  .pill.blue  { background: var(--primary-light); color: var(--primary); }
-  .pill.amber { background: var(--amber-bg); color: var(--amber); }
-  .pill.red   { background: var(--red-bg); color: var(--red); }
-
-  .badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
-  }
-  .badge.pending  { background: var(--amber-bg); color: var(--amber); }
-  .badge.approved { background: var(--green-bg); color: var(--green); }
-  .badge.rejected { background: var(--red-bg);   color: var(--red); }
-
-  /* 8. DATA TABLES */
-  .table-container {
-    background: var(--card); border-radius: 14px;
-    box-shadow: var(--shadow-sm); border: 1px solid var(--border);
-    overflow-x: auto; -webkit-overflow-scrolling: touch;
-  }
-  table.data-table { width: 100%; border-collapse: collapse; min-width: 600px; }
-  table.data-table thead tr { background: #f8fafc; border-bottom: 1px solid var(--border); }
-  table.data-table th {
-    text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700;
-    color: var(--sub); text-transform: uppercase; letter-spacing: 0.05em;
-  }
-  table.data-table td {
-    padding: 12px 16px; font-size: 13px; color: var(--text);
-    border-bottom: 1px solid var(--border-subtle); vertical-align: middle;
-  }
-  table.data-table tbody tr:hover td { background: #fafbff; }
-  .table-mobile-hint {
-    display: none; align-items: center; gap: 6px; font-size: 11px;
-    color: #64748b; background: #f1f5f9; padding: 5px 10px; border-radius: 6px;
-    margin-bottom: 8px; font-weight: 500;
-  }
-
-  /* Toolbar */
-  .table-toolbar {
-    display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
-  }
-  .search-box { flex: 1; min-width: 200px; position: relative; }
-  .search-box input {
-    width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
-    padding: 8px 12px 8px 34px; font-size: 13.5px; color: var(--text);
-    outline: none; font-family: inherit; background: var(--card);
-  }
-  .search-box .material-symbols-outlined {
-    position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
-    font-size: 18px; color: var(--sub); pointer-events: none;
-  }
-  .filter-select {
-    border: 1.5px solid var(--border); border-radius: 10px;
-    padding: 8px 12px; font-size: 13px; color: var(--text);
-    background: var(--card); outline: none; font-family: inherit;
-  }
-
-  /* 9. FORMS */
-  .form-card {
-    background: var(--card); border-radius: 16px; padding: 24px;
-    box-shadow: var(--shadow-sm); border: 1px solid var(--border); max-width: 620px;
-  }
-  .form-card h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
-  .form-card p  { font-size: 13px; color: var(--sub); margin-bottom: 20px; }
-  .form-row     { display: flex; gap: 14px; margin-bottom: 14px; }
-  .form-group   { display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .form-group label {
-    font-size: 11px; font-weight: 700; color: var(--sub);
-    text-transform: uppercase; letter-spacing: 0.05em;
-  }
-  .form-group input, .form-group select, .form-group textarea {
-    border: 1.5px solid var(--border); border-radius: 9px;
-    padding: 10px 14px; font-size: 14px; color: var(--text);
-    font-family: inherit; background: #fbfcfe; outline: none;
-  }
-  .submit-btn {
-    width: 100%; padding: 12px; background: var(--primary); color: #fff;
-    border: none; border-radius: 9px; font-size: 14px; font-weight: 700;
-    cursor: pointer; font-family: inherit; transition: all 0.15s ease;
-  }
-  .submit-btn:hover { background: var(--primary-hover); }
-
-  /* 10. MODALS & PROCESS CHAT */
-  .modal-overlay {
-    position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55);
-    backdrop-filter: blur(2px); z-index: 1000;
-    display: none; align-items: center; justify-content: center; padding: 16px;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal-box {
-    background: #fff; border-radius: 18px; max-width: 580px; width: 100%;
-    box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column;
-    max-height: 88vh;
-  }
-  .modal-header {
-    padding: 16px 20px; border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .modal-close {
-    background: none; border: none; font-size: 22px; cursor: pointer;
-    color: var(--sub); padding: 4px; line-height: 1;
-  }
-  .modal-body { padding: 20px; overflow-y: auto; }
-
-  /* Chat Message Bubbles */
-  .remark-msg-row {
-    display: flex; gap: 8px; align-items: flex-start; margin-bottom: 10px; width: 100%;
-  }
-  .remark-msg-row.me { flex-direction: row-reverse; }
-  .remark-bubble-wrap {
-    max-width: 82%; display: flex; flex-direction: column;
-  }
-  .remark-msg-row.me .remark-bubble-wrap { align-items: flex-end; }
-  .remark-meta-line {
-    display: flex; align-items: center; gap: 6px; margin-bottom: 2px; font-size: 11px;
-  }
-  .remark-bubble {
-    padding: 7px 12px; font-size: 13px; line-height: 1.45;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.05); white-space: pre-wrap; word-break: break-word;
-    width: fit-content; max-width: 100%; display: inline-block;
-  }
-  .remark-bubble.me {
-    background: var(--primary); color: #fff;
-    border-radius: 14px 4px 14px 14px;
-  }
-  .remark-bubble.other {
-    background: #fff; color: var(--text); border: 1px solid var(--border);
-    border-radius: 4px 14px 14px 14px;
-  }
-
-  /* 11. MOBILE BOTTOM NAVIGATION */
-  #mobile-bottom-nav {
-    display: none; position: fixed; bottom: 0; left: 0; right: 0;
-    height: 56px; background: #ffffff; border-top: 1px solid var(--border);
-    z-index: 45; justify-content: space-around; align-items: center;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
-  }
-  .mb-nav-item {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    color: var(--sub); font-size: 11px; font-weight: 600; text-decoration: none;
-    flex: 1; height: 100%; border: none; background: none; cursor: pointer; font-family: inherit;
-  }
-  .mb-nav-item.active { color: var(--primary); font-weight: 800; }
-  .mb-nav-item .material-symbols-outlined { font-size: 22px; }
-
-  /* 12. RESPONSIVE BREAKPOINTS (TABLET & MOBILE) */
-  @media (max-width: 1024px) {
-    #sidebar { width: 210px; }
-    .cards-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .view-pane { padding: 20px 18px 30px; }
-  }
-
-  @media (max-width: 820px) {
-    #sidebar { display: none !important; }
-    .mobile-menu-btn { display: none !important; }
+    /* -------------------------------------------------------------
+       2. MAIN CONTENT AREA & TOPBAR
+       ------------------------------------------------------------- */
+    #main {
+      flex: 1; display: flex; flex-direction: column; min-width: 0; position: relative;
+    }
 
     #topbar {
-      padding: 0 10px; min-height: 54px; justify-content: space-between;
-      max-width: 100vw; box-sizing: border-box; overflow: hidden;
+      background: var(--card); border-bottom: 1px solid var(--border);
+      padding: 0 20px; display: flex; align-items: center; gap: 14px;
+      min-height: 60px; position: sticky; top: 0; z-index: 40;
     }
-    #topbar #finance-tabs, #topbar #task-tabs { display: none !important; }
-    .topbar-spacer { display: none; }
-    
-    #module-label {
-      border-right: none; padding-right: 0; margin-right: 0; font-size: 13.5px;
+    #module-title-label {
+      font-size: 15px; font-weight: 800; color: var(--text);
+      display: flex; align-items: center; gap: 8px; white-space: nowrap;
+      padding-right: 14px; border-right: 1px solid var(--border);
     }
-    #module-label img { height: 20px !important; }
+    .mobile-only-logo { display: none; }
 
-    #quick-action-btn {
-      padding: 6px 12px; font-size: 12px; border-radius: 8px;
-      white-space: nowrap; flex-shrink: 0;
+    /* Desktop Navigation Tabs */
+    .tab-nav-group {
+      display: flex; align-items: center; gap: 4px; overflow-x: auto;
+      scrollbar-width: none;
     }
-    #quick-action-btn .material-symbols-outlined { font-size: 17px; }
+    .tab-nav-group::-webkit-scrollbar { display: none; }
+    .tab-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 13px; border-radius: 8px; border: none;
+      background: transparent; color: var(--sub); font-size: 13px;
+      font-weight: 500; cursor: pointer; transition: all 0.15s ease;
+      font-family: inherit; white-space: nowrap;
+    }
+    .tab-btn:hover { background: var(--bg); color: var(--text); }
+    .tab-btn.active {
+      background: var(--primary-light); color: var(--primary); font-weight: 700;
+    }
+    .tab-btn .material-symbols-outlined { font-size: 18px; }
 
-    #mobile-subnav-bar { display: flex; }
-    #mobile-bottom-nav {
-      display: flex;
-      padding-bottom: env(safe-area-inset-bottom, 0);
-      height: calc(56px + env(safe-area-inset-bottom, 0));
+    .topbar-spacer { flex: 1; }
+    .primary-action-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--primary); color: #fff; border: none;
+      padding: 8px 16px; border-radius: 9px; font-size: 13px; font-weight: 700;
+      cursor: pointer; transition: all 0.15s ease; font-family: inherit; white-space: nowrap;
     }
-    .view-pane {
-      padding: 12px 12px calc(72px + env(safe-area-inset-bottom, 0));
-    }
-    .table-mobile-hint { display: flex; }
+    .primary-action-btn:hover { background: var(--primary-hover); }
 
+    /* -------------------------------------------------------------
+       3. STICKY MOBILE SUBNAV BAR (PILLS)
+       ------------------------------------------------------------- */
+    #mobile-subnav-bar {
+      display: none; background: #ffffff; border-bottom: 1px solid var(--border);
+      padding: 8px 12px; position: sticky; top: 54px; z-index: 38;
+      overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    #mobile-subnav-bar::-webkit-scrollbar { display: none; }
+    .mb-subnav-row {
+      display: flex; align-items: center; gap: 6px; flex-shrink: 0; min-width: 100%;
+    }
+    .mb-subnav-pill {
+      display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px;
+      border: 1px solid var(--border); background: #f8fafc; color: var(--sub);
+      font-size: 12px; font-weight: 600; white-space: nowrap; cursor: pointer;
+      transition: all 0.15s ease; font-family: inherit; -webkit-tap-highlight-color: transparent;
+    }
+    .mb-subnav-pill.active {
+      background: var(--primary); color: #ffffff; border-color: var(--primary);
+      box-shadow: 0 2px 6px rgba(79,70,229,0.25);
+    }
+    .mb-subnav-pill .material-symbols-outlined { font-size: 16px; }
+
+    /* -------------------------------------------------------------
+       4. MODULE CONTAINERS & VIEW PANES (Strict display none)
+       ------------------------------------------------------------- */
+    .module-pane { display: none !important; flex-direction: column; flex: 1; width: 100%; }
+    .module-pane.active { display: flex !important; }
+
+    .view-pane { display: none !important; padding: 24px 28px 40px; flex-direction: column; flex: 1; }
+    .view-pane.active { display: flex !important; }
+
+    /* -------------------------------------------------------------
+       5. DASHBOARD & STATS CARDS
+       ------------------------------------------------------------- */
     .cards-row {
-      grid-template-columns: repeat(2, 1fr) !important;
-      gap: 10px !important;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
     }
     .stat-card {
-      padding: 12px 14px !important;
+      background: var(--card); border-radius: 16px; padding: 18px 20px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 6px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .stat-card .label {
+      display: flex; align-items: center; justify-content: space-between;
+      font-size: 12px; font-weight: 700; color: var(--sub);
     }
     .stat-card .amount {
-      font-size: 20px !important;
+      font-size: 24px; font-weight: 800; letter-spacing: -0.5px;
+      font-variant-numeric: tabular-nums;
     }
-    .stat-card .hint {
-      font-size: 10.5px !important;
+    .stat-card .amount.urgent { color: var(--red); }
+    .stat-card .amount.warn   { color: var(--amber); }
+    .stat-card .amount.ok     { color: var(--green); }
+    .stat-card .hint { font-size: 11.5px; color: var(--sub); line-height: 1.35; }
+    .stat-card .pill { margin-top: 4px; align-self: flex-start; }
+
+    .section-head {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 12px; margin-top: 8px;
+    }
+    .section-head h2 { font-size: 15px; font-weight: 800; color: var(--text); }
+    .link-action {
+      font-size: 12.5px; font-weight: 700; color: var(--primary);
+      cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 4px;
+    }
+    .link-action:hover { text-decoration: underline; }
+
+    /* Compact Team Balances Grid on Dashboard */
+    .dash-balance-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 12px; margin-bottom: 22px; width: 100%;
+    }
+    .dash-balance-item {
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 12px 14px; display: flex; align-items: center; justify-content: space-between;
+      box-shadow: var(--shadow-sm); cursor: pointer; transition: all 0.15s ease;
+    }
+    .dash-balance-item:hover { border-color: #cbd5e1; transform: translateY(-1px); }
+
+    /* -------------------------------------------------------------
+       6. BULLETPROOF TASK CARDS (DIRECT LINE ARCHITECTURE)
+       ------------------------------------------------------------- */
+    .task-list { display: flex; flex-direction: column; gap: 12px; }
+    .task-card {
+      background: var(--card); border-radius: 14px; padding: 15px 18px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px;
+      transition: all 0.15s ease; width: 100%; box-sizing: border-box;
+    }
+    .task-card:hover { border-color: #cbd5e1; box-shadow: var(--shadow); }
+    .task-card.completed { background: #fafbfc; opacity: 0.8; }
+
+    .task-direct-header {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+    }
+    .task-direct-title {
+      font-size: 15px; font-weight: 700; color: var(--text);
+      flex: 1; word-break: break-word; line-height: 1.35;
+    }
+    .task-direct-title.done { text-decoration: line-through; color: var(--sub); }
+
+    .task-direct-badges {
+      display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+    }
+    .priority-badge {
+      font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    }
+    .p-high   { background: #fee2e2; color: #dc2626; }
+    .p-medium { background: #fef3c7; color: #d97706; }
+    .p-low    { background: #dcfce7; color: #16a34a; }
+
+    .status-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 700; padding: 2px 9px; border-radius: 20px;
+    }
+    .status-ongoing   { background: var(--amber-bg); color: var(--amber); }
+    .status-completed { background: var(--green-bg); color: var(--green); }
+    .status-overdue   { background: var(--red-bg);   color: var(--red); }
+
+    .task-direct-meta {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      font-size: 12px; color: var(--sub);
+    }
+    .task-meta-item { display: flex; align-items: center; gap: 4px; }
+    .task-meta-item.overdue { color: var(--red); font-weight: 700; }
+    .task-meta-divider { color: #cbd5e1; }
+
+    .task-direct-actions {
+      display: flex; align-items: center; gap: 8px; width: 100%;
+      padding-top: 10px; border-top: 1px solid var(--border-subtle); margin-top: 2px;
+    }
+    .task-remark-btn {
+      background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1;
+      border-radius: 8px; padding: 7px 14px; font-size: 12.5px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .task-remark-btn:hover { background: #e2e8f0; color: var(--primary); }
+    .remark-count-badge {
+      background: var(--primary); color: #fff; border-radius: 12px;
+      font-size: 11px; padding: 1px 6px; font-weight: 800;
+    }
+    .task-toggle-btn {
+      background: var(--primary-light); color: var(--primary); border: none;
+      border-radius: 8px; padding: 7px 14px; font-size: 12.5px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .task-toggle-btn:hover { background: var(--primary); color: #fff; }
+    .task-delete-btn {
+      background: none; border: none; cursor: pointer; color: #94a3b8;
+      padding: 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;
+      margin-left: auto;
+    }
+    .task-delete-btn:hover { color: var(--red); }
+
+    /* -------------------------------------------------------------
+       7. CLEAN STAFF LEDGER CARDS (NO OVERLAPPING)
+       ------------------------------------------------------------- */
+    .person-card-responsive {
+      background: var(--card); border-radius: 14px; padding: 16px 20px;
+      border: 1px solid var(--border); box-shadow: var(--shadow-sm);
+      display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px;
+    }
+    .person-card-header {
+      display: flex; align-items: center; gap: 12px; width: 100%;
+    }
+    .person-card-stats-box {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      background: #f8fafc; border-radius: 10px; padding: 12px 10px;
+      gap: 6px; text-align: center; border: 1px solid #f1f5f9;
+    }
+    .stat-col .stat-lbl { font-size: 11px; color: var(--sub); font-weight: 500; }
+    .stat-col .stat-val { font-size: 15px; font-weight: 700; margin-top: 2px; }
+
+    /* Avatars */
+    .avatar {
+      width: 38px; height: 38px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 700; flex-shrink: 0;
+    }
+    .av-indigo { background: #eef0ff; color: #4f46e5; }
+    .av-teal   { background: #ccfbf1; color: #0f766e; }
+    .av-orange { background: #fff7ed; color: #ea580c; }
+    .av-purple { background: #f3e8ff; color: #7c3aed; }
+    .av-pink   { background: #fce7f3; color: #be185d; }
+
+    /* Buttons */
+    .btn-sm {
+      padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700;
+      cursor: pointer; border: none; font-family: inherit; transition: all 0.15s ease;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .btn-outline { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-outline:hover { background: var(--bg); border-color: var(--primary); color: var(--primary); }
+    .btn-pay { background: var(--green-bg); color: var(--green); font-weight: 800; }
+    .btn-pay:hover { background: var(--green); color: #fff; }
+
+    .pill {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+    }
+    .pill.green { background: var(--green-bg); color: var(--green); }
+    .pill.blue  { background: var(--primary-light); color: var(--primary); }
+    .pill.amber { background: var(--amber-bg); color: var(--amber); }
+    .pill.red   { background: var(--red-bg); color: var(--red); }
+
+    .badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11px; font-weight: 700; padding: 3px 9px; border-radius: 6px;
+    }
+    .badge.pending  { background: var(--amber-bg); color: var(--amber); }
+    .badge.approved { background: var(--green-bg); color: var(--green); }
+    .badge.rejected { background: var(--red-bg);   color: var(--red); }
+
+    /* -------------------------------------------------------------
+       8. DATA TABLES & TOOLBARS
+       ------------------------------------------------------------- */
+    .table-container {
+      background: var(--card); border-radius: 14px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      overflow-x: auto; -webkit-overflow-scrolling: touch;
+    }
+    table.data-table { width: 100%; border-collapse: collapse; min-width: 620px; }
+    table.data-table thead tr { background: #f8fafc; border-bottom: 1px solid var(--border); }
+    table.data-table th {
+      text-align: left; padding: 12px 16px; font-size: 11px; font-weight: 700;
+      color: var(--sub); text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    table.data-table td {
+      padding: 12px 16px; font-size: 13px; color: var(--text);
+      border-bottom: 1px solid var(--border-subtle); vertical-align: middle;
+    }
+    table.data-table tbody tr:hover td { background: #fafbff; }
+    .table-mobile-hint {
+      display: none; align-items: center; gap: 6px; font-size: 11px;
+      color: #64748b; background: #f1f5f9; padding: 5px 10px; border-radius: 6px;
+      margin-bottom: 8px; font-weight: 500;
+    }
+    .table-toolbar {
+      display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; align-items: center;
+    }
+    .search-box { flex: 1; min-width: 200px; position: relative; }
+    .search-box input {
+      width: 100%; border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 8px 12px 8px 34px; font-size: 13.5px; color: var(--text);
+      outline: none; font-family: inherit; background: var(--card);
+    }
+    .search-box .material-symbols-outlined {
+      position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+      font-size: 18px; color: var(--sub); pointer-events: none;
+    }
+    .filter-select {
+      border: 1.5px solid var(--border); border-radius: 10px;
+      padding: 8px 12px; font-size: 13px; color: var(--text);
+      background: var(--card); outline: none; font-family: inherit;
     }
 
-    .form-row { flex-direction: column; gap: 10px; }
+    /* -------------------------------------------------------------
+       9. FORMS
+       ------------------------------------------------------------- */
+    .form-card {
+      background: var(--card); border-radius: 16px; padding: 26px;
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border); max-width: 620px;
+    }
+    .form-card h2 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .form-card p  { font-size: 13px; color: var(--sub); margin-bottom: 20px; }
+    .form-row     { display: flex; gap: 14px; margin-bottom: 14px; }
+    .form-group   { display: flex; flex-direction: column; gap: 6px; flex: 1; }
+    .form-group label {
+      font-size: 11px; font-weight: 700; color: var(--sub);
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
     .form-group input, .form-group select, .form-group textarea {
-      font-size: 16px !important;
+      border: 1.5px solid var(--border); border-radius: 9px;
+      padding: 10px 14px; font-size: 14px; color: var(--text);
+      font-family: inherit; background: #fbfcfe; outline: none;
     }
+    .submit-btn {
+      width: 100%; padding: 12px; background: var(--primary); color: #fff;
+      border: none; border-radius: 9px; font-size: 14px; font-weight: 700;
+      cursor: pointer; font-family: inherit; transition: all 0.15s ease;
+    }
+    .submit-btn:hover { background: var(--primary-hover); }
 
+    /* -------------------------------------------------------------
+       10. MODALS & PROCESS CHAT (HUGGING BUBBLES)
+       ------------------------------------------------------------- */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(15, 23, 42, 0.55);
+      backdrop-filter: blur(2px); z-index: 1000;
+      display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.open { display: flex; }
     .modal-box {
-      width: 95% !important; max-width: 95% !important;
-      max-height: 90vh !important; margin: 8px auto !important;
-      padding: 14px !important;
+      background: #fff; border-radius: 18px; max-width: 580px; width: 100%;
+      box-shadow: var(--shadow-lg); overflow: hidden; display: flex; flex-direction: column;
+      max-height: 88vh;
+    }
+    .modal-header {
+      padding: 16px 20px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .modal-close {
+      background: none; border: none; font-size: 22px; cursor: pointer;
+      color: var(--sub); padding: 4px; line-height: 1;
+    }
+    .modal-body { padding: 20px; overflow-y: auto; }
+
+    /* Chat Messages */
+    .remark-msg-row {
+      display: flex; gap: 8px; align-items: flex-start; margin-bottom: 10px; width: 100%;
+    }
+    .remark-msg-row.me { flex-direction: row-reverse; }
+    .remark-bubble-wrap {
+      max-width: 82%; display: flex; flex-direction: column;
+    }
+    .remark-msg-row.me .remark-bubble-wrap { align-items: flex-end; }
+    .remark-meta-line {
+      display: flex; align-items: center; gap: 6px; margin-bottom: 2px; font-size: 11px;
+    }
+    .remark-bubble {
+      padding: 7px 12px; font-size: 13px; line-height: 1.45;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05); white-space: pre-wrap; word-break: break-word;
+      width: fit-content; max-width: 100%; display: inline-block;
+    }
+    .remark-bubble.me {
+      background: var(--primary); color: #fff;
+      border-radius: 14px 4px 14px 14px;
+    }
+    .remark-bubble.other {
+      background: #fff; color: var(--text); border: 1px solid var(--border);
+      border-radius: 4px 14px 14px 14px;
     }
 
-    .task-direct-actions .task-remark-btn,
-    .task-direct-actions .task-toggle-btn {
-      flex: 1; justify-content: center; padding: 8px 10px; font-size: 12px;
+    /* -------------------------------------------------------------
+       11. MOBILE BOTTOM NAVIGATION (3 ITEMS)
+       ------------------------------------------------------------- */
+    #mobile-bottom-nav {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0;
+      height: 56px; background: #ffffff; border-top: 1px solid var(--border);
+      z-index: 45; justify-content: space-around; align-items: center;
+      box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
-  }
-</style>
+    .mb-nav-item {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--sub); font-size: 11px; font-weight: 600; text-decoration: none;
+      flex: 1; height: 100%; border: none; background: none; cursor: pointer; font-family: inherit;
+    }
+    .mb-nav-item.active { color: var(--primary); font-weight: 800; }
+    .mb-nav-item .material-symbols-outlined { font-size: 22px; }
+
+    /* -------------------------------------------------------------
+       12. RESPONSIVE BREAKPOINTS (TABLET & MOBILE)
+       ------------------------------------------------------------- */
+    @media (max-width: 1024px) {
+      #sidebar { width: 210px; }
+      .cards-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+      .view-pane { padding: 20px 18px 30px; }
+    }
+
+    @media (max-width: 820px) {
+      #sidebar { display: none !important; }
+
+      #topbar {
+        padding: 0 12px; min-height: 54px; justify-content: space-between;
+        max-width: 100vw; box-sizing: border-box; overflow: hidden;
+      }
+      #topbar #finance-tabs, #topbar #task-tabs { display: none !important; }
+      .topbar-spacer { display: none; }
+      
+      #module-title-label {
+        border-right: none; padding-right: 0; margin-right: 0; font-size: 13.5px;
+      }
+      .mobile-only-logo { display: inline-block; height: 20px; width: auto; object-fit: contain; }
+
+      .primary-action-btn {
+        padding: 6px 12px; font-size: 12px; border-radius: 8px;
+        white-space: nowrap; flex-shrink: 0;
+      }
+      .primary-action-btn .material-symbols-outlined { font-size: 17px; }
+
+      #mobile-subnav-bar { display: flex; }
+      #mobile-bottom-nav {
+        display: flex;
+        padding-bottom: env(safe-area-inset-bottom, 0);
+        height: calc(56px + env(safe-area-inset-bottom, 0));
+      }
+      .view-pane {
+        padding: 12px 12px calc(72px + env(safe-area-inset-bottom, 0));
+      }
+      .table-mobile-hint { display: flex; }
+
+      .cards-row {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .stat-card { padding: 12px 14px !important; }
+      .stat-card .amount { font-size: 20px !important; }
+      .stat-card .hint { font-size: 10.5px !important; }
+
+      .form-row { flex-direction: column; gap: 10px; }
+      .form-group input, .form-group select, .form-group textarea {
+        font-size: 16px !important;
+      }
+
+      .modal-box {
+        width: 95% !important; max-width: 95% !important;
+        max-height: 90vh !important; margin: 8px auto !important;
+        padding: 14px !important;
+      }
+
+      .task-direct-actions .task-remark-btn,
+      .task-direct-actions .task-toggle-btn {
+        flex: 1; justify-content: center; padding: 8px 10px; font-size: 12px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════
-     0. LOGIN SCREEN GATE (Clean Username & Password)
-════════════════════════════════════════ -->
+<!-- ==========================================================================
+     0. LOGIN SCREEN GATE
+     ========================================================================== -->
 <div id="login-screen">
   <div class="login-box">
-    <!-- Official Brand Logo -->
-    <div style="margin: 0 auto 18px; text-align: center;">
-      <img src="hegfin_logo.png" alt="Hegfin Academy" style="height: 68px; max-width: 90%; object-fit: contain;"/>
+    <div style="margin: 0 auto 16px; text-align: center;">
+      <img src="hegfin_logo.png" alt="Hegfin Academy" style="height: 64px; max-width: 90%; object-fit: contain;"/>
     </div>
-    <p class="login-sub">Staff & Executive Portal — Please Sign In</p>
+    <h2 style="font-size:18px; font-weight:800; color:var(--text);">Portal Login</h2>
+    <p class="login-sub">Enter your staff credentials to continue</p>
 
-    <!-- Clean Login Form -->
     <form id="login-form" onsubmit="event.preventDefault(); handleLogin();" style="text-align:left;">
-      <div class="form-group" style="margin-bottom:16px;">
-        <label style="display:block; font-size:11.5px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
-          Username
-        </label>
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>Username</label>
         <div style="position:relative;">
-          <span class="material-symbols-outlined" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:19px; color:#94a3b8; pointer-events:none;">person</span>
-          <input type="text" id="login-username" class="pin-input" placeholder="Enter your username" autocomplete="username" required autofocus style="text-align:left; font-size:14px; letter-spacing:normal; font-weight:500; padding:12px 14px 12px 38px;"/>
+          <span class="material-symbols-outlined" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:18px; color:#94a3b8; pointer-events:none;">person</span>
+          <input type="text" id="login-username" class="input-field" placeholder="Enter username" autocomplete="username" required autofocus style="padding-left:38px;"/>
         </div>
       </div>
 
-      <div class="form-group" style="margin-bottom:22px;">
-        <label style="display:block; font-size:11.5px; font-weight:700; color:var(--sub); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:6px;">
-          Password / PIN
-        </label>
+      <div class="form-group" style="margin-bottom:20px;">
+        <label>Password / PIN</label>
         <div style="position:relative;">
-          <span class="material-symbols-outlined" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:19px; color:#94a3b8; pointer-events:none;">lock</span>
-          <input type="password" id="login-password" class="pin-input" placeholder="Enter password / PIN" autocomplete="current-password" required style="text-align:left; font-size:14px; letter-spacing:normal; font-weight:500; padding:12px 14px 12px 38px;"/>
+          <span class="material-symbols-outlined" style="position:absolute; left:12px; top:50%; transform:translateY(-50%); font-size:18px; color:#94a3b8; pointer-events:none;">lock</span>
+          <input type="password" id="login-password" class="input-field" placeholder="Enter PIN" autocomplete="current-password" required style="padding-left:38px;"/>
         </div>
       </div>
 
       <button type="submit" class="login-btn">
-        Sign In to Portal
+        Sign In
       </button>
     </form>
 
-    <div style="margin-top:18px; font-size:11px; color:#94a3b8; display:flex; align-items:center; justify-content:center; gap:6px;">
+    <div style="margin-top:16px; font-size:11px; color:#94a3b8; display:flex; align-items:center; justify-content:center; gap:6px;">
       <span class="material-symbols-outlined" style="font-size:14px; color:#3b82f6;">verified_user</span>
       <span>Confidential role-based institutional access</span>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     1. SIDEBAR
-════════════════════════════════════════ -->
-<div id="sidebar-backdrop" onclick="closeSidebar()"></div>
+<!-- ==========================================================================
+     1. DESKTOP SIDEBAR (Strictly Finance Room & Tasks)
+     ========================================================================== -->
 <aside id="sidebar">
   <div class="sidebar-logo">
-    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom: 6px;">
-      <img src="hegfin_logo_white.png" alt="Hegfin Academy" style="height: 36px; max-width: 80%; object-fit: contain; display: block;"/>
-      <button class="sidebar-close-btn" onclick="closeSidebar()" aria-label="Close Menu">
-        <span class="material-symbols-outlined">close</span>
-      </button>
+    <div style="margin-bottom: 6px;">
+      <img src="hegfin_logo_white.png" alt="Hegfin Academy" style="height: 36px; max-width: 100%; object-fit: contain; display: block;"/>
     </div>
-    <div class="sub">Mangalore • Operations & Finance</div>
+    <div class="school-sub">Mangalore • Operations & Finance</div>
   </div>
 
-  <div class="sidebar-section-label">Operations & Views</div>
+  <div class="sidebar-section-label">Operations</div>
   <nav class="sidebar-nav">
     <button class="mod-btn active" id="mod-finance-btn" onclick="switchModule('finance', this)">
       <span class="material-symbols-outlined">account_balance</span>
       <span>Finance Room</span>
       <span class="badge-pill" id="badge-finance-pending">0</span>
     </button>
-    <div class="sidebar-sub-nav" id="sidebar-finance-sub">
-      <button class="sidebar-sub-link active" data-fview="dashboard" onclick="showFinanceView('dashboard')">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span>Dashboard</span>
-      </button>
-      <button class="sidebar-sub-link" data-fview="expenses" onclick="showFinanceView('expenses')">
-        <span class="material-symbols-outlined">receipt_long</span>
-        <span id="sb-expenses-label">All Expenses</span>
-      </button>
-      <button class="sidebar-sub-link" id="sb-people-btn" data-fview="people" onclick="showFinanceView('people')">
-        <span class="material-symbols-outlined">group</span>
-        <span id="sb-people-label">Staff Ledgers</span>
-      </button>
-      <button class="sidebar-sub-link" id="sb-repay-btn" data-fview="repay" onclick="showFinanceView('repay')">
-        <span class="material-symbols-outlined">payments</span>
-        <span>Record Payment</span>
-      </button>
-      <button class="sidebar-sub-link" data-fview="add" onclick="showFinanceView('add')">
-        <span class="material-symbols-outlined">add_circle</span>
-        <span>Add Expense</span>
-      </button>
-    </div>
-
-    <button class="mod-btn" id="mod-tasks-btn" onclick="switchModule('tasks', this)" style="margin-top:6px;">
+    <button class="mod-btn" id="mod-tasks-btn" onclick="switchModule('tasks', this)">
       <span class="material-symbols-outlined">task_alt</span>
       <span>Tasks</span>
       <span class="badge-pill" id="badge-tasks-ongoing">0</span>
     </button>
-    <div class="sidebar-sub-nav" id="sidebar-tasks-sub" style="display:none;">
-      <button class="sidebar-sub-link active" data-tview="all" onclick="showTaskView('all')">
-        <span class="material-symbols-outlined">list</span>
-        <span>All Tasks</span>
-      </button>
-      <button class="sidebar-sub-link" data-tview="ongoing" onclick="showTaskView('ongoing')">
-        <span class="material-symbols-outlined">pending</span>
-        <span>Ongoing</span>
-      </button>
-      <button class="sidebar-sub-link" data-tview="completed" onclick="showTaskView('completed')">
-        <span class="material-symbols-outlined">task_alt</span>
-        <span>Completed</span>
-      </button>
-      <button class="sidebar-sub-link" data-tview="addtask" onclick="showTaskView('addtask')">
-        <span class="material-symbols-outlined">add_circle</span>
-        <span>Add Task</span>
-      </button>
-    </div>
   </nav>
 
   <div class="sidebar-divider"></div>
@@ -722,15 +715,12 @@
     </div>
 
     <!-- Live Cloud Sync Indicator -->
-    <div id="sidebar-cloud-badge" onclick="openCloudModal()" style="background:rgba(255,255,255,0.04); border:1px dashed rgba(255,255,255,0.15); border-radius:10px; padding:8px 12px; font-size:11px; cursor:pointer; transition:all 0.15s ease;" title="Click to view/configure cloud database">
-      <div style="display:flex; align-items:center; justify-content:space-between;">
-        <div style="display:flex; align-items:center; gap:6px;">
-          <span class="material-symbols-outlined" id="cloud-sync-icon" style="font-size:15px; color:#94a3b8;">cloud_off</span>
-          <span id="cloud-sync-text" style="font-weight:700; color:#e2e8f0;">Cloud: Local Mode</span>
-        </div>
-        <span class="material-symbols-outlined" style="font-size:14px; color:#94a3b8;">settings</span>
+    <div class="sidebar-cloud-badge" id="sidebar-cloud-badge" onclick="openCloudModal()" title="View cloud database connection">
+      <div style="display:flex; align-items:center; gap:6px;">
+        <span class="material-symbols-outlined" id="cloud-sync-icon" style="font-size:15px; color:#34d399;">cloud_done</span>
+        <span id="cloud-sync-text" style="font-weight:700; color:#34d399;">Cloud: Live Synced</span>
       </div>
-      <div id="cloud-sync-sub" style="color:var(--sidebar-sub); font-size:10px; margin-top:2px;">Tap to connect Firebase sync</div>
+      <span class="material-symbols-outlined" style="font-size:14px; color:#94a3b8;">settings</span>
     </div>
   </div>
 
@@ -741,32 +731,28 @@
       <strong id="current-user-name">Faisal</strong>
       <span id="current-user-role">Founder</span>
     </div>
-    <button class="user-profile-btn" onclick="openProfileModal()" title="My Profile & Password">
+    <button class="user-action-btn" onclick="openProfileModal()" title="Profile & Password">
       <span class="material-symbols-outlined" style="font-size:19px">manage_accounts</span>
     </button>
-    <button class="logout-btn" onclick="handleLogout()" title="Sign Out">
+    <button class="user-action-btn logout-btn" onclick="handleLogout()" title="Sign Out">
       <span class="material-symbols-outlined" style="font-size:19px">logout</span>
     </button>
   </div>
 </aside>
 
-<!-- ═══════════════════════════════════════
+<!-- ==========================================================================
      2. MAIN CONTENT AREA
-════════════════════════════════════════ -->
+     ========================================================================== -->
 <div id="main">
 
-  <!-- TOP BAR -->
+  <!-- TOP BAR (No repeated logo on desktop!) -->
   <header id="topbar">
-    <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle Sidebar">
-      <span class="material-symbols-outlined">menu</span>
-    </button>
-
-    <div id="module-label" style="display:flex; align-items:center; gap:8px;">
-      <img src="hegfin_logo.png" alt="Hegfin" style="height: 22px; width: auto; object-fit: contain;"/>
+    <div id="module-title-label">
+      <img src="hegfin_logo.png" class="mobile-only-logo" alt="Hegfin"/>
       <span id="module-name-text">Finance Room</span>
     </div>
 
-    <!-- Finance Room Tabs -->
+    <!-- Finance Room Tabs (Desktop) -->
     <div class="tab-nav-group" id="finance-tabs">
       <button class="tab-btn active" data-fview="dashboard" onclick="showFinanceView('dashboard', this)">
         <span class="material-symbols-outlined">dashboard</span>
@@ -790,7 +776,7 @@
       </button>
     </div>
 
-    <!-- Tasks Tabs -->
+    <!-- Tasks Tabs (Desktop) -->
     <div class="tab-nav-group" id="task-tabs" style="display:none;">
       <button class="tab-btn active" data-tview="all" onclick="showTaskView('all', this)">
         <span class="material-symbols-outlined">list</span>
@@ -813,68 +799,66 @@
     <div class="topbar-spacer"></div>
 
     <div class="action-group">
-      <button id="quick-action-btn" class="primary-btn" onclick="handleQuickAction()">
+      <button id="quick-action-btn" class="primary-action-btn" onclick="handleQuickAction()">
         <span class="material-symbols-outlined">add</span>
         <span id="quick-action-label">New Expense</span>
       </button>
     </div>
   </header>
 
-  <!-- Sticky Mobile Pill Sub-Navigation Bar -->
+  <!-- Sticky Mobile Pill Subnav Bar -->
   <nav id="mobile-subnav-bar">
-    <!-- Finance View Pills -->
     <div class="mb-subnav-row" id="mb-finance-tabs">
-      <button class="mb-subnav-pill active" data-fview="dashboard" onclick="showFinanceView('dashboard')">
+      <button class="mb-subnav-pill active" data-fview="dashboard" onclick="showFinanceView('dashboard', this)">
         <span class="material-symbols-outlined">dashboard</span>
         <span>Dashboard</span>
       </button>
-      <button class="mb-subnav-pill" data-fview="expenses" onclick="showFinanceView('expenses')">
+      <button class="mb-subnav-pill" data-fview="expenses" onclick="showFinanceView('expenses', this)">
         <span class="material-symbols-outlined">receipt_long</span>
         <span id="mb-tab-expenses-label">All Expenses</span>
       </button>
-      <button class="mb-subnav-pill" id="mb-tab-people-btn" data-fview="people" onclick="showFinanceView('people')">
+      <button class="mb-subnav-pill" id="mb-tab-people-btn" data-fview="people" onclick="showFinanceView('people', this)">
         <span class="material-symbols-outlined">group</span>
         <span id="mb-tab-people-label">Staff Ledgers</span>
       </button>
-      <button class="mb-subnav-pill" id="mb-tab-repay-btn" data-fview="repay" onclick="showFinanceView('repay')">
+      <button class="mb-subnav-pill" id="mb-tab-repay-btn" data-fview="repay" onclick="showFinanceView('repay', this)">
         <span class="material-symbols-outlined">payments</span>
         <span>Record Payment</span>
       </button>
-      <button class="mb-subnav-pill" data-fview="add" onclick="showFinanceView('add')">
+      <button class="mb-subnav-pill" data-fview="add" onclick="showFinanceView('add', this)">
         <span class="material-symbols-outlined">add_circle</span>
         <span>+ Expense</span>
       </button>
     </div>
 
-    <!-- Tasks View Pills -->
     <div class="mb-subnav-row" id="mb-task-tabs" style="display:none;">
-      <button class="mb-subnav-pill active" data-tview="all" onclick="showTaskView('all')">
+      <button class="mb-subnav-pill active" data-tview="all" onclick="showTaskView('all', this)">
         <span class="material-symbols-outlined">list</span>
         <span>All Tasks</span>
       </button>
-      <button class="mb-subnav-pill" data-tview="ongoing" onclick="showTaskView('ongoing')">
+      <button class="mb-subnav-pill" data-tview="ongoing" onclick="showTaskView('ongoing', this)">
         <span class="material-symbols-outlined">pending</span>
         <span>Ongoing</span>
       </button>
-      <button class="mb-subnav-pill" data-tview="completed" onclick="showTaskView('completed')">
+      <button class="mb-subnav-pill" data-tview="completed" onclick="showTaskView('completed', this)">
         <span class="material-symbols-outlined">task_alt</span>
         <span>Completed</span>
       </button>
-      <button class="mb-subnav-pill" data-tview="addtask" onclick="showTaskView('addtask')">
+      <button class="mb-subnav-pill" data-tview="addtask" onclick="showTaskView('addtask', this)">
         <span class="material-symbols-outlined">add_circle</span>
         <span>+ Task</span>
       </button>
     </div>
   </nav>
 
-  <!-- ═════════════════════════════════════
+  <!-- ==========================================================================
        MODULE 1: FINANCE ROOM
-  ══════════════════════════════════════ -->
+       ========================================================================== -->
   <main class="module-pane active" id="module-finance">
 
-    <!-- VIEW 1: DASHBOARD -->
+    <!-- VIEW 1: DASHBOARD (Clean, non-repetitive executive view) -->
     <section class="view-pane active" id="fview-dashboard">
-      <div id="confidential-banner" class="confidential-banner" style="display:none; background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:12.5px; color:#1e40af; display:flex; align-items:center; gap:8px;">
+      <div id="confidential-banner" style="display:none; background:#eff6ff; border:1px solid #bfdbfe; border-radius:10px; padding:10px 14px; margin-bottom:16px; font-size:12.5px; color:#1e40af; align-items:center; gap:8px;">
         <span class="material-symbols-outlined" style="font-size:18px">lock</span>
         <span><strong>Confidential View:</strong> As Department Director, you only see finances pertaining directly to your account.</span>
       </div>
@@ -883,7 +867,7 @@
       <div class="cards-row">
         <div class="stat-card">
           <div class="label">
-            <span id="card-owed-label">💸 We Owe Staff</span>
+            <span id="card-owed-label">💸 Total Owed to Staff</span>
             <span class="material-symbols-outlined" style="color:var(--red);font-size:18px">account_balance_wallet</span>
           </div>
           <div class="amount urgent" id="dash-owed-amt">₹0</div>
@@ -903,7 +887,7 @@
 
         <div class="stat-card">
           <div class="label">
-            <span id="card-paid-label">✅ Paid Out</span>
+            <span id="card-paid-label">✅ Total Disbursed</span>
             <span class="material-symbols-outlined" style="color:var(--green);font-size:18px">verified</span>
           </div>
           <div class="amount ok" id="dash-paid-amt">₹0</div>
@@ -913,7 +897,7 @@
 
         <div class="stat-card">
           <div class="label">
-            <span id="card-total-label">📊 Total Claims</span>
+            <span id="card-total-label">📊 Institutional Expenditure</span>
             <span class="material-symbols-outlined" style="color:var(--primary);font-size:18px">receipt</span>
           </div>
           <div class="amount" id="dash-total-amt">₹0</div>
@@ -925,16 +909,16 @@
       <!-- Section 1: Team Balances Quick Glance (Non-redundant compact grid) -->
       <div class="section-head">
         <h2 id="dash-people-heading">👥 Team Balances & Status</h2>
-        <a class="link-action" id="dash-people-see-all" onclick="showFinanceView('people')">
+        <a class="link-action" onclick="showFinanceView('people', document.querySelector('[data-fview=people]'))">
           View full ledgers →
         </a>
       </div>
-      <div id="dash-people-list"></div>
+      <div class="dash-balance-grid" id="dash-people-list"></div>
 
       <!-- Section 2: Recent Expenses & Claims Table -->
-      <div class="section-head" style="margin-top:20px;">
+      <div class="section-head" style="margin-top:14px;">
         <h2 id="dash-recent-heading">🧾 Recent Expenses & Claims</h2>
-        <a class="link-action" onclick="showFinanceView('expenses')">
+        <a class="link-action" onclick="showFinanceView('expenses', document.querySelector('[data-fview=expenses]'))">
           View all claims →
         </a>
       </div>
@@ -962,48 +946,34 @@
 
     <!-- VIEW 2: ALL EXPENSES -->
     <section class="view-pane" id="fview-expenses">
-      <div class="section-head">
+      <div class="section-head" style="margin-bottom: 16px;">
         <div>
-          <h2 id="expenses-view-title">Institutional Claims Ledger</h2>
-          <p id="expenses-view-subtitle" style="font-size:13px;color:var(--sub);margin-top:2px;">Complete record of organizational expenditures</p>
+          <h2 id="expenses-view-title">All Expense Claims</h2>
+          <p id="expenses-view-subtitle" style="font-size:13px; color:var(--sub); margin-top:2px;">Track and audit institutional claims</p>
         </div>
-        <div style="display:flex;gap:8px;">
-          <button class="secondary-btn" onclick="exportExpensesCSV()">
-            <span class="material-symbols-outlined">file_download</span>
-            <span>Export CSV</span>
-          </button>
-          <button class="primary-btn" onclick="showFinanceView('add', document.querySelector('[data-fview=add]'))">
-            <span class="material-symbols-outlined">add</span>
-            <span>Add Expense</span>
-          </button>
-        </div>
+        <button class="btn-sm btn-outline" onclick="exportExpensesCSV()">
+          <span class="material-symbols-outlined" style="font-size:16px;">download</span>
+          Export CSV
+        </button>
       </div>
 
       <div class="table-toolbar">
         <div class="search-box">
           <span class="material-symbols-outlined">search</span>
-          <input type="text" id="expense-search-input" placeholder="Search ref, description, category..." oninput="renderExpensesTable()"/>
+          <input type="text" id="expense-search" placeholder="Search by description, reference, or claimant..." oninput="filterExpenses()"/>
         </div>
-        <select class="filter-select" id="expense-status-filter" onchange="renderExpensesTable()">
-          <option value="ALL">All Statuses</option>
-          <option value="Pending">⏳ Pending Approval</option>
-          <option value="Approved">✓ Approved (Unpaid)</option>
-          <option value="Cleared">✓ Cleared / Settled</option>
+        <select class="filter-select" id="expense-status-filter" onchange="filterExpenses()">
+          <option value="ALL">All Audit Statuses</option>
+          <option value="Pending">⏳ Pending Audit</option>
+          <option value="Approved">✓ Approved</option>
           <option value="Rejected">✕ Rejected</option>
         </select>
-        <select class="filter-select" id="expense-category-filter" onchange="renderExpensesTable()">
-          <option value="ALL">All Categories</option>
-          <option value="Teaching materials">Teaching materials</option>
-          <option value="Stationery">Stationery</option>
-          <option value="Maintenance">Maintenance</option>
-          <option value="Lab supplies">Lab supplies</option>
-          <option value="Sports">Sports</option>
-          <option value="Travel">Travel</option>
-          <option value="Marketing">Marketing & Sales</option>
-          <option value="Other">Other</option>
-        </select>
+        <select class="filter-select" id="expense-staff-filter" onchange="filterExpenses()"></select>
       </div>
 
+      <div class="table-mobile-hint">
+        <span class="material-symbols-outlined" style="font-size:14px">swipe</span> Swipe table to view all details
+      </div>
       <div class="table-container">
         <table class="data-table">
           <thead>
@@ -1014,26 +984,25 @@
               <th>Description</th>
               <th>Category</th>
               <th>Amount</th>
-              <th>Source</th>
-              <th>Status</th>
-              <th>Settlement</th>
+              <th>Audit</th>
+              <th>Settled</th>
               <th>Actions</th>
             </tr>
           </thead>
-          <tbody id="full-expenses-table-body"></tbody>
+          <tbody id="expenses-table-body"></tbody>
         </table>
       </div>
     </section>
 
-    <!-- VIEW 3: PEOPLE LEDGERS -->
+    <!-- VIEW 3: STAFF LEDGERS (Comprehensive view with zero overlaps) -->
     <section class="view-pane" id="fview-people">
-      <div class="section-head">
+      <div class="section-head" style="margin-bottom: 16px;">
         <div>
           <h2 id="people-view-title">Staff Account Ledgers</h2>
-          <p id="people-view-subtitle" style="font-size:13px;color:var(--sub);margin-top:2px;">Track team balances and reimbursements</p>
+          <p id="people-view-subtitle" style="font-size:13px; color:var(--sub); margin-top:2px;">Track team balances and reimbursements</p>
         </div>
       </div>
-      <div class="people-list" id="full-people-list"></div>
+      <div id="full-people-list"></div>
     </section>
 
     <!-- VIEW 4: RECORD PAYMENT (Admin Only) -->
@@ -1051,7 +1020,7 @@
             <div class="form-group">
               <label>Amount (₹)</label>
               <input type="number" id="repay-amount-input" required min="1" placeholder="e.g. 1500"/>
-              <span id="repay-hint" style="font-size:11.5px;color:var(--red);margin-top:2px;font-weight:600"></span>
+              <span id="repay-hint" style="font-size:11.5px; color:var(--red); margin-top:2px; font-weight:600"></span>
             </div>
           </div>
 
@@ -1059,32 +1028,36 @@
             <div class="form-group">
               <label>Disbursement Method</label>
               <select id="repay-method-select">
-                <option value="UPI">UPI Transfer (GooglePay / PhonePe)</option>
-                <option value="NEFT">Bank Transfer (NEFT / IMPS)</option>
-                <option value="Cash">Cash (Counter)</option>
-                <option value="Cheque">Institutional Cheque</option>
+                <option value="UPI / GPay">UPI / GPay</option>
+                <option value="Bank Transfer (NEFT/IMPS)">Bank Transfer (NEFT/IMPS)</option>
+                <option value="Cash">Cash</option>
+                <option value="Cheque">Cheque</option>
               </select>
             </div>
             <div class="form-group">
-              <label>Payment Date</label>
-              <input type="date" id="repay-date-input" required/>
+              <label>UTR / Transaction Ref</label>
+              <input type="text" id="repay-ref-input" required placeholder="e.g. UTR-98213847"/>
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
-              <label>Transaction / UTR Ref</label>
-              <input type="text" id="repay-ref-input" placeholder="e.g. UPI/AXIS/4092817291"/>
+              <label>Payment Date</label>
+              <input type="date" id="repay-date-input" required/>
+            </div>
+            <div class="form-group">
+              <label>Disbursed By</label>
+              <input type="text" id="repay-by-input" readonly style="background:#f1f5f9; color:var(--sub)"/>
             </div>
           </div>
 
-          <div class="form-group" style="margin-bottom:16px;">
-            <label>Notes / Voucher Narration (optional)</label>
-            <textarea id="repay-notes-input" rows="2" placeholder="e.g. Cleared October operational expense"></textarea>
+          <div class="form-group" style="margin-bottom:18px;">
+            <label>Notes / Voucher Details (Optional)</label>
+            <input type="text" id="repay-notes-input" placeholder="e.g. Settled creative production expenses"/>
           </div>
 
           <button type="submit" class="submit-btn">
-            Confirm & Log Payment
+            Record & Settle Disbursement
           </button>
         </form>
       </div>
@@ -1093,44 +1066,44 @@
     <!-- VIEW 5: ADD EXPENSE -->
     <section class="view-pane" id="fview-add">
       <div class="form-card" style="margin:0 auto;">
-        <h2>➕ Submit New Claim / Expense</h2>
-        <p>Record an expense voucher incurred for institutional auditing.</p>
+        <h2>➕ Submit Expense Claim</h2>
+        <p>Record a new institutional claim or expense reimbursement.</p>
 
         <form id="expense-form" onsubmit="event.preventDefault(); submitNewExpense();">
           <div class="form-row">
             <div class="form-group">
               <label>Claimant / Staff Member</label>
-              <select id="exp-staff" required></select>
+              <select id="exp-staff"></select>
             </div>
             <div class="form-group">
-              <label>Funding Source</label>
-              <select id="exp-source" required>
-                <option value="Personal">Personal Money (Reimbursement Owed)</option>
-                <option value="Academy">Academy Direct Fund (No refund needed)</option>
+              <label>Expense Source</label>
+              <select id="exp-source">
+                <option value="Staff Out-of-Pocket (Needs Reimbursement)">Staff Out-of-Pocket (Reimbursement)</option>
+                <option value="Academy Direct Account (Already Paid)">Academy Direct Account (Already Paid)</option>
               </select>
             </div>
           </div>
 
-          <div class="form-group" style="margin-bottom:14px">
-            <label>Item / Purpose Description</label>
-            <input type="text" id="exp-desc" placeholder="e.g. Stationery & materials for student workshop" required/>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label>Expense Description / Purpose</label>
+            <input type="text" id="exp-desc" required placeholder="e.g. A4 Paper & Printing Stationery"/>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Amount (₹)</label>
-              <input type="number" id="exp-amount" min="1" placeholder="e.g. 850" required/>
+              <input type="number" id="exp-amount" required min="1" placeholder="e.g. 850"/>
             </div>
             <div class="form-group">
               <label>Category</label>
-              <select id="exp-cat" required>
-                <option value="Teaching materials">Teaching materials</option>
+              <select id="exp-cat">
                 <option value="Stationery">Stationery</option>
+                <option value="Software & Tech">Software & Tech</option>
+                <option value="Teaching materials">Teaching materials</option>
+                <option value="Travel & Commute">Travel & Commute</option>
+                <option value="Marketing & Promo">Marketing & Promo</option>
+                <option value="Refreshments & Events">Refreshments & Events</option>
                 <option value="Maintenance">Maintenance</option>
-                <option value="Lab supplies">Lab supplies</option>
-                <option value="Sports">Sports</option>
-                <option value="Travel">Travel</option>
-                <option value="Marketing">Marketing & Sales</option>
                 <option value="Other">Other</option>
               </select>
             </div>
@@ -1138,57 +1111,63 @@
 
           <div class="form-row">
             <div class="form-group">
-              <label>Transaction Date</label>
+              <label>Expense Date</label>
               <input type="date" id="exp-date" required/>
             </div>
             <div class="form-group">
-              <label>Receipt Document (optional)</label>
-              <input type="file" id="exp-receipt-file" accept="image/*,.pdf" style="padding:7px;font-size:12px;"/>
+              <label>Audit Status</label>
+              <input type="text" id="exp-audit-status" value="Pending Audit" readonly style="background:#f1f5f9; color:var(--amber); font-weight:700;"/>
             </div>
           </div>
 
-          <div class="form-group" style="margin-bottom:16px">
-            <label>Notes (optional)</label>
-            <textarea id="exp-notes" rows="2" placeholder="Details for audit..."></textarea>
+          <div class="form-group" style="margin-bottom:18px;">
+            <label>Vendor / Notes (Optional)</label>
+            <input type="text" id="exp-notes" placeholder="e.g. Purchased from Office Depot, receipt attached."/>
           </div>
 
-          <button type="submit" class="submit-btn">Submit Claim</button>
+          <button type="submit" class="submit-btn">
+            Submit Claim
+          </button>
         </form>
       </div>
     </section>
 
   </main>
 
-  <!-- ═════════════════════════════════════
+  <!-- ==========================================================================
        MODULE 2: TASKS
-  ══════════════════════════════════════ -->
+       ========================================================================== -->
   <main class="module-pane" id="module-tasks">
 
     <!-- VIEW 1: ALL TASKS -->
     <section class="view-pane active" id="tview-all">
-      <div class="task-summary-row">
-        <div class="task-stat-card">
-          <div class="ts-num" id="task-count-all">0</div>
-          <div class="ts-lbl" id="lbl-task-all">Total Tasks</div>
+      <div class="cards-row" style="margin-bottom: 20px;">
+        <div class="stat-card">
+          <div class="label"><span>Total Tasks</span><span class="material-symbols-outlined" style="color:var(--primary);font-size:18px">task</span></div>
+          <div class="amount" id="task-count-all">0</div>
+          <div class="hint">Assigned in department</div>
         </div>
-        <div class="task-stat-card">
-          <div class="ts-num" style="color:var(--amber)" id="task-count-ongoing">0</div>
-          <div class="ts-lbl">Ongoing</div>
+        <div class="stat-card">
+          <div class="label"><span>Ongoing</span><span class="material-symbols-outlined" style="color:var(--amber);font-size:18px">pending</span></div>
+          <div class="amount warn" id="task-count-ongoing">0</div>
+          <div class="hint">In progress</div>
         </div>
-        <div class="task-stat-card">
-          <div class="ts-num" style="color:var(--green)" id="task-count-completed">0</div>
-          <div class="ts-lbl">Completed</div>
+        <div class="stat-card">
+          <div class="label"><span>Completed</span><span class="material-symbols-outlined" style="color:var(--green);font-size:18px">task_alt</span></div>
+          <div class="amount ok" id="task-count-completed">0</div>
+          <div class="hint">Finished & verified</div>
         </div>
-        <div class="task-stat-card">
-          <div class="ts-num" style="color:var(--red)" id="task-count-overdue">0</div>
-          <div class="ts-lbl">Overdue</div>
+        <div class="stat-card">
+          <div class="label"><span>Overdue</span><span class="material-symbols-outlined" style="color:var(--red);font-size:18px">warning</span></div>
+          <div class="amount urgent" id="task-count-overdue">0</div>
+          <div class="hint">Past target deadline</div>
         </div>
       </div>
 
       <div class="table-toolbar">
         <div class="search-box">
           <span class="material-symbols-outlined">search</span>
-          <input type="text" id="task-search-input" placeholder="Search tasks by title, assignee..." oninput="renderTasks()"/>
+          <input type="text" id="task-search-input" placeholder="Search tasks by title, assignee, or keyword..." oninput="renderTasks()"/>
         </div>
         <select class="filter-select" id="task-priority-filter" onchange="renderTasks()">
           <option value="ALL">All Priorities</option>
@@ -1196,73 +1175,74 @@
           <option value="Medium">🟡 Medium Priority</option>
           <option value="Low">🟢 Low Priority</option>
         </select>
-        <button class="primary-btn" onclick="showTaskView('addtask', document.querySelector('[data-tview=addtask]'))">
-          <span class="material-symbols-outlined">add</span>
-          <span>Add Task</span>
-        </button>
       </div>
 
-      <div id="tasklist-all"></div>
+      <div class="task-list" id="tasklist-all"></div>
     </section>
 
     <!-- VIEW 2: ONGOING TASKS -->
     <section class="view-pane" id="tview-ongoing">
-      <div class="section-head">
-        <h2>Active & In-Progress Tasks</h2>
-        <span class="pill amber" id="badge-ongoing-count">0 tasks</span>
+      <div class="section-head" style="margin-bottom: 16px;">
+        <div>
+          <h2>⏳ Ongoing Tasks</h2>
+          <p style="font-size:13px; color:var(--sub); margin-top:2px;">Active processes currently in progress</p>
+        </div>
       </div>
-      <div id="tasklist-ongoing"></div>
+      <div class="task-list" id="tasklist-ongoing"></div>
     </section>
 
     <!-- VIEW 3: COMPLETED TASKS -->
     <section class="view-pane" id="tview-completed">
-      <div class="section-head">
-        <h2>Completed & Archived Tasks</h2>
-        <span class="pill green" id="badge-completed-count">0 tasks</span>
+      <div class="section-head" style="margin-bottom: 16px;">
+        <div>
+          <h2>✅ Completed Tasks</h2>
+          <p style="font-size:13px; color:var(--sub); margin-top:2px;">Finished assignments and verified deliverables</p>
+        </div>
       </div>
-      <div id="tasklist-completed"></div>
+      <div class="task-list" id="tasklist-completed"></div>
     </section>
 
     <!-- VIEW 4: ADD TASK -->
     <section class="view-pane" id="tview-addtask">
-      <div class="form-card" style="margin:0 auto;">
-        <h2>📋 Create New Department Task</h2>
-        <p>Assign duties with deadlines and track progress via remarks</p>
+      <div class="form-card" style="margin: 0 auto;">
+        <h2>➕ Create New Task</h2>
+        <p>Assign actionable duties and deadlines to staff.</p>
 
         <form id="new-task-form" onsubmit="event.preventDefault(); addNewTask();">
-          <div class="form-row">
-            <div class="form-group" style="flex:2">
-              <label>Task Title</label>
-              <input type="text" id="t-title" placeholder="e.g. Q3 Sales & Marketing Strategy Plan" required/>
-            </div>
-            <div class="form-group">
-              <label>Priority</label>
-              <select id="t-priority" required>
-                <option value="High">🔴 High</option>
-                <option value="Medium" selected>🟡 Medium</option>
-                <option value="Low">🟢 Low</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="form-group" style="margin-bottom:14px">
-            <label>Task Description (optional)</label>
-            <textarea id="t-desc" rows="3" placeholder="Provide action steps or details..."></textarea>
+          <div class="form-group" style="margin-bottom:14px;">
+            <label>Task Title</label>
+            <input type="text" id="t-title" required placeholder="e.g. Prepare Term-1 Student Progress Reports"/>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label>Assign To</label>
-              <select id="t-assignee" required></select>
+              <select id="t-assignee"></select>
             </div>
+            <div class="form-group">
+              <label>Priority</label>
+              <select id="t-priority">
+                <option value="Medium">Medium Priority</option>
+                <option value="High">High Priority</option>
+                <option value="Low">Low Priority</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-row">
             <div class="form-group">
               <label>Target Deadline</label>
               <input type="date" id="t-deadline" required/>
             </div>
+            <div class="form-group">
+              <label>Assigned By</label>
+              <input type="text" id="auto-assigner-label" readonly style="background:#f1f5f9; color:var(--sub)"/>
+            </div>
           </div>
 
-          <div style="font-size:12px; color:var(--sub); margin-bottom:14px;">
-            ℹ️ This task will automatically record <strong id="auto-assigner-label">You</strong> as the creator.
+          <div class="form-group" style="margin-bottom:18px;">
+            <label>Instructions / Description (Optional)</label>
+            <textarea id="t-desc" rows="3" placeholder="Provide any necessary guidelines or instructions for this task..."></textarea>
           </div>
 
           <button type="submit" class="submit-btn">
@@ -1274,315 +1254,234 @@
 
   </main>
 
-</div><!-- end #main -->
+  <!-- Mobile Bottom Navigation (Strictly 3 Items) -->
+  <nav id="mobile-bottom-nav">
+    <button class="mb-nav-item active" id="mb-finance-btn" onclick="switchModule('finance', document.getElementById('mod-finance-btn'))">
+      <span class="material-symbols-outlined">account_balance</span>
+      <span>Finance</span>
+    </button>
+    <button class="mb-nav-item" id="mb-tasks-btn" onclick="switchModule('tasks', document.getElementById('mod-tasks-btn'))">
+      <span class="material-symbols-outlined">task_alt</span>
+      <span>Tasks</span>
+    </button>
+    <button class="mb-nav-item" onclick="openProfileModal()">
+      <span class="material-symbols-outlined">person</span>
+      <span>Profile</span>
+    </button>
+  </nav>
 
-<!-- ═══════════════════════════════════════
-     MOBILE BOTTOM NAV BAR (FOR PHONES)
-════════════════════════════════════════ -->
-<nav id="mobile-bottom-nav">
-  <button class="mb-nav-item active" id="mb-finance-btn" onclick="switchModule('finance', document.getElementById('mod-finance-btn'))">
-    <span class="material-symbols-outlined">account_balance</span>
-    <span>Finance</span>
-  </button>
-  <button class="mb-nav-item" id="mb-tasks-btn" onclick="switchModule('tasks', document.getElementById('mod-tasks-btn'))">
-    <span class="material-symbols-outlined">task_alt</span>
-    <span>Tasks</span>
-  </button>
-  <button class="mb-nav-item" onclick="openProfileModal()">
-    <span class="material-symbols-outlined">person</span>
-    <span>Profile</span>
-  </button>
-</nav>
-
-<!-- ═══════════════════════════════════════
-     MODAL: USER PROFILE & PASSWORD CHANGE
-════════════════════════════════════════ -->
-<div class="modal-overlay" id="profile-modal">
-  <div class="modal-box" style="max-width: 500px;">
-    <div class="modal-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div class="avatar av-indigo" id="modal-profile-avatar" style="width:36px;height:36px;font-size:13px">FA</div>
-        <div>
-          <h3 id="modal-profile-name">My Profile</h3>
-          <span id="modal-profile-role" style="font-size:12px;color:var(--sub)">Role</span>
-        </div>
-      </div>
-      <button class="modal-close" onclick="closeProfileModal()">&times;</button>
-    </div>
-    <div class="modal-body">
-      <!-- Profile Details Card -->
-      <div style="background:#f8fafc; border:1px solid var(--border); border-radius:12px; padding:14px; margin-bottom:18px;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-size:11px; font-weight:700; color:var(--sub); text-transform:uppercase;">Access Permission</div>
-            <div id="profile-access-badge" style="margin-top:2px;"></div>
-          </div>
-          <div style="text-align:right;">
-            <div style="font-size:11px; font-weight:700; color:var(--sub); text-transform:uppercase;">Account Status</div>
-            <span class="pill green" style="margin-top:2px;">Active Verified</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Change Password Form -->
-      <h4 style="font-size:14px; font-weight:700; color:var(--text); margin-bottom:6px;">
-        🔐 Change Password / Security PIN
-      </h4>
-      <p style="font-size:12.5px; color:var(--sub); margin-bottom:14px;">
-        Update your personal credentials for future phone and desktop sign-ins.
-      </p>
-
-      <form id="change-password-form" onsubmit="event.preventDefault(); handleChangePassword();">
-        <div class="form-group" style="margin-bottom:12px;">
-          <label>Current Password</label>
-          <input type="password" id="current-pwd-input" placeholder="Current PIN / Password" required/>
-        </div>
-        <div class="form-group" style="margin-bottom:12px;">
-          <label>New Password (min 4 characters)</label>
-          <input type="password" id="new-pwd-input" placeholder="Enter new PIN / Password" minlength="4" required/>
-        </div>
-        <div class="form-group" style="margin-bottom:16px;">
-          <label>Confirm New Password</label>
-          <input type="password" id="confirm-pwd-input" placeholder="Re-enter new PIN / Password" minlength="4" required/>
-        </div>
-
-        <button type="submit" class="submit-btn" style="margin-top:0;">
-          Update My Password
-        </button>
-      </form>
-    </div>
-    <div class="modal-footer">
-      <button class="secondary-btn" onclick="closeProfileModal()">Close</button>
-    </div>
-  </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MODAL: TASK REMARK & PROCESS CHAT
-════════════════════════════════════════ -->
+<!-- ==========================================================================
+     MODALS
+     ========================================================================== -->
+
+<!-- 1. TASK REMARKS / PROCESS CHAT MODAL -->
 <div class="modal-overlay" id="task-remark-modal">
-  <div class="modal-box" style="max-width: 660px; height: 85vh; display: flex; flex-direction: column;">
-    <div class="modal-header" style="background:#f8fafc; padding: 16px 20px;">
+  <div class="modal-box" style="height:86vh;">
+    <div class="modal-header" style="background:#f8fafc;">
       <div style="min-width:0; flex:1;">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:3px;">
           <span class="material-symbols-outlined" style="color:var(--primary); font-size:20px;">forum</span>
-          <span id="remark-task-id" style="font-size:12px; font-weight:800; color:var(--primary);">TASK-1</span>
-          <span id="remark-task-priority" class="priority-badge p-high">High Priority</span>
+          <span id="remark-task-id" style="font-size:12px; font-weight:800; color:var(--primary);">TASK</span>
+          <span id="remark-task-priority" class="priority-badge p-medium">Priority</span>
         </div>
         <h3 id="remark-task-title" style="font-size:15px; font-weight:800; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">
           Task Title
         </h3>
-        <div id="remark-task-meta" style="font-size:12px; color:var(--sub); margin-top:2px;">
-          Assignee: Ashik • Deadline: 28 Oct 2024
-        </div>
+        <div id="remark-task-meta" style="font-size:11.5px; color:var(--sub); margin-top:2px;"></div>
       </div>
       <button class="modal-close" onclick="closeTaskRemarkModal()">&times;</button>
     </div>
 
-    <!-- Scrollable Chat Area -->
-    <div id="remark-chat-messages" style="flex:1; overflow-y:auto; padding:18px 20px; background:#f8fafc; display:flex; flex-direction:column; gap:12px;"></div>
+    <!-- Scrollable Messages Container -->
+    <div id="remark-chat-messages" style="flex:1; overflow-y:auto; padding:16px; background:#f8fafc; display:flex; flex-direction:column; gap:8px;"></div>
 
-    <!-- Chat Input Area -->
-    <div style="padding:14px 20px; background:#ffffff; border-top:1px solid var(--border);">
-      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px;">
-        <span style="font-size:12px; color:var(--sub);">
-          Posting as: <strong id="remark-posting-author" style="color:var(--text);">Current User</strong>
-        </span>
-        <span id="remark-total-count" style="font-size:11px; font-weight:700; color:var(--primary);">0 updates</span>
+    <!-- Input Box -->
+    <div style="padding:12px 16px; background:#ffffff; border-top:1px solid var(--border);">
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; font-size:11.5px; color:var(--sub);">
+        <span>Posting as: <strong id="remark-author-name">Staff</strong></span>
+        <span id="remark-total-count">0 updates</span>
       </div>
-
-      <div style="display:flex; gap:10px; align-items:flex-end;">
-        <textarea id="remark-input" rows="2" placeholder="Write process update (e.g. 'Document submitted, waiting for CA response...')..." style="flex:1; border:1.5px solid var(--border); border-radius:10px; padding:10px 12px; font-size:13.5px; font-family:inherit; outline:none; resize:none; background:#fcfdfe;" onkeydown="handleRemarkKeydown(event)"></textarea>
-        <button class="primary-btn" onclick="submitRemark()" style="padding:10px 16px; border-radius:10px; height:44px; display:inline-flex; align-items:center; gap:6px;">
+      <div style="display:flex; gap:8px; align-items:flex-end;">
+        <textarea id="remark-input" rows="2" class="input-field" placeholder="Type a remark..." style="resize:none; padding:8px 12px; font-size:13.5px;"></textarea>
+        <button class="primary-action-btn" onclick="submitRemark()" style="padding:10px 16px; height:44px;">
           <span class="material-symbols-outlined" style="font-size:18px;">send</span>
           <span>Send</span>
         </button>
       </div>
-      <div style="font-size:11px; color:var(--sub); margin-top:4px;">
-        Press <strong>Enter</strong> to post update, <strong>Shift+Enter</strong> for a new line
-      </div>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MODAL: EXPENSE DETAIL VOUCHER
-════════════════════════════════════════ -->
-<div class="modal-overlay" id="expense-modal">
-  <div class="modal-box">
-    <div class="modal-header">
-      <div style="display:flex;align-items:center;gap:8px;">
-        <span class="material-symbols-outlined" style="color:var(--primary)">receipt_long</span>
-        <h3 id="modal-exp-ref">Expense Voucher</h3>
-      </div>
-      <button class="modal-close" onclick="closeExpenseModal()">&times;</button>
-    </div>
-    <div class="modal-body" id="modal-exp-content"></div>
-    <div class="modal-footer" id="modal-exp-footer">
-      <button class="secondary-btn" onclick="closeExpenseModal()">Close</button>
-    </div>
-  </div>
-</div>
-
-<!-- ═══════════════════════════════════════
-     MODAL: STAFF LEDGER BREAKDOWN
-════════════════════════════════════════ -->
+<!-- 2. STAFF DETAILED ACCOUNT LEDGER MODAL -->
 <div class="modal-overlay" id="staff-modal">
-  <div class="modal-box" style="max-width:720px;">
+  <div class="modal-box" style="max-width: 660px;">
     <div class="modal-header">
-      <div style="display:flex;align-items:center;gap:10px;">
-        <div class="avatar av-indigo" id="modal-staff-avatar" style="width:36px;height:36px;font-size:13px">FA</div>
+      <div style="display:flex; align-items:center; gap:12px;">
+        <div class="avatar av-indigo" id="modal-staff-avatar">ST</div>
         <div>
-          <h3 id="modal-staff-name" style="font-size:15px;">Staff Ledger</h3>
-          <span id="modal-staff-dept" style="font-size:12px;color:var(--sub)">Role</span>
+          <h3 id="modal-staff-name" style="font-size:16px; font-weight:800;">Staff Name</h3>
+          <p id="modal-staff-role" style="font-size:12px; color:var(--sub);">Designation</p>
         </div>
       </div>
       <button class="modal-close" onclick="closeStaffModal()">&times;</button>
     </div>
     <div class="modal-body" id="modal-staff-body"></div>
-    <div class="modal-footer">
-      <button class="secondary-btn" onclick="closeStaffModal()">Close</button>
-      <button class="primary-btn" id="modal-staff-pay-btn">Pay Remaining Balance</button>
+    <div style="padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:8px;">
+      <button class="btn-sm btn-outline" onclick="closeStaffModal()">Close</button>
+      <button class="btn-sm btn-pay" id="modal-staff-pay-btn" style="display:none;"></button>
     </div>
   </div>
 </div>
 
-<!-- ═══════════════════════════════════════
-     MODAL: CLOUD DATABASE SETUP & SYNC
-════════════════════════════════════════ -->
-<div class="modal-overlay" id="cloud-modal">
-  <div class="modal-box" style="max-width: 600px;">
+<!-- 3. EXPENSE DETAIL MODAL -->
+<div class="modal-overlay" id="expense-modal">
+  <div class="modal-box" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 style="font-size:16px; font-weight:800;">Expense Claim Audit</h3>
+      <button class="modal-close" onclick="closeExpenseModal()">&times;</button>
+    </div>
+    <div class="modal-body" id="modal-expense-body"></div>
+    <div style="padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end; gap:8px;">
+      <button class="btn-sm btn-outline" onclick="closeExpenseModal()">Close</button>
+      <span id="modal-expense-actions"></span>
+    </div>
+  </div>
+</div>
+
+<!-- 4. USER PROFILE & PASSWORD CHANGE MODAL -->
+<div class="modal-overlay" id="profile-modal">
+  <div class="modal-box" style="max-width: 480px;">
     <div class="modal-header">
       <div style="display:flex; align-items:center; gap:10px;">
-        <span class="material-symbols-outlined" style="color:var(--primary); font-size:24px;">cloud_sync</span>
+        <div class="avatar av-indigo" id="modal-profile-avatar">FA</div>
         <div>
-          <h3 style="font-size:16px; font-weight:800; color:var(--text);">Cloud Realtime Database (Free Tier)</h3>
-          <span style="font-size:12px; color:var(--sub);">Sync tasks, remarks & financials across all staff phones</span>
+          <h3 id="modal-profile-name" style="font-size:16px; font-weight:800;">Faisal</h3>
+          <p id="modal-profile-role" style="font-size:12px; color:var(--sub);">Founder</p>
         </div>
+      </div>
+      <button class="modal-close" onclick="closeProfileModal()">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form onsubmit="event.preventDefault(); handlePasswordChange();">
+        <h4 style="font-size:13px; font-weight:700; margin-bottom:12px;">Change Your Secret PIN / Password</h4>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label>Current Password</label>
+          <input type="password" id="current-pwd" class="input-field" required placeholder="Enter current PIN"/>
+        </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label>New Password / PIN</label>
+          <input type="password" id="new-pwd" class="input-field" required placeholder="Enter new secret PIN"/>
+        </div>
+        <div class="form-group" style="margin-bottom:18px;">
+          <label>Confirm New Password</label>
+          <input type="password" id="confirm-pwd" class="input-field" required placeholder="Re-enter new secret PIN"/>
+        </div>
+        <button type="submit" class="primary-action-btn" style="width:100%; justify-content:center; padding:11px;">
+          Update My Password
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- 5. CLOUD DATABASE SYNC MODAL -->
+<div class="modal-overlay" id="cloud-modal">
+  <div class="modal-box" style="max-width: 520px;">
+    <div class="modal-header">
+      <div style="display:flex; align-items:center; gap:8px;">
+        <span class="material-symbols-outlined" style="color:var(--primary); font-size:22px;">cloud_sync</span>
+        <h3 style="font-size:16px; font-weight:800;">Cloud Database Status</h3>
       </div>
       <button class="modal-close" onclick="closeCloudModal()">&times;</button>
     </div>
     <div class="modal-body">
-      <!-- Status Card -->
-      <div id="cloud-status-card" style="background:#f8fafc; border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:16px;">
-        <div style="display:flex; justify-content:space-between; align-items:center;">
-          <div>
-            <div style="font-size:11px; font-weight:700; color:var(--sub); text-transform:uppercase;">Sync Engine</div>
-            <div id="modal-cloud-status-title" style="font-size:14.5px; font-weight:800; color:var(--text); margin-top:2px;">Offline / Local Mode</div>
-          </div>
-          <span id="modal-cloud-status-pill" class="pill" style="background:#e2e8f0; color:#475569;">Device Storage Only</span>
-        </div>
-        <p id="modal-cloud-status-desc" style="font-size:12px; color:var(--sub); margin-top:6px; line-height:1.4;">
-          Currently saving to this device's browser memory. To sync automatically across everyone's phone in real-time, connect your free Google Firebase project below.
+      <div style="background:#dcfce7; border:1px solid #86efac; border-radius:12px; padding:14px; margin-bottom:14px; font-size:13px; color:#14532d;">
+        <strong>✅ Connected to Google Firebase (Live Cloud)</strong>
+        <p style="font-size:12px; margin-top:4px; color:#166534;">
+          Your portal is connected to Hegfin Realtime Database (<code>hegfin-acadmey-default-rtdb</code>). Any task, remark, or expense created on any phone or PC syncs automatically in real time with zero configuration.
         </p>
       </div>
-
-      <!-- Quick 3-Step Guide -->
-      <div style="background:#eff6ff; border:1px solid #bfdbfe; border-radius:12px; padding:14px; margin-bottom:16px; font-size:12px; color:#1e40af;">
-        <strong>How to get your free Firebase Cloud Database (Takes 2 minutes):</strong>
-        <ol style="margin-left:18px; margin-top:6px; line-height:1.5;">
-          <li>Go to <a href="https://console.firebase.google.com" target="_blank" style="color:#2563eb; font-weight:700; text-decoration:underline;">console.firebase.google.com</a> and click <strong>"Create a project"</strong> (100% Free).</li>
-          <li>Click <strong>"Firestore Database"</strong> in the left menu &gt; <strong>Create database</strong> &gt; Start in <strong>Test mode</strong>.</li>
-          <li>Click <strong>Project Settings (⚙)</strong> &gt; Under "Your apps", select the <strong>Web (&lt;/&gt;)</strong> icon &gt; Copy your <code>firebaseConfig</code> object and paste it below.</li>
-        </ol>
+      <div class="form-group">
+        <label>Firebase Project ID</label>
+        <input type="text" readonly value="hegfin-acadmey" class="input-field" style="background:#f1f5f9;"/>
       </div>
-
-      <!-- Config Paste Input -->
-      <div class="form-group" style="margin-bottom:14px;">
-        <label style="font-size:11.5px; font-weight:700; color:var(--sub); text-transform:uppercase;">Paste Firebase Config JSON / Object</label>
-        <textarea id="firebase-config-input" rows="5" placeholder='Paste your firebaseConfig here, e.g.:
-{
-  "apiKey": "AIzaSy...",
-  "authDomain": "hegfin-portal.firebaseapp.com",
-  "projectId": "hegfin-portal",
-  "storageBucket": "hegfin-portal.appspot.com",
-  "messagingSenderId": "...",
-  "appId": "..."
-}' style="font-family:monospace; font-size:12px;"></textarea>
-      </div>
-
-      <div style="display:flex; gap:10px;">
-        <button class="submit-btn" onclick="saveCloudConfig()" style="margin-top:0; flex:1;">
-          <span class="material-symbols-outlined" style="vertical-align:middle; font-size:17px;">cloud_done</span>
-          Connect & Enable Live Cloud Sync
-        </button>
-        <button class="secondary-btn" onclick="clearCloudConfig()" style="padding:10px 14px; border-radius:10px;">
-          Disconnect
-        </button>
+      <div class="form-group" style="margin-top:10px;">
+        <label>Database URL</label>
+        <input type="text" readonly value="https://hegfin-acadmey-default-rtdb.firebaseio.com" class="input-field" style="background:#f1f5f9; font-size:12px;"/>
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="secondary-btn" onclick="closeCloudModal()">Close</button>
+    <div style="padding:14px 20px; border-top:1px solid var(--border); display:flex; justify-content:flex-end;">
+      <button class="btn-sm btn-outline" onclick="closeCloudModal()">Close</button>
     </div>
   </div>
 </div>
 
-<div id="toast"></div>
+<!-- Toast Alert -->
+<div id="toast" style="position:fixed; bottom:24px; right:24px; background:#0f172a; color:#fff; padding:10px 18px; border-radius:10px; font-size:13px; font-weight:600; box-shadow:var(--shadow-lg); z-index:99999; display:none; align-items:center; gap:8px;"></div>
 
-<!-- ═══════════════════════════════════════
-     APPLICATION JAVASCRIPT ENGINE
-════════════════════════════════════════ -->
-<!-- Firebase Cloud Realtime Sync SDK (Free Tier) -->
+<!-- Firebase Realtime Database SDK -->
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
 
 <script>
-  /* ════════════════════════════════════
-     1. ROSTER, ROLES & ACCESS TIERS
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     1. ROSTER, ROLES & CREDENTIALS
+     ========================================================================== */
   const INITIAL_STAFF_ROSTER = {
     'faisal': {
       id: 'faisal',
       name: 'Faisal',
       role: 'Founder',
-      accessLevel: 'admin', // Full access to all finances & tasks
-      password: '1001',
-      initials: 'FA',
-      colorClass: 'av-indigo'
+      tier: 'executive',
+      pin: '1001',
+      colorClass: 'av-indigo',
+      initials: 'FA'
     },
     'ashik': {
       id: 'ashik',
       name: 'Ashik',
       role: 'Operational Manager',
-      accessLevel: 'admin', // Full access to all finances & tasks
-      password: '1002',
-      initials: 'AS',
-      colorClass: 'av-teal'
+      tier: 'executive',
+      pin: '2002',
+      colorClass: 'av-teal',
+      initials: 'AS'
     },
     'azheem': {
       id: 'azheem',
       name: 'Azheem',
       role: 'Creative Director',
-      accessLevel: 'member', // Sees only his own finances & tasks
-      password: '1003',
-      initials: 'AZ',
-      colorClass: 'av-orange'
+      tier: 'director',
+      pin: '3003',
+      colorClass: 'av-orange',
+      initials: 'AZ'
     },
     'vijetha': {
       id: 'vijetha',
       name: 'Vijetha',
       role: 'Academic Director',
-      accessLevel: 'member', // Sees only her own finances & tasks
-      password: '1004',
-      initials: 'VJ',
-      colorClass: 'av-purple'
+      tier: 'director',
+      pin: '4004',
+      colorClass: 'av-purple',
+      initials: 'VJ'
     },
     'manha': {
       id: 'manha',
       name: 'Manha',
       role: 'Sales & Marketing Head',
-      accessLevel: 'member', // Sees only her own finances & tasks
-      password: '1005',
-      initials: 'MN',
-      colorClass: 'av-pink'
+      tier: 'director',
+      pin: '5005',
+      colorClass: 'av-pink',
+      initials: 'MN'
     }
   };
 
-  const ROSTER_KEY   = 'hegfin_v4_roster';
-  const EXPENSES_KEY = 'hegfin_v4_expenses';
-  const PAYMENTS_KEY = 'hegfin_v4_payments';
-  const TASKS_KEY    = 'hegfin_v4_tasks';
-  const AUTH_KEY     = 'hegfin_v4_auth_user';
+  const ROSTER_KEY   = 'hegfin_roster_v5';
+  const AUTH_KEY     = 'hegfin_current_user_v5';
+  const EXPENSES_KEY = 'hegfin_expenses_v5';
+  const PAYMENTS_KEY = 'hegfin_payments_v5';
+  const TASKS_KEY    = 'hegfin_tasks_v5';
 
   function loadState(key, fallback) {
     try {
@@ -1593,9 +1492,9 @@
     }
   }
 
-  function saveState(key, val) {
+  function saveState(key, data) {
     try {
-      localStorage.setItem(key, JSON.stringify(val));
+      localStorage.setItem(key, JSON.stringify(data));
     } catch(e) {}
   }
 
@@ -1603,28 +1502,24 @@
   let expenses    = loadState(EXPENSES_KEY, []);
   let payments    = loadState(PAYMENTS_KEY, []);
   let tasks       = loadState(TASKS_KEY, []);
-
   let currentUser = loadState(AUTH_KEY, null);
-  let selectedLoginUser = 'faisal';
 
   function isAdmin(user) {
     if (!user) return false;
-    return user.accessLevel === 'admin' || user.id === 'faisal' || user.id === 'ashik';
+    return user.tier === 'executive';
   }
 
-  /* ════════════════════════════════════
-     2. AUTHENTICATION & LOGIN GATE
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     2. AUTHENTICATION & LOGIN
+     ========================================================================== */
   function initLoginScreen() {
     if (currentUser) {
-      currentUser = staffRoster[currentUser.id] || currentUser;
       document.getElementById('login-screen').style.display = 'none';
       applyCurrentUserData();
+      refreshAll();
     } else {
       document.getElementById('login-screen').style.display = 'flex';
-      setTimeout(() => {
-        document.getElementById('login-username')?.focus();
-      }, 100);
+      setTimeout(() => document.getElementById('login-username')?.focus(), 150);
     }
   }
 
@@ -1632,38 +1527,26 @@
     const usernameInput = document.getElementById('login-username').value.trim().toLowerCase();
     const passwordInput = document.getElementById('login-password').value.trim();
 
-    if (!usernameInput || !passwordInput) {
-      alert('Please enter both username and password.');
+    if (!staffRoster[usernameInput]) {
+      alert('Invalid username. Please check your username or contact management.');
       return;
     }
 
-    // Lookup user in staffRoster by key or name
-    let foundKey = Object.keys(staffRoster).find(k => {
-      return k.toLowerCase() === usernameInput || 
-             staffRoster[k].name.toLowerCase() === usernameInput;
-    });
-
-    if (!foundKey) {
-      alert('Invalid username or password. Please verify your credentials.');
+    const member = staffRoster[usernameInput];
+    if (member.pin !== passwordInput) {
+      alert('Incorrect password / PIN. Please try again.');
       return;
     }
 
-    const staff = staffRoster[foundKey];
-
-    if (staff.password !== passwordInput) {
-      alert('Invalid username or password. Please verify your credentials.');
-      return;
-    }
-
-    currentUser = staff;
+    currentUser = member;
     saveState(AUTH_KEY, currentUser);
 
-    // Reset login inputs
     document.getElementById('login-username').value = '';
     document.getElementById('login-password').value = '';
-
     document.getElementById('login-screen').style.display = 'none';
+
     applyCurrentUserData();
+    refreshAll();
     toast(`Welcome, ${currentUser.name} (${currentUser.role})!`);
   }
 
@@ -1673,7 +1556,6 @@
       currentUser = null;
       document.getElementById('login-screen').style.display = 'flex';
       initLoginScreen();
-    initCloudSync();
     }
   }
 
@@ -1681,88 +1563,63 @@
     if (!currentUser) return;
     const admin = isAdmin(currentUser);
 
-    // Sidebar identity
+    // Sidebar card
     document.getElementById('current-user-avatar').textContent = currentUser.initials;
     document.getElementById('current-user-avatar').className = `sidebar-avatar ${currentUser.colorClass}`;
     document.getElementById('current-user-name').textContent = currentUser.name;
     document.getElementById('current-user-role').textContent = currentUser.role;
 
-    // Permissions badge
-    const accessLabel = document.getElementById('sidebar-access-label');
-    const accessDesc  = document.getElementById('sidebar-access-desc');
-    if (admin) {
-      accessLabel.textContent = 'Executive Admin';
-      accessDesc.textContent  = 'Full institutional finance & task oversight';
-    } else {
-      accessLabel.textContent = 'Confidential Access';
-      accessDesc.textContent  = 'Restricted to personal claims & assigned tasks';
-    }
+    // Confidential labels
+    document.getElementById('sidebar-access-label').textContent = admin ? 'Executive Access' : 'Confidential Access';
+    document.getElementById('sidebar-access-desc').textContent = admin ? 'Full financial oversight' : `${currentUser.name}'s private ledger`;
 
-    // Role-based visibility adjustments
-    const banner = document.getElementById('confidential-banner');
-    if (banner) banner.style.display = admin ? 'none' : 'flex';
-
-    // Confidentiality adjustments on tabs & headings across all navigation bars
+    // Repay Tab (Admin Only)
     const repayTab = document.getElementById('tab-repay-btn');
-    if (repayTab) repayTab.style.display = admin ? 'flex' : 'none';
+    if (repayTab) repayTab.style.display = admin ? 'inline-flex' : 'none';
     const mbRepayTab = document.getElementById('mb-tab-repay-btn');
     if (mbRepayTab) mbRepayTab.style.display = admin ? 'inline-flex' : 'none';
-    const sbRepayTab = document.getElementById('sb-repay-btn');
-    if (sbRepayTab) sbRepayTab.style.display = admin ? 'flex' : 'none';
 
+    // Confidential Tab text
     const peopleText = admin ? 'Staff Ledgers' : 'My Ledger';
     if (document.getElementById('tab-people-label')) document.getElementById('tab-people-label').textContent = peopleText;
     if (document.getElementById('mb-tab-people-label')) document.getElementById('mb-tab-people-label').textContent = peopleText;
-    if (document.getElementById('sb-people-label')) document.getElementById('sb-people-label').textContent = peopleText;
 
     const expText = admin ? 'All Expenses' : 'My Expenses';
     if (document.getElementById('tab-expenses-label')) document.getElementById('tab-expenses-label').textContent = expText;
     if (document.getElementById('mb-tab-expenses-label')) document.getElementById('mb-tab-expenses-label').textContent = expText;
-    if (document.getElementById('sb-expenses-label')) document.getElementById('sb-expenses-label').textContent = expText;
 
-    const dashPeopleHeading = document.getElementById('dash-people-heading');
-    if (dashPeopleHeading) dashPeopleHeading.textContent = admin ? '👤 Staff Reimbursement Ledgers' : '👤 My Reimbursement Ledger';
+    // Headings
+    if (document.getElementById('people-view-title')) document.getElementById('people-view-title').textContent = admin ? 'Staff Account Ledgers' : 'My Account Ledger';
+    if (document.getElementById('people-view-subtitle')) document.getElementById('people-view-subtitle').textContent = admin ? 'Track team balances and reimbursements' : 'Your personal claims, reimbursements and net balance';
 
-    const dashRecentHeading = document.getElementById('dash-recent-heading');
-    if (dashRecentHeading) dashRecentHeading.textContent = admin ? '🧾 Recent Institutional Claims' : '🧾 My Recent Expense Claims';
+    if (document.getElementById('expenses-view-title')) document.getElementById('expenses-view-title').textContent = admin ? 'All Expense Claims' : 'My Expense Claims';
+    if (document.getElementById('expenses-view-subtitle')) document.getElementById('expenses-view-subtitle').textContent = admin ? 'Track and audit institutional claims' : 'Your submitted claims and reimbursement audit statuses';
 
-    const expViewTitle = document.getElementById('expenses-view-title');
-    const expViewSubtitle = document.getElementById('expenses-view-subtitle');
-    if (expViewTitle) expViewTitle.textContent = admin ? 'Institutional Claims Ledger' : 'My Expense Claims';
-    if (expViewSubtitle) expViewSubtitle.textContent = admin ? 'Complete record of organizational expenditures' : 'Confidential ledger of your submitted claims';
+    // Confidential Banner
+    const confBanner = document.getElementById('confidential-banner');
+    if (confBanner) confBanner.style.display = admin ? 'none' : 'flex';
 
-    const peopleViewTitle = document.getElementById('people-view-title');
-    const peopleViewSubtitle = document.getElementById('people-view-subtitle');
-    if (peopleViewTitle) peopleViewTitle.textContent = admin ? 'Staff Account Ledgers' : 'My Account Ledger';
-    if (peopleViewSubtitle) peopleViewSubtitle.textContent = admin ? 'Track team balances and reimbursements' : 'Your personal claims, reimbursements and net balance';
-
-    // Auto assigner label
-    const autoAssignerEl = document.getElementById('auto-assigner-label');
-    if (autoAssignerEl) autoAssignerEl.textContent = `${currentUser.name} (${currentUser.role})`;
+    // Auto Assigner & Disburser
+    if (document.getElementById('auto-assigner-label')) document.getElementById('auto-assigner-label').value = `${currentUser.name} (${currentUser.role})`;
+    if (document.getElementById('repay-by-input')) document.getElementById('repay-by-input').value = currentUser.name;
 
     populateDropdowns();
-    refreshAll();
   }
 
   function populateDropdowns() {
     const admin = isAdmin(currentUser);
-
-    // Populate claimant dropdown in Add Expense
     const expStaffSel = document.getElementById('exp-staff');
     if (expStaffSel) {
       if (admin) {
-        // Admins can log expenses on behalf of anyone
         expStaffSel.innerHTML = Object.keys(staffRoster).map(k => {
           const s = staffRoster[k];
           return `<option value="${s.name}" ${currentUser.name === s.name ? 'selected' : ''}>${s.name} (${s.role})</option>`;
         }).join('');
       } else {
-        // Non-admins can only log their own expenses!
         expStaffSel.innerHTML = `<option value="${currentUser.name}">${currentUser.name} (${currentUser.role})</option>`;
       }
     }
 
-    // Populate task assignee dropdown
     const tAssigneeSel = document.getElementById('t-assignee');
     if (tAssigneeSel) {
       tAssigneeSel.innerHTML = Object.keys(staffRoster).map(k => {
@@ -1772,74 +1629,12 @@
     }
   }
 
-  /* ════════════════════════════════════
-     3. PROFILE & PASSWORD MODAL
-  ═════════════════════════════════════ */
-  function openProfileModal() {
-    if (!currentUser) return;
-    const admin = isAdmin(currentUser);
-
-    document.getElementById('modal-profile-name').textContent = currentUser.name;
-    document.getElementById('modal-profile-role').textContent = currentUser.role;
-    
-    const avatarEl = document.getElementById('modal-profile-avatar');
-    avatarEl.className = `avatar ${currentUser.colorClass}`;
-    avatarEl.textContent = currentUser.initials;
-
-    const badgeEl = document.getElementById('profile-access-badge');
-    badgeEl.innerHTML = `<span class="access-tag ${admin ? 'tag-admin' : 'tag-member'}">${admin ? 'Executive Administrator (Full Access)' : 'Confidential Member (Self Only)'}</span>`;
-
-    document.getElementById('change-password-form').reset();
-    document.getElementById('profile-modal').classList.add('open');
-  }
-
-  function closeProfileModal() {
-    document.getElementById('profile-modal').classList.remove('open');
-  }
-
-  function handleChangePassword() {
-    if (!currentUser) return;
-
-    const currentPwd = document.getElementById('current-pwd-input').value.trim();
-    const newPwd     = document.getElementById('new-pwd-input').value.trim();
-    const confirmPwd = document.getElementById('confirm-pwd-input').value.trim();
-
-    if (currentPwd !== currentUser.password) {
-      alert('The current password you entered is incorrect.');
-      return;
-    }
-
-    if (newPwd.length < 4) {
-      alert('New password must be at least 4 characters/digits.');
-      return;
-    }
-
-    if (newPwd !== confirmPwd) {
-      alert('New password and confirmation do not match.');
-      return;
-    }
-
-    // Update in staff roster
-    staffRoster[currentUser.id].password = newPwd;
-    currentUser.password = newPwd;
-
-    saveState(ROSTER_KEY, staffRoster);
-    saveState(AUTH_KEY, currentUser);
-
-    closeProfileModal();
-    toast('Password updated successfully! Use your new password next time you sign in.');
-  }
-
-  /* ════════════════════════════════════
-     4. NAVIGATION LOGIC
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     3. NAVIGATION (MODULE & VIEW SWITCHING)
+     ========================================================================== */
   let currentModule = 'finance';
   let currentFinanceView = 'dashboard';
   let currentTaskView = 'all';
-
-  function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('open');
-  }
 
   function switchModule(mod, btn) {
     currentModule = mod;
@@ -1853,43 +1648,45 @@
     document.getElementById('module-finance').classList.toggle('active', mod === 'finance');
     document.getElementById('module-tasks').classList.toggle('active', mod === 'tasks');
 
-    const financeTabs = document.getElementById('finance-tabs');
-    const taskTabs    = document.getElementById('task-tabs');
-    const actionLabel = document.getElementById('quick-action-label');
-    const moduleText  = document.getElementById('module-name-text');
-    const moduleIcon  = document.getElementById('module-icon');
+    const financeTabs   = document.getElementById('finance-tabs');
+    const taskTabs      = document.getElementById('task-tabs');
+    const mbFinanceTabs = document.getElementById('mb-finance-tabs');
+    const mbTaskTabs    = document.getElementById('mb-task-tabs');
+    const actionLabel   = document.getElementById('quick-action-label');
+    const moduleText    = document.getElementById('module-name-text');
 
+    const isMobile = window.innerWidth <= 820;
     if (mod === 'finance') {
-      financeTabs.style.display = 'flex';
-      taskTabs.style.display    = 'none';
-      actionLabel.textContent   = 'New Expense';
-      moduleText.textContent    = 'Finance Room';
-      if (moduleIcon) moduleIcon.textContent = 'account_balance';
+      if (financeTabs) financeTabs.style.display = 'flex';
+      if (taskTabs) taskTabs.style.display = 'none';
+      if (mbFinanceTabs) mbFinanceTabs.style.display = 'flex';
+      if (mbTaskTabs) mbTaskTabs.style.display = 'none';
+      if (actionLabel) actionLabel.textContent = isMobile ? 'Expense' : 'New Expense';
+      if (moduleText) moduleText.textContent = 'Finance Room';
+      refreshFinanceMetrics();
     } else {
-      financeTabs.style.display = 'none';
-      taskTabs.style.display    = 'flex';
-      actionLabel.textContent   = 'New Task';
-      moduleText.textContent    = 'Tasks';
-      if (moduleIcon) moduleIcon.textContent = 'task_alt';
+      if (financeTabs) financeTabs.style.display = 'none';
+      if (taskTabs) taskTabs.style.display = 'flex';
+      if (mbFinanceTabs) mbFinanceTabs.style.display = 'none';
+      if (mbTaskTabs) mbTaskTabs.style.display = 'flex';
+      if (actionLabel) actionLabel.textContent = isMobile ? 'Task' : 'New Task';
+      if (moduleText) moduleText.textContent = 'Tasks';
+      renderTasks();
     }
-
-    document.getElementById('sidebar').classList.remove('open');
   }
 
   function showFinanceView(name, btn) {
-    // If non-admin tries to open repay tab directly, prevent it
     if (name === 'repay' && !isAdmin(currentUser)) {
-      alert('Confidential: Disbursement and payment settlement is restricted to Founder and Operational Manager.');
+      alert('Confidential: Disbursement is restricted to Founder and Operational Manager.');
       return;
     }
-
     currentFinanceView = name;
     document.querySelectorAll('#module-finance .view-pane').forEach(v => v.classList.remove('active'));
-    const target = document.getElementById('fview-' + name);
-    if (target) target.classList.add('active');
+    document.getElementById('fview-' + name)?.classList.add('active');
 
-    document.querySelectorAll('#finance-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
+    document.querySelectorAll('[data-fview]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-fview') === name);
+    });
 
     refreshFinanceMetrics();
   }
@@ -1897,11 +1694,11 @@
   function showTaskView(name, btn) {
     currentTaskView = name;
     document.querySelectorAll('#module-tasks .view-pane').forEach(v => v.classList.remove('active'));
-    const target = document.getElementById('tview-' + name);
-    if (target) target.classList.add('active');
+    document.getElementById('tview-' + name)?.classList.add('active');
 
-    document.querySelectorAll('#task-tabs .tab-btn').forEach(b => b.classList.remove('active'));
-    if (btn) btn.classList.add('active');
+    document.querySelectorAll('[data-tview]').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-tview') === name);
+    });
 
     renderTasks();
   }
@@ -1914,33 +1711,31 @@
     }
   }
 
-  /* ════════════════════════════════════
-     5. CONFIDENTIAL FINANCE ENGINE
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     4. FINANCIAL CALCULATIONS & LEDGER
+     ========================================================================== */
   function getStaffBalances() {
     const balances = {};
     Object.keys(staffRoster).forEach(k => {
-      const name = staffRoster[k].name;
-      balances[name] = { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0, pendingAudit: 0 };
+      balances[staffRoster[k].name] = { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0 };
     });
 
+    // Sum approved reimbursable claims
     expenses.forEach(e => {
-      if (!balances[e.staff]) {
-        balances[e.staff] = { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0, pendingAudit: 0 };
+      if (!balances[e.staff]) balances[e.staff] = { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0 };
+      if (e.approval === 'Approved' && e.source.includes('Staff Out-of-Pocket')) {
+        balances[e.staff].totalClaimed += e.amount;
       }
-      balances[e.staff].totalClaimed += e.amount;
+    });
 
-      if (e.source === 'Personal') {
-        if (e.approval === 'Approved') {
-          const remaining = Math.max(0, e.amount - (e.settledAmount || 0));
-          balances[e.staff].stillOwed += remaining;
-          balances[e.staff].totalReimbursed += (e.settledAmount || 0);
-        } else if (e.approval === 'Pending') {
-          balances[e.staff].pendingAudit += e.amount;
-        }
-      } else {
-        balances[e.staff].totalReimbursed += e.amount;
-      }
+    // Sum disbursements
+    payments.forEach(p => {
+      if (!balances[p.staff]) balances[p.staff] = { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0 };
+      balances[p.staff].totalReimbursed += p.amount;
+    });
+
+    Object.keys(balances).forEach(name => {
+      balances[name].stillOwed = Math.max(0, balances[name].totalClaimed - balances[name].totalReimbursed);
     });
 
     return balances;
@@ -1952,85 +1747,65 @@
     const balances = getStaffBalances();
 
     let totalOwed = 0;
-    let staffWaitingCount = 0;
     let pendingAmt = 0;
     let pendingCount = 0;
     let totalPaid = 0;
     let totalExpenditure = 0;
-    let visibleClaimsCount = 0;
 
     if (admin) {
-      // Admin sees institutional totals across all staff
-      Object.keys(balances).forEach(name => {
-        totalOwed += balances[name].stillOwed;
-        if (balances[name].stillOwed > 0) staffWaitingCount++;
-      });
+      Object.keys(balances).forEach(name => totalOwed += balances[name].stillOwed);
       expenses.forEach(e => {
         totalExpenditure += e.amount;
-        visibleClaimsCount++;
-        if (e.approval === 'Pending') {
-          pendingAmt += e.amount;
-          pendingCount++;
-        }
+        if (e.approval === 'Pending') { pendingAmt += e.amount; pendingCount++; }
       });
       payments.forEach(p => totalPaid += p.amount);
 
       document.getElementById('card-owed-label').textContent = '💸 Total Owed to Staff';
       document.getElementById('card-owed-hint').textContent = 'Combined outstanding reimbursements';
-      document.getElementById('card-pending-label').textContent = '⏳ Waiting Approval';
       document.getElementById('card-paid-label').textContent = '✅ Total Disbursed';
       document.getElementById('card-total-label').textContent = '📊 Institutional Expenditure';
-
-      document.getElementById('dash-owed-amt').textContent = '₹' + totalOwed.toLocaleString('en-IN');
-      document.getElementById('dash-owed-pill').textContent = staffWaitingCount > 0 ? `⚠ ${staffWaitingCount} staff waiting` : 'All cleared ✓';
-      document.getElementById('dash-pending-amt').textContent = '₹' + pendingAmt.toLocaleString('en-IN');
-      document.getElementById('dash-pending-pill').textContent = `${pendingCount} claims pending`;
-      document.getElementById('dash-paid-amt').textContent = '₹' + totalPaid.toLocaleString('en-IN');
-      document.getElementById('dash-paid-pill').textContent = `${payments.length} disbursements`;
-      document.getElementById('dash-total-amt').textContent = '₹' + totalExpenditure.toLocaleString('en-IN');
-      document.getElementById('dash-total-claims').textContent = `${visibleClaimsCount} claims logged`;
     } else {
-      // Non-admin sees ONLY their personal balance and claims
-      const myBal = balances[currentUser.name] || { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0, pendingAudit: 0 };
+      const myBal = balances[currentUser.name] || { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0 };
       totalOwed = myBal.stillOwed;
-      totalPaid = myBal.totalReimbursed;
 
-      expenses.forEach(e => {
-        if (e.staff === currentUser.name) {
-          totalExpenditure += e.amount;
-          visibleClaimsCount++;
-          if (e.approval === 'Pending') {
-            pendingAmt += e.amount;
-            pendingCount++;
-          }
-        }
+      expenses.filter(e => e.staff === currentUser.name).forEach(e => {
+        totalExpenditure += e.amount;
+        if (e.approval === 'Pending') { pendingAmt += e.amount; pendingCount++; }
       });
+      payments.filter(p => p.staff === currentUser.name).forEach(p => totalPaid += p.amount);
 
       document.getElementById('card-owed-label').textContent = '💸 Owed to Me';
-      document.getElementById('card-owed-hint').textContent = 'Your outstanding reimbursement balance';
-      document.getElementById('card-pending-label').textContent = '⏳ My Claims in Audit';
+      document.getElementById('card-owed-hint').textContent = 'Your outstanding reimbursement';
       document.getElementById('card-paid-label').textContent = '✅ Reimbursed to Me';
       document.getElementById('card-total-label').textContent = '📊 My Total Claims';
-
-      document.getElementById('dash-owed-amt').textContent = '₹' + totalOwed.toLocaleString('en-IN');
-      document.getElementById('dash-owed-pill').textContent = totalOwed > 0 ? `₹${totalOwed.toLocaleString('en-IN')} pending` : 'All cleared ✓';
-      document.getElementById('dash-pending-amt').textContent = '₹' + pendingAmt.toLocaleString('en-IN');
-      document.getElementById('dash-pending-pill').textContent = `${pendingCount} of your claims`;
-      document.getElementById('dash-paid-amt').textContent = '₹' + totalPaid.toLocaleString('en-IN');
-      document.getElementById('dash-paid-pill').textContent = 'Cleared payouts';
-      document.getElementById('dash-total-amt').textContent = '₹' + totalExpenditure.toLocaleString('en-IN');
-      document.getElementById('dash-total-claims').textContent = `${visibleClaimsCount} claims logged`;
     }
+
+    // Render KPI values
+    document.getElementById('dash-owed-amt').textContent = '₹' + totalOwed.toLocaleString('en-IN');
+    document.getElementById('dash-owed-pill').textContent = totalOwed > 0 ? `${admin ? 'Pending settlements' : 'Pending payment'}` : 'All cleared ✓';
+    document.getElementById('dash-owed-pill').className = `pill ${totalOwed > 0 ? 'amber' : 'green'}`;
+
+    document.getElementById('dash-pending-amt').textContent = '₹' + pendingAmt.toLocaleString('en-IN');
+    document.getElementById('dash-pending-pill').textContent = `${pendingCount} claim${pendingCount === 1 ? '' : 's'} pending`;
+    document.getElementById('dash-pending-pill').className = `pill ${pendingCount > 0 ? 'amber' : 'blue'}`;
+
+    document.getElementById('dash-paid-amt').textContent = '₹' + totalPaid.toLocaleString('en-IN');
+    document.getElementById('dash-paid-pill').textContent = admin ? `${payments.length} disbursements` : `${payments.filter(p=>p.staff===currentUser.name).length} disbursements`;
+
+    document.getElementById('dash-total-amt').textContent = '₹' + totalExpenditure.toLocaleString('en-IN');
+    const myExpCount = admin ? expenses.length : expenses.filter(e => e.staff === currentUser.name).length;
+    document.getElementById('dash-total-claims').textContent = `${myExpCount} claims logged`;
 
     document.getElementById('badge-finance-pending').textContent = pendingCount;
 
     renderDashboardPeople(balances);
     renderDashboardRecent();
+    renderAllExpensesTable();
     renderPeopleLedgersView(balances);
-    renderExpensesTable();
     populateRepayStaffDropdown(balances);
   }
 
+  /* Compact Team Balances Grid on Dashboard (Non-repetitive) */
   function renderDashboardPeople(balances) {
     const container = document.getElementById('dash-people-list');
     if (!container) return;
@@ -2041,9 +1816,6 @@
       ? Object.keys(staffRoster).map(k => staffRoster[k].name) 
       : [currentUser.name];
 
-    const grid = document.createElement('div');
-    grid.style.cssText = 'display:grid; grid-template-columns:repeat(auto-fill, minmax(200px, 1fr)); gap:10px; width:100%; margin-bottom:14px;';
-
     visibleStaff.forEach(name => {
       const staffKey = Object.keys(staffRoster).find(k => staffRoster[k].name === name);
       const meta = staffRoster[staffKey] || { role: 'Team Member', initials: 'ST', colorClass: 'av-indigo' };
@@ -2051,9 +1823,7 @@
       const isOwed = bal.stillOwed > 0;
 
       const item = document.createElement('div');
-      item.style.cssText = 'background:#fff; border:1px solid var(--border); border-radius:12px; padding:12px 14px; display:flex; align-items:center; justify-content:space-between; box-shadow:var(--shadow-sm); cursor:pointer; transition:all 0.15s ease;';
-      item.onmouseover = () => { item.style.borderColor = '#cbd5e1'; };
-      item.onmouseout  = () => { item.style.borderColor = 'var(--border)'; };
+      item.className = 'dash-balance-item';
       item.onclick = () => openStaffModal(name);
       item.innerHTML = `
         <div style="display:flex; align-items:center; gap:10px; min-width:0;">
@@ -2070,145 +1840,105 @@
           <span style="font-size:10px; color:var(--sub);">${isOwed ? 'Owed' : 'Balance'}</span>
         </div>
       `;
-      grid.appendChild(item);
+      container.appendChild(item);
     });
-    container.appendChild(grid);
   }
 
   function renderDashboardRecent() {
     const tbody = document.getElementById('dash-recent-table-body');
+    if (!tbody) return;
     tbody.innerHTML = '';
     const admin = isAdmin(currentUser);
 
-    // Filter visible claims
-    const visibleExpenses = admin 
-      ? expenses 
-      : expenses.filter(e => e.staff === currentUser.name);
-
-    if (visibleExpenses.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:32px;color:var(--sub)">No claims recorded yet. Click <strong>Add Expense</strong> to create a claim.</td></tr>`;
+    const visible = admin ? expenses : expenses.filter(e => e.staff === currentUser.name);
+    if (visible.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:28px; color:var(--sub);">No claims logged yet.</td></tr>`;
       return;
     }
 
-    const recent = visibleExpenses.slice(-5).reverse();
+    const recent = visible.slice(-5).reverse();
     recent.forEach(exp => {
       const tr = document.createElement('tr');
       const isApproved = exp.approval === 'Approved';
-      const isCleared = exp.settledAmount >= exp.amount;
-      const remaining = Math.max(0, exp.amount - (exp.settledAmount || 0));
-
-      let badgeHtml = exp.approval === 'Pending' 
-        ? '<span class="badge pending">⏳ Pending</span>'
-        : (exp.approval === 'Rejected' ? '<span class="badge rejected">✕ Rejected</span>' : '<span class="badge approved">✓ Approved</span>');
-
-      let payStatusHtml = exp.source === 'Academy'
-        ? '<span class="badge cleared">Academy Direct</span>'
-        : (isCleared ? '<span class="badge cleared">✓ Cleared</span>' 
-        : (isApproved ? `<span class="badge pending">₹${remaining.toLocaleString('en-IN')} owed</span>` : '<span style="color:var(--sub);font-size:12px">Pending Audit</span>'));
-
       tr.innerHTML = `
-        <td><span class="ref-code" onclick="openExpenseModal('${exp.id}')">${exp.ref}</span></td>
+        <td><span style="font-weight:700; color:var(--primary); cursor:pointer;" onclick="openExpenseModal('${exp.id}')">${exp.ref}</span></td>
         <td><strong>${exp.staff}</strong></td>
+        <td>${exp.desc}</td>
+        <td><span class="pill blue">${exp.cat}</span></td>
+        <td style="font-weight:700;">₹${exp.amount.toLocaleString('en-IN')}</td>
+        <td><span class="badge ${exp.approval.toLowerCase()}">${exp.approval}</span></td>
+        <td><span class="pill ${isApproved ? 'green' : 'amber'}">${isApproved ? 'Approved' : 'Pending'}</span></td>
         <td>
-          <div style="font-weight:600">${exp.desc}</div>
-          <div style="font-size:11.5px;color:var(--sub)">${exp.notes || ''}</div>
-        </td>
-        <td style="font-size:12.5px;color:var(--sub)">${exp.cat}</td>
-        <td class="currency-mono">₹${exp.amount.toLocaleString('en-IN')}</td>
-        <td>${badgeHtml}</td>
-        <td>${payStatusHtml}</td>
-        <td>
-          <div style="display:flex;gap:6px;">
-            <button class="btn-sm btn-outline" onclick="openExpenseModal('${exp.id}')">Inspect</button>
-            ${admin && exp.approval === 'Pending' ? `<button class="btn-sm btn-approve" onclick="quickApproveExpense('${exp.id}')">Approve</button>` : ''}
-            ${admin && (isApproved && !isCleared && exp.source === 'Personal') ? `<button class="btn-sm btn-pay" onclick="openRepayForStaff('${exp.staff}', ${remaining})">Settle</button>` : ''}
-          </div>
+          <button class="btn-sm btn-outline" onclick="openExpenseModal('${exp.id}')">Audit</button>
         </td>
       `;
       tbody.appendChild(tr);
     });
   }
 
-  function renderExpensesTable() {
-    const tbody = document.getElementById('full-expenses-table-body');
+  function renderAllExpensesTable() {
+    const tbody = document.getElementById('expenses-table-body');
     if (!tbody) return;
     tbody.innerHTML = '';
     const admin = isAdmin(currentUser);
 
-    const search = (document.getElementById('expense-search-input')?.value || '').toLowerCase().trim();
+    const search = (document.getElementById('expense-search')?.value || '').toLowerCase().trim();
     const statusFilter = document.getElementById('expense-status-filter')?.value || 'ALL';
-    const catFilter = document.getElementById('expense-category-filter')?.value || 'ALL';
+    const staffFilter = document.getElementById('expense-staff-filter')?.value || 'ALL';
 
-    const filtered = expenses.filter(exp => {
-      // Privacy Check: Non-admins ONLY see their own expenses!
-      if (!admin && exp.staff !== currentUser.name) return false;
+    const visible = admin ? expenses : expenses.filter(e => e.staff === currentUser.name);
 
-      const matchesSearch = !search || 
-        exp.ref.toLowerCase().includes(search) ||
-        exp.staff.toLowerCase().includes(search) ||
-        exp.desc.toLowerCase().includes(search) ||
-        exp.cat.toLowerCase().includes(search);
-
-      let matchesStatus = true;
-      if (statusFilter === 'Pending') matchesStatus = exp.approval === 'Pending';
-      else if (statusFilter === 'Approved') matchesStatus = exp.approval === 'Approved' && (exp.settledAmount < exp.amount);
-      else if (statusFilter === 'Cleared') matchesStatus = exp.settledAmount >= exp.amount || exp.source === 'Academy';
-      else if (statusFilter === 'Rejected') matchesStatus = exp.approval === 'Rejected';
-
-      let matchesCat = catFilter === 'ALL' || exp.cat === catFilter;
-      return matchesSearch && matchesStatus && matchesCat;
+    const filtered = visible.filter(e => {
+      const matchSearch = !search || e.desc.toLowerCase().includes(search) || e.ref.toLowerCase().includes(search) || e.staff.toLowerCase().includes(search);
+      const matchStatus = statusFilter === 'ALL' || e.approval === statusFilter;
+      const matchStaff  = staffFilter === 'ALL' || e.staff === staffFilter;
+      return matchSearch && matchStatus && matchStaff;
     });
 
     if (filtered.length === 0) {
-      tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;padding:36px;color:var(--sub)">No claims recorded or matching filters.</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center; padding:32px; color:var(--sub);">No matching expense claims found.</td></tr>`;
       return;
     }
 
     filtered.slice().reverse().forEach(exp => {
       const tr = document.createElement('tr');
       const isApproved = exp.approval === 'Approved';
-      const isCleared = exp.settledAmount >= exp.amount;
-      const remaining = Math.max(0, exp.amount - (exp.settledAmount || 0));
-
-      let badgeHtml = exp.approval === 'Pending' 
-        ? '<span class="badge pending">⏳ Pending</span>' 
-        : (exp.approval === 'Rejected' ? '<span class="badge rejected">✕ Rejected</span>' : '<span class="badge approved">✓ Approved</span>');
-
-      let payStatusHtml = exp.source === 'Academy'
-        ? '<span class="badge cleared">Direct Fund</span>'
-        : (isCleared ? '<span class="badge cleared">✓ Cleared</span>'
-        : (isApproved ? `<span class="badge pending">₹${remaining.toLocaleString('en-IN')} owed</span>` : '<span style="color:var(--sub);font-size:12px">Pending Audit</span>'));
-
+      const isPending = exp.approval === 'Pending';
       tr.innerHTML = `
-        <td><span class="ref-code" onclick="openExpenseModal('${exp.id}')">${exp.ref}</span></td>
-        <td style="font-size:12px;color:var(--sub)">${formatDate(exp.date)}</td>
+        <td><span style="font-weight:700; color:var(--primary); cursor:pointer;" onclick="openExpenseModal('${exp.id}')">${exp.ref}</span></td>
+        <td style="font-size:12px; color:var(--sub);">${exp.date}</td>
         <td><strong>${exp.staff}</strong></td>
+        <td>${exp.desc}</td>
+        <td><span class="pill blue">${exp.cat}</span></td>
+        <td style="font-weight:700;">₹${exp.amount.toLocaleString('en-IN')}</td>
+        <td><span class="badge ${exp.approval.toLowerCase()}">${exp.approval}</span></td>
+        <td><span class="pill ${isApproved ? 'green' : 'amber'}">${isApproved ? 'Approved' : 'Pending'}</span></td>
         <td>
-          <div style="font-weight:600">${exp.desc}</div>
-          <div style="font-size:11px;color:var(--sub)">${exp.notes || ''}</div>
-        </td>
-        <td><span class="pill" style="background:#f1f5f9;color:#475569">${exp.cat}</span></td>
-        <td class="currency-mono">₹${exp.amount.toLocaleString('en-IN')}</td>
-        <td><span class="badge ${exp.source === 'Personal' ? 'personal' : 'academy'}">${exp.source}</span></td>
-        <td>${badgeHtml}</td>
-        <td>${payStatusHtml}</td>
-        <td>
-          <div style="display:flex;gap:6px;">
-            <button class="btn-sm btn-outline" onclick="openExpenseModal('${exp.id}')">Inspect</button>
-            ${admin && exp.approval === 'Pending' ? `
-              <button class="btn-sm btn-approve" onclick="quickApproveExpense('${exp.id}')">Approve</button>
-              <button class="btn-sm btn-reject" onclick="quickRejectExpense('${exp.id}')">Reject</button>
-            ` : ''}
-            ${admin && (isApproved && !isCleared && exp.source === 'Personal') ? `
-              <button class="btn-sm btn-pay" onclick="openRepayForStaff('${exp.staff}', ${remaining})">Settle</button>
-            ` : ''}
+          <div style="display:flex; gap:6px;">
+            ${admin && isPending ? `
+              <button class="btn-sm btn-pay" onclick="quickApproveExpense('${exp.id}')">Approve</button>
+              <button class="btn-sm btn-outline" style="color:var(--red)" onclick="quickRejectExpense('${exp.id}')">Reject</button>
+            ` : `
+              <button class="btn-sm btn-outline" onclick="openExpenseModal('${exp.id}')">View</button>
+            `}
           </div>
         </td>
       `;
       tbody.appendChild(tr);
     });
+
+    // Populate staff filter
+    const staffFilterSel = document.getElementById('expense-staff-filter');
+    if (staffFilterSel && admin && staffFilterSel.children.length <= 1) {
+      staffFilterSel.innerHTML = '<option value="ALL">All Staff</option>' + Object.keys(staffRoster).map(k => `<option value="${staffRoster[k].name}">${staffRoster[k].name}</option>`).join('');
+    }
   }
 
+  function filterExpenses() {
+    renderAllExpensesTable();
+  }
+
+  /* Full Staff Ledgers View (Zero Overlapping Text) */
   function renderPeopleLedgersView(balances) {
     const container = document.getElementById('full-people-list');
     if (!container) return;
@@ -2253,7 +1983,7 @@
           </div>
         </div>
         ${admin && isOwed 
-          ? `<button class="btn-sm btn-pay" style="width:100%; justify-content:center; margin-top:4px;" onclick="openRepayForStaff('${name}', ${bal.stillOwed})">Issue Reimbursement (₹${bal.stillOwed.toLocaleString('en-IN')})</button>`
+          ? `<button class="btn-sm btn-pay" style="width:100%; justify-content:center; margin-top:2px;" onclick="openRepayForStaff('${name}', ${bal.stillOwed})">Issue Reimbursement (₹${bal.stillOwed.toLocaleString('en-IN')})</button>`
           : ''
         }
       `;
@@ -2264,17 +1994,13 @@
   function populateRepayStaffDropdown(balances) {
     const sel = document.getElementById('repay-staff-select');
     if (!sel) return;
-    const currentVal = sel.value;
-    sel.innerHTML = '';
-    Object.keys(staffRoster).forEach(k => {
+    const cur = sel.value;
+    sel.innerHTML = Object.keys(staffRoster).map(k => {
       const name = staffRoster[k].name;
       const owed = balances[name] ? balances[name].stillOwed : 0;
-      const opt = document.createElement('option');
-      opt.value = name;
-      opt.textContent = `${name} (${staffRoster[k].role}) — ₹${owed.toLocaleString('en-IN')} owed`;
-      sel.appendChild(opt);
-    });
-    if (currentVal) sel.value = currentVal;
+      return `<option value="${name}">${name} (${staffRoster[k].role}) — ₹${owed.toLocaleString('en-IN')} owed</option>`;
+    }).join('');
+    if (cur) sel.value = cur;
     updateRepayAmountHint();
   }
 
@@ -2333,119 +2059,87 @@
     const notes   = document.getElementById('exp-notes').value.trim();
 
     if (!desc || isNaN(amount) || amount <= 0) {
-      alert('Please fill out all fields with valid amounts.');
+      alert('Please enter a valid description and amount.');
       return;
     }
 
-    const nextIdNum = 101 + expenses.length;
+    const nextNum = 101 + expenses.length;
     const newExp = {
-      id: 'EXP-' + nextIdNum,
-      ref: '#EXP-' + nextIdNum,
+      id: 'EXP-' + nextNum,
+      ref: '#EXP-' + nextNum,
       date,
       staff,
       desc,
       cat,
       amount,
       source,
-      approval: 'Pending',
-      settledAmount: 0,
-      notes: notes || `Submitted by ${currentUser ? currentUser.name : staff}`
+      notes,
+      approval: isAdmin(currentUser) ? 'Approved' : 'Pending',
+      submittedBy: currentUser.name,
+      createdAt: new Date().toISOString()
     };
 
     expenses.push(newExp);
     saveState(EXPENSES_KEY, expenses);
-    refreshFinanceMetrics();
-
     document.getElementById('expense-form').reset();
-    document.getElementById('exp-date').valueAsDate = new Date();
-
-    toast(`Claim ${newExp.ref} submitted!`);
-    showFinanceView('dashboard', document.querySelector('[data-fview=dashboard]'));
+    toast(`Expense claim ${newExp.ref} submitted!`);
+    showFinanceView('expenses', document.querySelector('[data-fview=expenses]'));
   }
 
   function submitRepayment() {
-    if (!isAdmin(currentUser)) {
-      alert('Unauthorized');
-      return;
-    }
-
+    if (!isAdmin(currentUser)) return;
     const staff  = document.getElementById('repay-staff-select').value;
     const amount = parseFloat(document.getElementById('repay-amount-input').value);
     const method = document.getElementById('repay-method-select').value;
+    const ref    = document.getElementById('repay-ref-input').value.trim();
     const date   = document.getElementById('repay-date-input').value || new Date().toISOString().split('T')[0];
-    const ref    = document.getElementById('repay-ref-input').value.trim() || 'REF-' + Date.now().toString().slice(-6);
     const notes  = document.getElementById('repay-notes-input').value.trim();
 
-    if (isNaN(amount) || amount <= 0) {
-      alert('Please enter a valid amount.');
+    if (isNaN(amount) || amount <= 0 || !ref) {
+      alert('Please fill out all required fields.');
       return;
     }
 
-    let remainingToAllocate = amount;
-    expenses.forEach(e => {
-      if (e.staff === staff && e.source === 'Personal' && e.approval === 'Approved' && remainingToAllocate > 0) {
-        const owedOnThis = e.amount - (e.settledAmount || 0);
-        if (owedOnThis > 0) {
-          const payingThis = Math.min(owedOnThis, remainingToAllocate);
-          e.settledAmount = (e.settledAmount || 0) + payingThis;
-          remainingToAllocate -= payingThis;
-        }
-      }
-    });
-
-    const newPayment = {
-      id: 'PAY-' + (payments.length + 1).toString().padStart(3, '0'),
+    const nextNum = 501 + payments.length;
+    const newPay = {
+      id: 'PAY-' + nextNum,
       staff,
       amount,
-      date,
       method,
       ref,
-      notes
+      date,
+      notes,
+      disbursedBy: currentUser.name,
+      createdAt: new Date().toISOString()
     };
 
-    payments.push(newPayment);
+    payments.push(newPay);
     saveState(PAYMENTS_KEY, payments);
-    saveState(EXPENSES_KEY, expenses);
-
-    refreshFinanceMetrics();
     document.getElementById('repay-form').reset();
-    document.getElementById('repay-date-input').valueAsDate = new Date();
-
-    toast(`Payment of ₹${amount.toLocaleString('en-IN')} to ${staff} recorded!`);
-    showFinanceView('dashboard', document.querySelector('[data-fview=dashboard]'));
+    toast(`Payment ${newPay.id} of ₹${amount.toLocaleString('en-IN')} recorded!`);
+    showFinanceView('people', document.querySelector('[data-fview=people]'));
   }
 
   function exportExpensesCSV() {
     const admin = isAdmin(currentUser);
-    const visibleExpenses = admin ? expenses : expenses.filter(e => e.staff === currentUser.name);
+    const visible = admin ? expenses : expenses.filter(e => e.staff === currentUser.name);
 
-    let csv = 'Reference,Date,Claimant,Description,Category,Amount (INR),Source,Approval,Settled Amount\n';
-    visibleExpenses.forEach(e => {
-      const line = [
-        `"${e.ref}"`,
-        `"${e.date}"`,
-        `"${e.staff}"`,
-        `"${e.desc.replace(/"/g, '""')}"`,
-        `"${e.cat}"`,
-        e.amount,
-        `"${e.source}"`,
-        `"${e.approval}"`,
-        e.settledAmount || 0
-      ].join(',');
-      csv += line + '\n';
+    let csv = 'Reference,Date,Claimant,Description,Category,Amount (INR),Source,Approval\n';
+    visible.forEach(e => {
+      csv += `"${e.ref}","${e.date}","${e.staff}","${e.desc.replace(/"/g, '""')}","${e.cat}",${e.amount},"${e.source}","${e.approval}"\n`;
     });
 
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
-    link.download = `HEGFIN_Expenses_${currentUser.name}_${new Date().toISOString().split('T')[0]}.csv`;
+    link.download = `HEGFIN_Expenses_${new Date().toISOString().split('T')[0]}.csv`;
     link.click();
-    toast('Expenses CSV exported!');
+    toast('Expenses exported to CSV!');
   }
 
-  /* ════════════════════════════════════
-     6. TASKS ENGINE (Role Controlled)
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     5. TASKS ENGINE (CLEAN DIRECT LINE ARCHITECTURE)
+     ========================================================================== */
   function renderTasks() {
     const listAll       = document.getElementById('tasklist-all');
     const listOngoing   = document.getElementById('tasklist-ongoing');
@@ -2457,9 +2151,7 @@
     const search = (document.getElementById('task-search-input')?.value || '').toLowerCase().trim();
     const priorityFilter = document.getElementById('task-priority-filter')?.value || 'ALL';
 
-    // Confidentiality filter:
-    // Admin sees all tasks across academy.
-    // Member sees tasks assigned to them OR created by them.
+    // Confidentiality filter
     const visibleTasks = tasks.filter(t => {
       if (admin) return true;
       return t.assignee === currentUser.name || t.assigner.includes(currentUser.name);
@@ -2481,14 +2173,9 @@
     document.getElementById('task-count-completed').textContent = countCompleted;
     document.getElementById('task-count-overdue').textContent = countOverdue;
     document.getElementById('badge-tasks-ongoing').textContent = countOngoing;
-    if (document.getElementById('badge-ongoing-count')) document.getElementById('badge-ongoing-count').textContent = `${countOngoing} ongoing`;
-    if (document.getElementById('badge-completed-count')) document.getElementById('badge-completed-count').textContent = `${countCompleted} completed`;
 
     const filtered = visibleTasks.filter(t => {
-      const matchSearch = !search ||
-        t.title.toLowerCase().includes(search) ||
-        (t.desc && t.desc.toLowerCase().includes(search)) ||
-        t.assignee.toLowerCase().includes(search);
+      const matchSearch = !search || t.title.toLowerCase().includes(search) || (t.desc && t.desc.toLowerCase().includes(search)) || t.assignee.toLowerCase().includes(search);
       const matchPriority = priorityFilter === 'ALL' || t.priority === priorityFilter;
       return matchSearch && matchPriority;
     });
@@ -2537,7 +2224,7 @@
             <span class="task-meta-divider">•</span>
             <div class="task-meta-item ${isOverdue ? 'overdue' : ''}">
               <span class="material-symbols-outlined" style="font-size:15px;">event</span>
-              <span>Deadline: ${formatDate(t.deadline)} ${isOverdue ? '(Past Due)' : ''}</span>
+              <span>Deadline: ${t.deadline} ${isOverdue ? '(Past Due)' : ''}</span>
             </div>
           </div>
 
@@ -2560,7 +2247,7 @@
     }
 
     if (filtered.length === 0) {
-      listAll.innerHTML = `<div class="empty-state"><span class="material-symbols-outlined">task_alt</span><h3>No Tasks Found</h3><p>Create a task using the Add Task tab.</p></div>`;
+      listAll.innerHTML = `<div style="text-align:center; padding:32px; color:var(--sub);">No tasks found.</div>`;
     } else {
       listAll.innerHTML = filtered.map(t => createTaskCardHtml(t)).join('');
     }
@@ -2568,14 +2255,14 @@
     const ongoingList = visibleTasks.filter(t => t.status !== 'completed');
     if (listOngoing) {
       listOngoing.innerHTML = ongoingList.length === 0 
-        ? `<div class="empty-state"><span class="material-symbols-outlined">check_circle</span><h3>All Tasks Completed!</h3><p>No ongoing tasks pending.</p></div>`
+        ? `<div style="text-align:center; padding:32px; color:var(--sub);">All tasks completed!</div>`
         : ongoingList.map(t => createTaskCardHtml(t)).join('');
     }
 
     const completedList = visibleTasks.filter(t => t.status === 'completed');
     if (listCompleted) {
       listCompleted.innerHTML = completedList.length === 0
-        ? `<div class="empty-state"><span class="material-symbols-outlined">history</span><h3>No Completed Tasks</h3><p>Completed tasks will show here.</p></div>`
+        ? `<div style="text-align:center; padding:32px; color:var(--sub);">No completed tasks yet.</div>`
         : completedList.map(t => createTaskCardHtml(t)).join('');
     }
   }
@@ -2594,10 +2281,9 @@
     if (idx === -1) return;
     const task = tasks[idx];
     if (!isAdmin(currentUser) && !task.assigner.includes(currentUser.name)) {
-      alert('Only the task creator or management can delete tasks.');
+      alert('Only task creator or management can delete this task.');
       return;
     }
-
     if (confirm('Delete this task?')) {
       tasks.splice(idx, 1);
       saveState(TASKS_KEY, tasks);
@@ -2614,72 +2300,54 @@
     const deadline = document.getElementById('t-deadline').value;
 
     if (!title || !deadline) {
-      alert('Please fill out task title and deadline.');
+      alert('Please fill out the task title and deadline.');
       return;
     }
 
-    const assigner = currentUser ? `${currentUser.name} (${currentUser.role})` : 'Executive Board';
-
+    const nextNum = 1 + tasks.length;
     const newTask = {
-      id: 'TASK-' + (tasks.length + 1),
+      id: 'TASK-' + nextNum,
       title,
-      desc,
       priority,
+      desc,
       assignee,
-      assigner,
       deadline,
+      assigner: `${currentUser.name} (${currentUser.role})`,
       status: 'ongoing',
-      createdAt: new Date().toISOString().split('T')[0],
-      remarks: []
+      remarks: [],
+      createdAt: new Date().toISOString()
     };
 
-    tasks.unshift(newTask);
+    tasks.push(newTask);
     saveState(TASKS_KEY, tasks);
-    renderTasks();
-
     document.getElementById('new-task-form').reset();
-    document.getElementById('t-deadline').valueAsDate = new Date();
-
-    toast(`New task assigned to ${assignee}!`);
+    toast(`Task created and assigned to ${assignee}!`);
     showTaskView('all', document.querySelector('[data-tview=all]'));
   }
 
-  /* ════════════════════════════════════
-     7. TASK REMARKS & PROCESS CHAT
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     6. TASK REMARK CHAT THREAD (COMPACT HUGGING BUBBLES)
+     ========================================================================== */
   let activeRemarkTaskId = null;
 
-  function openTaskRemarkModal(taskId) {
-    activeRemarkTaskId = taskId;
-    const task = tasks.find(t => t.id === taskId);
+  function openTaskRemarkModal(id) {
+    const task = tasks.find(t => t.id === id);
     if (!task) return;
-
-    if (!task.remarks) task.remarks = [];
+    activeRemarkTaskId = id;
 
     document.getElementById('remark-task-id').textContent = task.id;
     document.getElementById('remark-task-title').textContent = task.title;
-
-    const pEl = document.getElementById('remark-task-priority');
-    pEl.textContent = `${task.priority} Priority`;
-    pEl.className = `priority-badge ${task.priority === 'High' ? 'p-high' : (task.priority === 'Low' ? 'p-low' : 'p-medium')}`;
-
-    document.getElementById('remark-task-meta').textContent = 
-      `Assignee: ${task.assignee} (Assigned by ${task.assigner}) • Deadline: ${formatDate(task.deadline)}`;
-
-    const postingAuthorEl = document.getElementById('remark-posting-author');
-    if (postingAuthorEl) {
-      postingAuthorEl.textContent = currentUser ? `${currentUser.name} (${currentUser.role})` : 'Staff';
-    }
+    document.getElementById('remark-task-priority').textContent = task.priority + ' Priority';
+    document.getElementById('remark-task-priority').className = `priority-badge ${task.priority === 'High' ? 'p-high' : (task.priority === 'Low' ? 'p-low' : 'p-medium')}`;
+    document.getElementById('remark-task-meta').textContent = `Assignee: ${task.assignee} • Deadline: ${task.deadline}`;
+    document.getElementById('remark-author-name').textContent = `${currentUser.name} (${currentUser.role})`;
 
     renderRemarkMessages(task);
     document.getElementById('task-remark-modal').classList.add('open');
 
     setTimeout(() => {
       const input = document.getElementById('remark-input');
-      if (input) {
-        input.value = '';
-        input.focus();
-      }
+      if (input) { input.value = ''; input.focus(); }
       const chatContainer = document.getElementById('remark-chat-messages');
       if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
     }, 100);
@@ -2735,193 +2403,86 @@
 
   function submitRemark() {
     if (!activeRemarkTaskId) return;
+    const input = document.getElementById('remark-input');
+    const text = input.value.trim();
+    if (!text) return;
+
     const task = tasks.find(t => t.id === activeRemarkTaskId);
     if (!task) return;
 
-    const input = document.getElementById('remark-input');
-    const text = (input?.value || '').trim();
-    if (!text) return;
-
-    const sender = currentUser ? `${currentUser.name} (${currentUser.role})` : 'Staff Member';
+    if (!task.remarks) task.remarks = [];
 
     const now = new Date();
     const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }) + ', ' + 
-                    now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true });
 
-    if (!task.remarks) task.remarks = [];
     task.remarks.push({
-      id: 'REM-' + (task.remarks.length + 1),
-      sender,
+      sender: `${currentUser.name} (${currentUser.role})`,
       text,
       timestamp: timeStr
     });
 
     saveState(TASKS_KEY, tasks);
+    input.value = '';
     renderRemarkMessages(task);
     renderTasks();
 
-    input.value = '';
-    input.focus();
-
-    const chatContainer = document.getElementById('remark-chat-messages');
-    if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
-
-    toast('Remark posted!');
+    setTimeout(() => {
+      const chatContainer = document.getElementById('remark-chat-messages');
+      if (chatContainer) chatContainer.scrollTop = chatContainer.scrollHeight;
+    }, 50);
   }
 
-  function handleRemarkKeydown(e) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      submitRemark();
-    }
-  }
-
-  /* ════════════════════════════════════
-     8. MODALS: VOUCHER & STAFF LEDGER
-  ═════════════════════════════════════ */
-  function openExpenseModal(id) {
-    const exp = expenses.find(e => e.id === id);
-    if (!exp) return;
-    const admin = isAdmin(currentUser);
-
-    // Confidentiality check: if non-admin and not their expense, block
-    if (!admin && exp.staff !== currentUser.name) {
-      alert('Access Restricted: This claim belongs to another staff member.');
-      return;
-    }
-
-    document.getElementById('modal-exp-ref').textContent = `Expense Voucher ${exp.ref}`;
-    const staffKey = Object.keys(staffRoster).find(k => staffRoster[k].name === exp.staff);
-    const meta = staffRoster[staffKey] || { role: 'Team Member' };
-    const remaining = Math.max(0, exp.amount - (exp.settledAmount || 0));
-    const isCleared = exp.settledAmount >= exp.amount || exp.source === 'Academy';
-
-    const content = document.getElementById('modal-exp-content');
-    content.innerHTML = `
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;background:#f8fafc;padding:16px;border-radius:12px;border:1px solid var(--border);">
-        <div>
-          <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Claimant</span>
-          <div style="font-size:16px;font-weight:800;color:var(--text);margin-top:2px;">${exp.staff}</div>
-          <div style="font-size:12px;color:var(--sub)">${meta.role}</div>
-        </div>
-        <div style="text-align:right;">
-          <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Amount</span>
-          <div style="font-size:22px;font-weight:800;color:var(--primary);margin-top:2px;">₹${exp.amount.toLocaleString('en-IN')}</div>
-          <span class="badge ${exp.approval === 'Approved' ? 'approved' : (exp.approval === 'Rejected' ? 'rejected' : 'pending')}">
-            ${exp.approval}
-          </span>
-        </div>
-      </div>
-
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;">
-        <div>
-          <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Date</span>
-          <div style="font-weight:600;margin-top:2px;">${formatDate(exp.date)}</div>
-        </div>
-        <div>
-          <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Category</span>
-          <div style="font-weight:600;margin-top:2px;">${exp.cat}</div>
-        </div>
-        <div>
-          <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Source</span>
-          <div style="font-weight:600;margin-top:2px;">${exp.source === 'Personal' ? 'Personal (Reimbursable)' : 'Academy Direct'}</div>
-        </div>
-        <div>
-          <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Settlement</span>
-          <div style="font-weight:700;color:${isCleared ? 'var(--green)' : 'var(--red)'};margin-top:2px;">
-            ${isCleared ? 'Cleared ✓' : `₹${remaining.toLocaleString('en-IN')} Owed`}
-          </div>
-        </div>
-      </div>
-
-      <div style="margin-bottom:16px;">
-        <span style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase;">Purpose</span>
-        <div style="font-size:14px;font-weight:600;margin-top:2px;">${exp.desc}</div>
-        <p style="font-size:12.5px;color:var(--sub);margin-top:4px;">${exp.notes || 'No extra notes.'}</p>
-      </div>
-    `;
-
-    const footer = document.getElementById('modal-exp-footer');
-    footer.innerHTML = `
-      <button class="secondary-btn" onclick="closeExpenseModal()">Close</button>
-      ${admin && exp.approval === 'Pending' ? `
-        <button class="btn-sm btn-reject" onclick="quickRejectExpense('${exp.id}'); closeExpenseModal();">Reject</button>
-        <button class="btn-sm btn-approve" onclick="quickApproveExpense('${exp.id}'); closeExpenseModal();">Approve</button>
-      ` : ''}
-      ${admin && (exp.approval === 'Approved' && !isCleared && exp.source === 'Personal') ? `
-        <button class="primary-btn" onclick="closeExpenseModal(); openRepayForStaff('${exp.staff}', ${remaining});">Settle Now</button>
-      ` : ''}
-    `;
-
-    document.getElementById('expense-modal').classList.add('open');
-  }
-
-  function closeExpenseModal() {
-    document.getElementById('expense-modal').classList.remove('open');
-  }
-
+  /* ==========================================================================
+     7. STAFF MODAL, EXPENSE MODAL, PROFILE MODAL
+     ========================================================================== */
   function openStaffModal(name) {
     const admin = isAdmin(currentUser);
-    // Confidentiality check: non-admin can only see their own ledger
     if (!admin && name !== currentUser.name) {
-      alert('Access Restricted: You are only permitted to view your own financial ledger.');
+      alert('Confidential: You can only view your own accounting ledger.');
       return;
     }
 
     const staffKey = Object.keys(staffRoster).find(k => staffRoster[k].name === name);
-    const meta = staffRoster[staffKey] || { role: 'Team Member', initials: name.slice(0,2).toUpperCase(), colorClass: 'av-indigo' };
-    document.getElementById('modal-staff-name').textContent = `${name}'s Account Ledger`;
-    document.getElementById('modal-staff-dept').textContent = meta.role;
-    const avatarEl = document.getElementById('modal-staff-avatar');
-    avatarEl.className = `avatar ${meta.colorClass}`;
-    avatarEl.textContent = meta.initials;
-
+    const meta = staffRoster[staffKey] || { role: 'Team Member', initials: 'ST', colorClass: 'av-indigo' };
     const balances = getStaffBalances();
     const bal = balances[name] || { totalClaimed: 0, totalReimbursed: 0, stillOwed: 0 };
+
+    document.getElementById('modal-staff-name').textContent = name;
+    document.getElementById('modal-staff-role').textContent = meta.role;
+    document.getElementById('modal-staff-avatar').textContent = meta.initials;
+    document.getElementById('modal-staff-avatar').className = `avatar ${meta.colorClass}`;
+
     const staffExpenses = expenses.filter(e => e.staff === name);
     const staffPayments = payments.filter(p => p.staff === name);
 
-    const body = document.getElementById('modal-staff-body');
-    body.innerHTML = `
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;">
-        <div class="stat-card" style="padding:14px;border:1px solid var(--border)">
-          <div style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase">Total Claimed</div>
-          <div style="font-size:20px;font-weight:800;margin-top:2px;">₹${bal.totalClaimed.toLocaleString('en-IN')}</div>
-        </div>
-        <div class="stat-card" style="padding:14px;border:1px solid var(--border)">
-          <div style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase">Disbursed</div>
-          <div style="font-size:20px;font-weight:800;color:var(--green);margin-top:2px;">₹${bal.totalReimbursed.toLocaleString('en-IN')}</div>
-        </div>
-        <div class="stat-card" style="padding:14px;border:1px solid var(--border)">
-          <div style="font-size:11px;font-weight:700;color:var(--sub);text-transform:uppercase">Outstanding</div>
-          <div style="font-size:20px;font-weight:800;color:${bal.stillOwed > 0 ? 'var(--red)' : 'var(--green)'};margin-top:2px;">
-            ₹${bal.stillOwed.toLocaleString('en-IN')}
-          </div>
-        </div>
+    document.getElementById('modal-staff-body').innerHTML = `
+      <div class="person-card-stats-box" style="margin-bottom:16px;">
+        <div class="stat-col"><div class="stat-lbl">Total Claimed</div><div class="stat-val">₹${bal.totalClaimed.toLocaleString('en-IN')}</div></div>
+        <div class="stat-col"><div class="stat-lbl">Total Reimbursed</div><div class="stat-val" style="color:var(--green)">₹${bal.totalReimbursed.toLocaleString('en-IN')}</div></div>
+        <div class="stat-col"><div class="stat-lbl">Net Outstanding</div><div class="stat-val" style="color:${bal.stillOwed > 0 ? 'var(--red)' : 'var(--green)'}">₹${bal.stillOwed.toLocaleString('en-IN')}</div></div>
       </div>
-
-      <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;">Claim History</h4>
-      <div class="table-container" style="max-height:200px;overflow-y:auto;margin-bottom:16px;">
+      <h4 style="font-size:13px; font-weight:700; margin-bottom:8px;">Expense Claims</h4>
+      <div class="table-container" style="max-height:160px; overflow-y:auto; margin-bottom:16px;">
         <table class="data-table">
-          <thead><tr><th>Ref</th><th>Date</th><th>Item</th><th>Amount</th><th>Status</th></tr></thead>
+          <thead><tr><th>Ref</th><th>Date</th><th>Description</th><th>Amount</th><th>Status</th></tr></thead>
           <tbody>
-            ${staffExpenses.length === 0 ? '<tr><td colspan="5" style="text-align:center;padding:16px;color:var(--sub)">No claims recorded.</td></tr>' :
+            ${staffExpenses.length === 0 ? '<tr><td colspan="5" style="text-align:center;padding:16px;color:var(--sub)">No claims logged yet.</td></tr>' :
               staffExpenses.map(e => `
                 <tr>
-                  <td><span class="ref-code" onclick="closeStaffModal(); openExpenseModal('${e.id}');">${e.ref}</span></td>
-                  <td style="font-size:12px;color:var(--sub)">${formatDate(e.date)}</td>
-                  <td><strong>${e.desc}</strong></td>
-                  <td class="currency-mono">₹${e.amount.toLocaleString('en-IN')}</td>
-                  <td><span class="badge ${e.approval === 'Approved' ? 'approved' : 'pending'}">${e.approval}</span></td>
+                  <td><strong style="color:var(--primary)">${e.ref}</strong></td>
+                  <td style="font-size:12px;color:var(--sub)">${e.date}</td>
+                  <td>${e.desc}</td>
+                  <td style="font-weight:700">₹${e.amount.toLocaleString('en-IN')}</td>
+                  <td><span class="badge ${e.approval.toLowerCase()}">${e.approval}</span></td>
                 </tr>
               `).join('')
             }
           </tbody>
         </table>
       </div>
-
-      <h4 style="font-size:13px;font-weight:700;margin-bottom:8px;">Payment Disbursements</h4>
-      <div class="table-container" style="max-height:160px;overflow-y:auto;">
+      <h4 style="font-size:13px; font-weight:700; margin-bottom:8px;">Disbursement Payouts</h4>
+      <div class="table-container" style="max-height:160px; overflow-y:auto;">
         <table class="data-table">
           <thead><tr><th>Receipt ID</th><th>Date</th><th>Method</th><th>UTR Ref</th><th>Amount</th></tr></thead>
           <tbody>
@@ -2929,10 +2490,10 @@
               staffPayments.map(p => `
                 <tr>
                   <td><strong>${p.id}</strong></td>
-                  <td style="font-size:12px;color:var(--sub)">${formatDate(p.date)}</td>
-                  <td><span class="pill" style="background:#e0e7ff;color:#3730a3">${p.method}</span></td>
+                  <td style="font-size:12px;color:var(--sub)">${p.date}</td>
+                  <td><span class="pill blue">${p.method}</span></td>
                   <td style="font-size:12px;font-family:monospace">${p.ref}</td>
-                  <td class="currency-mono" style="color:var(--green)">₹${p.amount.toLocaleString('en-IN')}</td>
+                  <td style="font-weight:700;color:var(--green)">₹${p.amount.toLocaleString('en-IN')}</td>
                 </tr>
               `).join('')
             }
@@ -2945,10 +2506,7 @@
     if (admin && bal.stillOwed > 0) {
       payBtn.style.display = 'inline-flex';
       payBtn.textContent = `Pay ₹${bal.stillOwed.toLocaleString('en-IN')}`;
-      payBtn.onclick = () => {
-        closeStaffModal();
-        openRepayForStaff(name, bal.stillOwed);
-      };
+      payBtn.onclick = () => { closeStaffModal(); openRepayForStaff(name, bal.stillOwed); };
     } else {
       payBtn.style.display = 'none';
     }
@@ -2960,24 +2518,100 @@
     document.getElementById('staff-modal').classList.remove('open');
   }
 
-  /* ════════════════════════════════════
-     9. UTILITIES & INITIALIZATION
-  ═════════════════════════════════════ */
-  function formatDate(dStr) {
-    if (!dStr) return '';
-    try {
-      const d = new Date(dStr);
-      return d.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' });
-    } catch(e) {
-      return dStr;
+  function openExpenseModal(id) {
+    const exp = expenses.find(e => e.id === id);
+    if (!exp) return;
+    const admin = isAdmin(currentUser);
+
+    document.getElementById('modal-expense-body').innerHTML = `
+      <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:14px;">
+        <div>
+          <span style="font-size:12px; font-weight:700; color:var(--primary);">${exp.ref}</span>
+          <h3 style="font-size:16px; font-weight:800; margin-top:2px;">${exp.desc}</h3>
+          <p style="font-size:12px; color:var(--sub);">Claimant: <strong>${exp.staff}</strong> • Date: ${exp.date}</p>
+        </div>
+        <div style="font-size:20px; font-weight:800; color:var(--text)">₹${exp.amount.toLocaleString('en-IN')}</div>
+      </div>
+      <div style="background:#f8fafc; border-radius:10px; padding:12px; font-size:12.5px; margin-bottom:12px;">
+        <div><strong>Category:</strong> ${exp.cat}</div>
+        <div style="margin-top:4px;"><strong>Payment Source:</strong> ${exp.source}</div>
+        ${exp.notes ? `<div style="margin-top:4px;"><strong>Notes:</strong> ${exp.notes}</div>` : ''}
+      </div>
+      <div><strong>Audit Status:</strong> <span class="badge ${exp.approval.toLowerCase()}">${exp.approval}</span></div>
+    `;
+
+    const actSpan = document.getElementById('modal-expense-actions');
+    if (admin && exp.approval === 'Pending') {
+      actSpan.innerHTML = `
+        <button class="btn-sm btn-pay" onclick="quickApproveExpense('${exp.id}'); closeExpenseModal();">Approve Claim</button>
+        <button class="btn-sm btn-outline" style="color:var(--red)" onclick="quickRejectExpense('${exp.id}'); closeExpenseModal();">Reject Claim</button>
+      `;
+    } else {
+      actSpan.innerHTML = '';
     }
+
+    document.getElementById('expense-modal').classList.add('open');
+  }
+
+  function closeExpenseModal() {
+    document.getElementById('expense-modal').classList.remove('open');
+  }
+
+  function openProfileModal() {
+    if (!currentUser) return;
+    document.getElementById('modal-profile-name').textContent = currentUser.name;
+    document.getElementById('modal-profile-role').textContent = currentUser.role;
+    document.getElementById('modal-profile-avatar').textContent = currentUser.initials;
+    document.getElementById('modal-profile-avatar').className = `avatar ${currentUser.colorClass}`;
+    document.getElementById('profile-modal').classList.add('open');
+  }
+
+  function closeProfileModal() {
+    document.getElementById('profile-modal').classList.remove('open');
+  }
+
+  function handlePasswordChange() {
+    const cur = document.getElementById('current-pwd').value.trim();
+    const np1 = document.getElementById('new-pwd').value.trim();
+    const np2 = document.getElementById('confirm-pwd').value.trim();
+
+    if (currentUser.pin !== cur) {
+      alert('Current password incorrect.');
+      return;
+    }
+    if (!np1 || np1.length < 4) {
+      alert('New password must be at least 4 characters.');
+      return;
+    }
+    if (np1 !== np2) {
+      alert('New passwords do not match.');
+      return;
+    }
+
+    currentUser.pin = np1;
+    staffRoster[currentUser.id].pin = np1;
+    saveState(ROSTER_KEY, staffRoster);
+    saveState(AUTH_KEY, currentUser);
+
+    alert('Password updated successfully!');
+    closeProfileModal();
+  }
+
+  function openCloudModal() {
+    document.getElementById('cloud-modal').classList.add('open');
+  }
+
+  function closeCloudModal() {
+    document.getElementById('cloud-modal').classList.remove('open');
   }
 
   function toast(msg) {
-    const t = document.getElementById('toast');
-    t.innerHTML = `<span class="material-symbols-outlined" style="font-size:18px;color:#a5b4fc">info</span><span>${msg}</span>`;
-    t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), 3000);
+    const el = document.getElementById('toast');
+    if (!el) return;
+    el.textContent = msg;
+    el.style.display = 'flex';
+    clearTimeout(window._toastTimer);
+    window._toastTimer = setTimeout(() => { el.style.display = 'none'; }, 2600);
   }
 
   function refreshAll() {
@@ -2985,9 +2619,9 @@
     renderTasks();
   }
 
-  /* ════════════════════════════════════
-     10. CLOUD REALTIME SYNC ENGINE (FIREBASE)
-  ═════════════════════════════════════ */
+  /* ==========================================================================
+     8. CLOUD REALTIME SYNC ENGINE (GOOGLE FIREBASE REALTIME DATABASE)
+     ========================================================================== */
   const DEFAULT_FIREBASE_CONFIG = {
     apiKey: "AIzaSyATQQ7cI92uNRj63W_T7qvetpluJqjq2l0",
     authDomain: "hegfin-acadmey.firebaseapp.com",
@@ -2999,85 +2633,47 @@
     measurementId: "G-F1NYJPMB09"
   };
 
-  const CLOUD_CONFIG_KEY = 'hegfin_firebase_config';
-  let isCloudConnected = false;
   let rtdbInstance = null;
   let isReceivingRemoteUpdate = false;
 
   function initCloudSync() {
-    let configObj = DEFAULT_FIREBASE_CONFIG;
-    const customConfig = localStorage.getItem(CLOUD_CONFIG_KEY);
-    if (customConfig) {
-      try {
-        if (customConfig.trim().startsWith('{')) {
-          configObj = JSON.parse(customConfig);
-        }
-      } catch(e) {
-        console.warn('Custom config parse error, using default:', e);
-      }
-    }
-
     try {
-      if (!window.firebase) {
-        console.warn('Firebase SDK not available yet');
-        return;
-      }
-
+      if (!window.firebase) return;
       if (!firebase.apps.length) {
-        firebase.initializeApp(configObj);
+        firebase.initializeApp(DEFAULT_FIREBASE_CONFIG);
       }
-
       rtdbInstance = firebase.database();
 
-      // Monitor online/offline status
-      rtdbInstance.ref('.info/connected').on('value', (snap) => {
-        const connected = !!snap.val();
-        isCloudConnected = connected;
-        updateCloudUI(connected);
-      });
-
-      // Listen for Live Realtime Updates across all staff phones & computers
+      // Listen for updates from other phones/computers
       const stateRef = rtdbInstance.ref('hegfin_academy/shared_state');
       stateRef.on('value', (snapshot) => {
         const remoteData = snapshot.val();
         if (remoteData) {
           isReceivingRemoteUpdate = true;
-
-          // Sync tasks
           if (remoteData.tasks && Array.isArray(remoteData.tasks)) {
             tasks = remoteData.tasks;
-            saveState(TASKS_KEY, tasks);
+            localStorage.setItem(TASKS_KEY, JSON.stringify(tasks));
           }
-          // Sync expenses
           if (remoteData.expenses && Array.isArray(remoteData.expenses)) {
             expenses = remoteData.expenses;
-            saveState(EXPENSES_KEY, expenses);
+            localStorage.setItem(EXPENSES_KEY, JSON.stringify(expenses));
           }
-          // Sync payments
           if (remoteData.payments && Array.isArray(remoteData.payments)) {
             payments = remoteData.payments;
-            saveState(PAYMENTS_KEY, payments);
+            localStorage.setItem(PAYMENTS_KEY, JSON.stringify(payments));
           }
-          // Sync staff passwords / roster
           if (remoteData.staffRoster && typeof remoteData.staffRoster === 'object') {
             staffRoster = remoteData.staffRoster;
-            saveState(ROSTER_KEY, staffRoster);
+            localStorage.setItem(ROSTER_KEY, JSON.stringify(staffRoster));
           }
-
           refreshAll();
-          setTimeout(() => { isReceivingRemoteUpdate = false; }, 300);
+          setTimeout(() => { isReceivingRemoteUpdate = false; }, 250);
         } else {
-          // Cloud empty on first boot, initialize it
           pushLocalStateToCloud();
         }
-      }, (err) => {
-        console.warn('Firebase RTDB error:', err);
-        updateCloudUI(false, err.message);
       });
-
-    } catch(err) {
-      console.error('Firebase init error:', err);
-      updateCloudUI(false, err.message);
+    } catch(e) {
+      console.warn('Cloud sync error:', e);
     }
   }
 
@@ -3092,87 +2688,21 @@
         lastUpdated: new Date().toISOString(),
         updatedBy: currentUser ? currentUser.name : 'System'
       });
-    } catch(e) {
-      console.warn('Cloud sync push error:', e);
-    }
+    } catch(e) {}
   }
 
-  // Intercept saveState calls to automatically broadcast to cloud
   const originalSaveState = saveState;
   saveState = function(key, val) {
     originalSaveState(key, val);
     if (rtdbInstance && !isReceivingRemoteUpdate) {
       clearTimeout(window._cloudPushTimer);
-      window._cloudPushTimer = setTimeout(() => {
-        pushLocalStateToCloud();
-      }, 250);
+      window._cloudPushTimer = setTimeout(() => { pushLocalStateToCloud(); }, 250);
     }
   };
 
-  function updateCloudUI(connected, errorMsg) {
-    const iconEl = document.getElementById('cloud-sync-icon');
-    const textEl = document.getElementById('cloud-sync-text');
-    const subEl  = document.getElementById('cloud-sync-sub');
-    const pillEl = document.getElementById('modal-cloud-status-pill');
-    const titleEl = document.getElementById('modal-cloud-status-title');
-    const descEl = document.getElementById('modal-cloud-status-desc');
-
-    if (connected) {
-      if (iconEl)  { iconEl.textContent = 'cloud_done'; iconEl.style.color = '#34d399'; }
-      if (textEl)  { textEl.textContent = 'Cloud: Live Synced'; textEl.style.color = '#34d399'; }
-      if (subEl)   { subEl.textContent = 'Multi-device realtime active'; }
-      if (pillEl)  { pillEl.textContent = 'Live Cloud Active ●'; pillEl.className = 'pill green'; }
-      if (titleEl) { titleEl.textContent = 'Connected & Synced'; }
-      if (descEl)  { descEl.textContent = 'Realtime cloud sync is operational. Changes made on any phone or desktop reflect instantly on all devices.'; }
-    } else {
-      if (iconEl)  { iconEl.textContent = 'cloud_sync'; iconEl.style.color = '#f59e0b'; }
-      if (textEl)  { textEl.textContent = 'Cloud: Connecting...'; textEl.style.color = '#f59e0b'; }
-      if (subEl)   { subEl.textContent = errorMsg ? 'Sync issue: Retrying' : 'Connecting to live database...'; }
-      if (pillEl)  { pillEl.textContent = 'Connecting...'; pillEl.className = 'pill amber'; }
-      if (titleEl) { titleEl.textContent = 'Connecting to Cloud'; }
-      if (descEl)  { descEl.textContent = errorMsg ? `Error: ${errorMsg}` : 'Connecting to your Hegfin cloud database...'; }
-    }
-  }
-
-  function openCloudModal() {
-    const saved = localStorage.getItem(CLOUD_CONFIG_KEY) || JSON.stringify(DEFAULT_FIREBASE_CONFIG, null, 2);
-    const input = document.getElementById('firebase-config-input');
-    if (input) input.value = saved;
-    document.getElementById('cloud-modal').classList.add('open');
-  }
-
-  function closeCloudModal() {
-    document.getElementById('cloud-modal').classList.remove('open');
-  }
-
-  function saveCloudConfig() {
-    const raw = document.getElementById('firebase-config-input').value.trim();
-    if (!raw) {
-      alert('Please paste your Firebase configuration.');
-      return;
-    }
-
-    try {
-      localStorage.setItem(CLOUD_CONFIG_KEY, raw);
-      initCloudSync();
-      toast('Cloud configuration updated! Reconnecting...');
-      setTimeout(() => {
-        closeCloudModal();
-      }, 600);
-    } catch(e) {
-      alert('Could not save configuration: ' + e.message);
-    }
-  }
-
-  function clearCloudConfig() {
-    if (confirm('Reset to default Hegfin cloud database?')) {
-      localStorage.removeItem(CLOUD_CONFIG_KEY);
-      initCloudSync();
-      toast('Reset to default cloud database.');
-      closeCloudModal();
-    }
-  }
-
+  /* ==========================================================================
+     9. APPLICATION BOOTSTRAP
+     ========================================================================== */
   document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('input[type=date]').forEach(el => {
       if (!el.value) el.valueAsDate = new Date();
